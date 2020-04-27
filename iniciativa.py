@@ -4,13 +4,11 @@ i=[]
 a=[]
 q=[]
 v2=[]
+q2=[]
 j=0
-ma=25
-me=1
 u=0
 u2=0
-a=(2/(ma-me))
-b=((-ma-me)/(ma-me))
+aux=1
 qj=int(input("Quantos combatentes: "))
 while j<qj:
     print("Nome do combatente ",j+1,": ")
@@ -21,20 +19,15 @@ while j<qj:
     i.insert(j,(2.71828**((0.0423*v1)+0.0423)))
     q.insert(j,(int(i[j])))
     v2.insert(j,v[j])
+    a.insert(j,(2.71828**((0.0423*v1)+0.0423)))
     j=j+1
-a=i
-print("v: ",v,"v2: ",v2)
-#i.sort(reverse=True)
 v.sort(reverse=True)
-#print("i: ",i,"q: ",q,"a: ",a)
-print("v: ",v,"v2: ",v2)
 x=int(input("Numero de rodadas: "))
 while x>0:
     while u<qj:
         a[u]=a[u]+(i[u]-q[u])
         u=u+1
     u=0
-    #print("a: ",a)
     while u2<qj:
         while u<qj:
             if v[u2]==v2[u]:
@@ -45,6 +38,16 @@ while x>0:
     u2=0
     while u<qj:
         q[u]=int(a[u])
+        if aux==1:
+            q2.insert(u,int(a[u]))
+        else:
+            q2[u]=int(a[u])
+        u=u+1
+    aux=aux-1
+    u=0
+    q2.sort()
+    while u<qj:
+        q[u]=q[u]-((q2[0])-1)
         u=u+1
     u=0
     x=x-1
