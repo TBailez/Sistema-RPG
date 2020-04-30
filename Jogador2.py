@@ -1,20 +1,10 @@
-nomes=[]
-racas=[]
-classes=[]
-hps=[]
-manas=[]
-forcas=[]
-inteligencias=[]
-velocidades=[]
-resistencias=[]
-intransigencias=[]
-boars=[]
-boarms=[]
+nomes={}
+dados={}
 aux=0
-test=1
-claroqvaicomecar=1
+aux2=0
+aux3=1
 do = input('O que você deseja fazer? \n')
-while claroqvaicomecar==1:
+while True:
     if do == 'Criar jogador 1' or do =='Criar personagem 1' or do == 'criar jogador 1' or do =='cp':
         nome = input('Qual é o seu nome? \n')
         #info = input('Você quer adicionar informações adicionais? \n')
@@ -91,18 +81,20 @@ while claroqvaicomecar==1:
         #print('Resistência:',(int_RES))
         #print('Instransigência:',(int_ING))
         #print('Velocidade:',(int_VEL))
-        nomes.insert(aux,nome)
-        racas.insert(aux,RAÇA)
-        classes.insert(aux,CLASSE)
-        hps.insert(aux,HP)
-        manas.insert(aux,MN)
-        forcas.insert(aux,int_FOR)
-        inteligencias.insert(aux,int_INT)
-        velocidades.insert(aux,int_VEL)
-        resistencias.insert(aux,int_RES)
-        intransigencias.insert(aux,int_ING)
-        boars.insert(aux,BoAr)
-        boarms.insert(aux,BoArm)
+        dados={
+            'forca':int_FOR,
+            'velocidade' : int_VEL,
+            'resistencia' : int_RES,
+            'hp' : HP,
+            'mana' : MN,
+            'inteligencia' : int_INT,
+            'intransigencia' : int_ING,
+            'raca':RAÇA,
+            'classe':CLASSE,
+            'boar':BoAr,
+            'boarm':BoArm
+        }
+        nomes.update({nome:dados})
         aux=aux+1
         do=input('O que deseja fazer?\n')
     if do == 'Checar status Jogador'or do=='c':
@@ -110,26 +102,23 @@ while claroqvaicomecar==1:
             print('n existem jogadores pra testar')
             do = input('O que você deseja fazer? \n')
             break
-        while test==1:
-            au=input('qual nome do jogador q vc deseja testar?')
-            aux2=0
-            while aux2<=aux:
-                if aux2==aux: break
-                if au==nomes[aux2]: break
-                else: aux2=aux2+1
-            if aux2==aux: print('burro esse nome n existe')
-            else: test=0
-        test=1
-        print('Os status de',(nomes[aux2]),'são:')
-        print('Raça:',(racas[aux2]))
-        print('Classe',(classes[aux2]))
-        print('HP:',(hps[aux2]))
-        print('MANA:',(manas[aux2]))
-        print('Força:',(forcas[aux2]))
-        print('Inteligência:',(inteligencias[aux2]))
-        print('Resistência:',(resistencias[aux2]))
-        print('Instransigência:',(intransigencias[aux2]))
-        print('Velocidade:',(velocidades[aux2]))
+        au=input('qual nome do jogador q vc deseja testar?')
+        if au in nomes: pass
+        else: 
+            print('burro esse nome n existe')
+            do = input('O que deseja fazer? \n')
+            break
+        print(nomes.get(au))
+        #print('Os status de',au,'são:')
+        #print('Raça:',(nomes.get(au).get('raca')))
+        #print('Classe',(nomes.get(au).get('classe')))
+        #print('HP:',(nomes.get(au).get('hp')))
+        #print('MANA:',(nomes.get(au).get('mana')))
+        #print('Força:',(nomes.get(au).get('forca')))
+        #print('Inteligência:',(nomes.get(au).get('inteligencia')))
+        #print('Resistência:',(nomes.get(au).get('resistencia')))
+        #print('Instransigência:',(nomes.get(au).get('intransigencia')))
+        #print('Velocidade:',(nomes.get(au).get('velocidade')))
         do = input('O que deseja fazer? \n')
     if do=='Combate'or do=='co':
         n=[]
@@ -142,62 +131,47 @@ while claroqvaicomecar==1:
         u=0
         u2=0
         auxi=1
-        while u<aux:
-            v1=velocidades[u]
-            n.insert(u,nomes[u])
+        for z in nomes:
+            v1=(nomes.get(z).get('velocidade'))
+            n.insert(u,z)
             v.insert(u,v1)
             i.insert(u,(2.71828**((0.0423*v1)+0.0423)))
             q.insert(u,(int(i[u])))
             v2.insert(u,v[u])
             a.insert(u,(2.71828**((0.0423*v1)+0.0423)))
-            u=u+1
+            u+=1
         u=0
         v.sort(reverse=True)
         x=1
         while x>0:
             while u<aux:
                 a[u]=a[u]+(i[u]-q[u])
-                u=u+1
+                u+=1
             u=0
             while u2<aux:
                 while u<aux:
                     if v[u2]==v2[u]:
-                            print(" ",n[u]," x",q[u])
+                            print("Vez de",n[u],",",q[u],"vezes")
                             quanti=0
                             while quanti<q[u]:
-                                #print('Combate',quanti+1)
-                                while test==1:
+                                while True:
                                     nomedef=input('Qual o nome do defensor?')
-                                    aux2=0
-                                    while aux2<=aux:
-                                        if aux2==aux: break
-                                        if nomedef==nomes[aux2]: break
-                                        else: aux2=aux2+1
-                                    if aux2==aux: print('burro esse nome n existe')
-                                    else: test=0
-                                test=1
-                                aux2=0
-                                while aux2<=aux:
-                                    if nomedef==nomes[aux2]: break
-                                    else: aux2=aux2+1
-                                f=forcas[u]
-                                ba=boars[u]
-                                va=v2[u]
-                                d=resistencias[aux2]
-                                bd=boarms[aux2]
-                                vd=velocidades[aux2]
+                                    if nomedef in nomes: break
+                                    else: print('burro esse nome n existe')
                                 d1=int(input("dado atk:"))
                                 d2=int(input("dado def:"))
-                                qa=f+ba+(d1-d2)
-                                qd=d+bd
-                                qva=(d1-d2)+va
+                                dd=(d1-d2)
+                                qa=(nomes.get(n[u]).get('forca'))+(nomes.get(n[u]).get('boar'))+(d1-d2)
+                                qd=(nomes.get(nomedef).get('resistencia'))+(nomes.get(nomedef).get('boarm'))
+                                qva=dd+(nomes.get(n[u]).get('velocidade'))
                                 dano=qa-qd
-                                desvio=qva-vd
-                                print("Dano =",dano," :(",f,"+",ba,"+",(d1-d2),")-(",d,"+",bd,")")
+                                if d1==20: dano=dano*2
+                                desvio=qva-(nomes.get(nomedef).get('velocidade'))
+                                print("Dano =",dano)
                                 if desvio<=0:
                                     print("Desvio")
                                 else:
-                                    print("Dano =",int(dano*1.5)," :(",f,"+",ba,"+",(d1-d2),")-(",d,"+",bd,")x1,5")
+                                    print("Dano se tentar desviar=",int(dano*1.5),"(x1,5)")
                                 quanti=quanti+1
                     u=u+1
                 u=0
