@@ -3,9 +3,9 @@ dados={}
 aux=0
 aux2=0
 aux3=1
-do = input('O que você deseja fazer? \n')
+do = input('O que você deseja fazer? ')
 while True:
-    if do == 'Criar jogador 1' or do =='Criar personagem 1' or do == 'criar jogador 1' or do =='cp':
+    if do=='Criar jogador 1' or do =='Criar personagem 1' or do == 'criar jogador 1' or do =='cp':
         nome = input('Qual é o seu nome? \n')
         #info = input('Você quer adicionar informações adicionais? \n')
         #if info == 'Sim' or info == 'SIM' or info == 'sim' or info =='s':
@@ -26,7 +26,8 @@ while True:
         int_RES = 0
         int_ING = 0
         int_VEL = 0
-        RAÇA = input('Qual a sua Raça? \n')
+        RAÇA=input('Qual a sua Raça?\n')
+        CLASSE=input('Qual a sua classe\n') 
         if RAÇA == 'Humano' or RAÇA =='humano' or RAÇA == 'HUMANO' :
             print('Você pode distribuir 3 pontos a mais')
         elif RAÇA == 'Elfo' or RAÇA == 'elfo' or RAÇA =='ELFO':
@@ -38,49 +39,55 @@ while True:
             int_CHP += 1
             int_INT -= 1
             int_VEL -= 1
-        print('Quanto de força você tem? (',int_FOR,')+')
-        FOR = int(input())
-        print('Quanto de inteligência você tem? (',int_INT,')+ ')
-        INT = int(input())
-        print('Quanto de resistência você tem? (',int_RES,')+')
-        RES = int(input())
-        print('Quanto de intransigência você tem? (',int_ING,')+') 
-        ING = int(input())
-        print('Quanto de velocidade você tem? (',int_VEL,')+') 
-        VEL = int(input())
-        print('Quanto é seu coeficiente de HP? (',int_CHP,')+') 
-        CHP = int(input())
-        print('Quanto é seu coeficiente de MANA? (',int_CMN,')+') 
-        CMN = int(input())
-        print('Quanto é seu bonus de arma?')
-        BoAr=int(input())
-        print('Quanto é seu bonus de armadura?')
-        BoArm=int(input())
-        int_CHP = int(CHP)+int_CHP
-        int_CMN = int(CMN)+int_CMN
-        int_FOR = int(FOR)+int_FOR
-        int_INT = int(INT)+int_INT
-        int_RES = int(RES)+int_RES
-        int_ING = int(ING)+int_ING
-        int_VEL = int(VEL)+int_VEL
-        ATR =int_CHP+int_CMN+int_FOR+int_ING+int_INT+int_RES+int_VEL
-        if ATR > 18:
-            print('Você distribuiu pontos demais, vai ter que recomeçar do zero por fazer tudo errado')
-            do = 0
-            do = input('O que voçê deseja fazer? \n')
-        CLASSE = input('Qual a sua classe \n') 
-        HP = int_CHP*15
-        MN = int_CMN*15
-        #print('Os status de',(nome),'são:')
-        #print('Raça:',(RAÇA))
-        #print('Classe',(CLASSE))
-        #print('HP:',(HP))
-        #print('MANA:',(MN))
-        #print('Força:',(int_FOR))
-        #print('Inteligência:',(int_INT))
-        #print('Resistência:',(int_RES))
-        #print('Instransigência:',(int_ING))
-        #print('Velocidade:',(int_VEL))
+        while True:
+            print('Quanto de força você tem? (',int_FOR,')+')
+            FOR = int(input())
+            print('Quanto de inteligência você tem? (',int_INT,')+ ')
+            INT = int(input())
+            print('Quanto de resistência você tem? (',int_RES,')+')
+            RES = int(input())
+            print('Quanto de intransigência você tem? (',int_ING,')+') 
+            ING = int(input())
+            print('Quanto de velocidade você tem? (',int_VEL,')+') 
+            VEL = int(input())
+            print('Quanto é seu coeficiente de HP? (',int_CHP,')+') 
+            CHP = int(input())
+            print('Quanto é seu coeficiente de MANA? (',int_CMN,')+') 
+            CMN = int(input())
+            int_CHP = int(CHP)+int_CHP
+            int_CMN = int(CMN)+int_CMN
+            int_FOR = int(FOR)+int_FOR
+            int_INT = int(INT)+int_INT
+            int_RES = int(RES)+int_RES
+            int_ING = int(ING)+int_ING
+            int_VEL = int(VEL)+int_VEL
+            ATR =int_CHP+int_CMN+int_FOR+int_ING+int_INT+int_RES+int_VEL
+            HP = int_CHP*15
+            MN = int_CMN*15
+            break
+            #if ATR==18: break
+            #else:
+            #    if ATR>18: print('Você distribuiu pontos demais, vai ter que recomeçar do zero por fazer tudo errado')
+            #    if ATR<18: print('Você não distribuiu todos os pontos, vai ter que recomeçar do zero por fazer tudo errado')
+            #    int_CHP = 0
+            #    int_CMN = 0
+            #    int_FOR = 0
+            #    int_INT = 0
+            #    int_RES = 0
+            #    int_ING = 0
+            #    int_VEL = 0
+        info=input('Tem armadura?')
+        if info == 'Sim' or info == 'SIM' or info == 'sim' or info =='s':
+            BoAr=input('Quanto de bonus de armadura?')
+        else: BoAr=0
+        info=input('Tem arma?')
+        if info == 'Sim' or info == 'SIM' or info == 'sim' or info =='s':
+            BoArm=input('Quanto de bonus de arma?')
+        else: BoArm=0
+        inventario={
+            'armadura':BoAr,
+            'arma':BoArm
+        }
         dados={
             'forca':int_FOR,
             'velocidade' : int_VEL,
@@ -91,36 +98,33 @@ while True:
             'intransigencia' : int_ING,
             'raca':RAÇA,
             'classe':CLASSE,
-            'boar':BoAr,
-            'boarm':BoArm
+            'inventario':inventario
         }
         nomes.update({nome:dados})
         aux=aux+1
         do=input('O que deseja fazer?\n')
-    if do == 'Checar status Jogador'or do=='c':
+    elif do=='Checar status Jogador'or do=='c':
         if aux==0: 
             print('n existem jogadores pra testar')
             do = input('O que você deseja fazer? \n')
             break
-        au=input('qual nome do jogador q vc deseja testar?')
-        if au in nomes: pass
-        else: 
-            print('burro esse nome n existe')
-            do = input('O que deseja fazer? \n')
-            break
-        print(nomes.get(au))
-        #print('Os status de',au,'são:')
-        #print('Raça:',(nomes.get(au).get('raca')))
-        #print('Classe',(nomes.get(au).get('classe')))
-        #print('HP:',(nomes.get(au).get('hp')))
-        #print('MANA:',(nomes.get(au).get('mana')))
-        #print('Força:',(nomes.get(au).get('forca')))
-        #print('Inteligência:',(nomes.get(au).get('inteligencia')))
-        #print('Resistência:',(nomes.get(au).get('resistencia')))
-        #print('Instransigência:',(nomes.get(au).get('intransigencia')))
-        #print('Velocidade:',(nomes.get(au).get('velocidade')))
+        while True:
+            au=input('qual nome do jogador q vc deseja testar?')
+            if au in nomes: break
+            else: 
+                print('burro esse nome n existe')
+        print('Os status de',au,'são:')
+        print('Raça:',(nomes.get(au).get('raca')))
+        print('Classe',(nomes.get(au).get('classe')))
+        print('HP:',(nomes.get(au).get('hp')))
+        print('MANA:',(nomes.get(au).get('mana')))
+        print('Força:',(nomes.get(au).get('forca')))
+        print('Inteligência:',(nomes.get(au).get('inteligencia')))
+        print('Resistência:',(nomes.get(au).get('resistencia')))
+        print('Instransigência:',(nomes.get(au).get('intransigencia')))
+        print('Velocidade:',(nomes.get(au).get('velocidade')))
         do = input('O que deseja fazer? \n')
-    if do=='Combate'or do=='co':
+    elif do=='Combate'or do=='co':
         n=[]
         v=[]
         i=[]
@@ -151,7 +155,7 @@ while True:
             while u2<aux:
                 while u<aux:
                     if v[u2]==v2[u]:
-                            print("Vez de",n[u],",",q[u],"vezes")
+                            print("Vez de",n[u],"atacar",q[u],"vez(es)")
                             quanti=0
                             while quanti<q[u]:
                                 while True:
@@ -161,17 +165,29 @@ while True:
                                 d1=int(input("dado atk:"))
                                 d2=int(input("dado def:"))
                                 dd=(d1-d2)
-                                qa=(nomes.get(n[u]).get('forca'))+(nomes.get(n[u]).get('boar'))+(d1-d2)
-                                qd=(nomes.get(nomedef).get('resistencia'))+(nomes.get(nomedef).get('boarm'))
-                                qva=dd+(nomes.get(n[u]).get('velocidade'))
+                                f=int(nomes.get(n[u]).get('forca'))
+                                ba=int(nomes.get(n[u]).get('inventario').get('arma'))
+                                f2=int(nomes.get(nomedef).get('forca'))
+                                ba2=int(nomes.get(nomedef).get('inventario').get('arma'))
+                                qa=f+ba+dd
+                                qd=int(nomes.get(nomedef).get('resistencia'))+int(nomes.get(nomedef).get('inventario').get('armadura'))
+                                qva=dd+int(nomes.get(n[u]).get('velocidade'))
                                 dano=qa-qd
+                                desvio=qva-int(nomes.get(nomedef).get('velocidade'))
+                                pa=qa-(f2+ba2)
                                 if d1==20: dano=dano*2
-                                desvio=qva-(nomes.get(nomedef).get('velocidade'))
-                                print("Dano =",dano)
+                                if d2==20: int(dano=dano/2)
+                                print("Se tentar bloquear:\n Dano =",dano,'\nSe tentar desviar:')
                                 if desvio<=0:
-                                    print("Desvio")
+                                    print(" Desvio")
                                 else:
-                                    print("Dano se tentar desviar=",int(dano*1.5),"(x1,5)")
+                                    print(" Dano=",int(dano*1.5),"(x1,5)")
+                                print('Se tentar parrear:')
+                                if pa<0 and desvio<0:
+                                    if (pa+desvio)<=(-5): print(' Parry perfeito')
+                                    else: print(' Parry inperfeito')
+                                else:
+                                    print(' Dano=',dano+int(nomes.get(nomedef).get('inventario').get('armadura')))
                                 quanti=quanti+1
                     u=u+1
                 u=0
@@ -193,3 +209,29 @@ while True:
             u=0
             x=int(input('Quer continuar o combate?(1=s)'))
         do = input('O que deseja fazer? \n')
+    elif do=='e':
+        if aux==0: 
+            print('n existem jogadores pra editar')
+            do = input('O que você deseja fazer? \n')
+            break
+        while True:
+            au=input('qual nome do jogador q vc deseja editar?')
+            if au in nomes: break
+            else: 
+                print('burro esse nome n existe')
+        print('Os status de',au,'são:')
+        
+        input('Raça:',(nomes.get(au).get('raca')),'Nova raça: ')
+        
+        print('Classe',(nomes.get(au).get('classe')))
+        print('HP:',(nomes.get(au).get('hp')))
+        print('MANA:',(nomes.get(au).get('mana')))
+        print('Força:',(nomes.get(au).get('forca')))
+        print('Inteligência:',(nomes.get(au).get('inteligencia')))
+        print('Resistência:',(nomes.get(au).get('resistencia')))
+        print('Instransigência:',(nomes.get(au).get('intransigencia')))
+        print('Velocidade:',(nomes.get(au).get('velocidade')))
+        
+    else: 
+        print('N existe essa opção')
+        do = input('O que você deseja fazer? ')
