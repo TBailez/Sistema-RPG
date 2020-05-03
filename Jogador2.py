@@ -1,3 +1,5 @@
+import json
+
 nomes={}
 dados={}
 aux=0
@@ -275,7 +277,13 @@ while True:
         print('Resistência:',(nomes.get(au).get('resistencia')))
         print('Instransigência:',(nomes.get(au).get('intransigencia')))
         print('Velocidade:',(nomes.get(au).get('velocidade')))
-        
+    elif do=='s':
+        with open('d:/ded.json','w') as f:
+            json.dump(nomes,f)
+
+        #with open('d:/ded.json') as f:
+        #    ded=json.load(f)
+        break
     else: 
         print('Não existe essa opção')
         do = input('O que você deseja fazer? \n')
