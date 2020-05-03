@@ -1,11 +1,13 @@
 import json
 
-nomes={}
+with open('d:/ded.json') as f:
+    ded=json.load(f)
+nomes=ded.copy()
 dados={}
 aux=0
 aux2=0
 aux3=1
-do = input('O que você deseja fazer? \n')
+do = input('O que você deseja fazer? ')
 while True:
     if do=='Criar jogador 1' or do =='Criar personagem 1' or do == 'criar jogador 1' or do =='cp':
         nome = input('Qual é o seu nome? \n')
@@ -41,50 +43,6 @@ while True:
             int_CHP += 1
             int_INT -= 1
             int_VEL -= 1
-        elif RAÇA == 'Anão' or RAÇA == 'anão' or RAÇA =='anao':
-            int_FOR += 1
-            int_RES += 2
-            int_ING += 2
-            int_VEL -= 2
-        elif RAÇA == 'Tiefling' or RAÇA == 'TIEFLING' or RAÇA == 'tiefling':
-            int_INT += 2
-            int_ING += 1
-            int_CHP += 1
-        elif RAÇA == 'Qunari' or RAÇA == 'QUNARI' or RAÇA == 'qunari':
-            int_FOR += 2
-            int_ING -= 1
-            int_VEL += 2
-        elif RAÇA == 'Deva' or RAÇA == 'DEVA' or RAÇA == 'deva':
-            int_FOR -= 1
-            int_RES -= 1
-            int_INT += 1
-            int_ING += 1
-            int_CMN += 2 
-        elif RAÇA == 'Hafling' or RAÇA == 'HAFLING' or RAÇA == 'hafling':
-            int_FOR -= 1
-            int_RES -= 1
-            int_ING += 1
-            int_VEL += 3
-        elif RAÇA == 'Fada' or RAÇA == 'FADA' or RAÇA == 'fada':
-            int_FOR -= 2
-            int_RES -= 2
-            int_INT += 2
-            int_ING += 1
-            int_CMN += 1 
-            int_VEL += 3
-        elif RAÇA == 'Tritão' or RAÇA == 'TRITÃO' or RAÇA == 'tritão':
-            int_CHP += 1
-            int_CMN += 1
-            int_VEL += 1 
-        elif RAÇA == 'Draconato' or RAÇA == 'DRACONATO' or RAÇA == 'draconato':
-            int_ING += 2
-            int_CHP += 1 
-        elif RAÇA == 'Myconid' or RAÇA == 'MYCONID' or RAÇA == 'myconid':
-            int_FOR += 1
-            int_RES += 3
-            int_ING -= 1
-            int_CHP += 1 
-            int_VEL -= 3                 
         while True:
             print('Quanto de força você tem? (',int_FOR,')+')
             FOR = int(input())
@@ -122,20 +80,20 @@ while True:
             #    int_RES = 0
             #    int_ING = 0
             #    int_VEL = 0
-        info=input('Tem armadura?\n')
+        info=input('Tem armadura?')
         if info == 'Sim' or info == 'SIM' or info == 'sim' or info =='s':
             BoAr=input('Quanto de bonus de armadura?')
         else: BoAr=0
-        info=input('Tem arma?\n')
+        info=input('Tem arma?')
         if info == 'Sim' or info == 'SIM' or info == 'sim' or info =='s':
-            BoArm=input('Quanto de bonus de arma?\n')
+            BoArm=input('Quanto de bonus de arma?')
         else: BoArm=0
         inventario={
             'armadura':BoAr,
             'arma':BoArm
         }
         dados={
-            'força':int_FOR,
+            'forca':int_FOR,
             'velocidade' : int_VEL,
             'resistencia' : int_RES,
             'hp' : HP,
@@ -151,20 +109,20 @@ while True:
         do=input('O que deseja fazer?\n')
     elif do=='Checar status Jogador'or do=='c':
         if aux==0: 
-            print('Não existem jogadores pra testar')
+            print('n existem jogadores pra testar')
             do = input('O que você deseja fazer? \n')
             break
         while True:
-            au=input('Qual nome do jogador que você deseja testar?\n')
+            au=input('Qual nome do jogador q vc deseja testar?')
             if au in nomes: break
             else: 
-                print('Burro esse nome não existe')
+                print('Burro esse nome n existe')
         print('Os status de',au,'são:')
-        print('Raça:',(nomes.get(au).get('raça')))
+        print('Raça:',(nomes.get(au).get('raca')))
         print('Classe',(nomes.get(au).get('classe')))
         print('HP:',(nomes.get(au).get('hp')))
         print('MANA:',(nomes.get(au).get('mana')))
-        print('Força:',(nomes.get(au).get('força')))
+        print('Força:',(nomes.get(au).get('forca')))
         print('Inteligência:',(nomes.get(au).get('inteligencia')))
         print('Resistência:',(nomes.get(au).get('resistencia')))
         print('Instransigência:',(nomes.get(au).get('intransigencia')))
@@ -182,7 +140,7 @@ while True:
         u2=0
         auxi=1
         for z in nomes:
-            v1=(nomes.get(z).get('velocidade'))
+            v1=(nomes.get(z).get('Velocidade'))
             n.insert(u,z)
             v.insert(u,v1)
             i.insert(u,(2.71828**((0.0423*v1)+0.0423)))
@@ -205,11 +163,11 @@ while True:
                             quanti=0
                             while quanti<q[u]:
                                 while True:
-                                    nomedef=input('Qual o nome do defensor?\n')
+                                    nomedef=input('Qual o nome do defensor?')
                                     if nomedef in nomes: break
-                                    else: print('burro esse nome n existe')
-                                d1=int(input("dado atk:"))
-                                d2=int(input("dado def:"))
+                                    else: print('Burro esse nome n existe')
+                                d1=int(input("Dado atk:"))
+                                d2=int(input("Dado def:"))
                                 dd=(d1-d2)
                                 f=int(nomes.get(n[u]).get('forca'))
                                 ba=int(nomes.get(n[u]).get('inventario').get('arma'))
@@ -257,18 +215,16 @@ while True:
         do = input('O que deseja fazer? \n')
     elif do=='e':
         if aux==0: 
-            print('Não existem jogadores pra editar')
+            print('N existem jogadores pra editar')
             do = input('O que você deseja fazer? \n')
             break
         while True:
-            au=input('Qual nome do jogador que você deseja editar?\n')
+            au=input('Qual nome do jogador q vc deseja editar?')
             if au in nomes: break
             else: 
-                print('Burro esse nome não existe\n')
+                print('Burro esse nome n existe')
         print('Os status de',au,'são:')
-        
-        input('Raça:',(nomes.get(au).get('raça')),'Nova raça: ')
-        
+        input('Raça:',(nomes.get(au).get('raca')),'Nova raça: ')
         print('Classe',(nomes.get(au).get('classe')))
         print('HP:',(nomes.get(au).get('hp')))
         print('MANA:',(nomes.get(au).get('mana')))
@@ -277,6 +233,8 @@ while True:
         print('Resistência:',(nomes.get(au).get('resistencia')))
         print('Instransigência:',(nomes.get(au).get('intransigencia')))
         print('Velocidade:',(nomes.get(au).get('velocidade')))
+
+        do = input('O que deseja fazer? \n')
     elif do=='s':
         with open('d:/ded.json','w') as f:
             json.dump(nomes,f)
@@ -284,6 +242,9 @@ while True:
         #with open('d:/ded.json') as f:
         #    ded=json.load(f)
         break
+    elif do=='p':
+        print(nomes)
+        do = input('O que deseja fazer? \n')
     else: 
-        print('Não existe essa opção')
-        do = input('O que você deseja fazer? \n')
+        print('N existe essa opção')
+        do = input('O que você deseja fazer? ')
