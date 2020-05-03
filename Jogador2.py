@@ -1,4 +1,8 @@
-nomes={}
+import json
+
+with open('d:/ded.json') as f:
+    ded=json.load(f)
+nomes=ded.copy()
 dados={}
 aux=0
 aux2=0
@@ -108,18 +112,17 @@ while True:
             ATR =int_CHP+int_CMN+int_FOR+int_ING+int_INT+int_RES+int_VEL
             HP = int_CHP*15
             MN = int_CMN*15
-            break
-            #if ATR==18: break
-            #else:
-            #    if ATR>18: print('Você distribuiu pontos demais, vai ter que recomeçar do zero por fazer tudo errado')
-            #    if ATR<18: print('Você não distribuiu todos os pontos, vai ter que recomeçar do zero por fazer tudo errado')
-            #    int_CHP = 0
-            #    int_CMN = 0
-            #    int_FOR = 0
-            #    int_INT = 0
-            #    int_RES = 0
-            #    int_ING = 0
-            #    int_VEL = 0
+            if ATR==18: break
+            else:
+                if ATR>18: print('Você distribuiu pontos demais, vai ter que recomeçar do zero por fazer tudo errado')
+                if ATR<18: print('Você não distribuiu todos os pontos, vai ter que recomeçar do zero por fazer tudo errado')
+                int_CHP = 0
+                int_CMN = 0
+                int_FOR = 0
+                int_INT = 0
+                int_RES = 0
+                int_ING = 0
+                int_VEL = 0
         info=input('Tem armadura?\n')
         if info == 'Sim' or info == 'SIM' or info == 'sim' or info =='s':
             BoAr=input('Quanto de bonus de armadura?')
@@ -264,9 +267,7 @@ while True:
             else: 
                 print('Burro esse nome não existe\n')
         print('Os status de',au,'são:')
-        
         input('Raça:',(nomes.get(au).get('raça')),'Nova raça: ')
-        
         print('Classe',(nomes.get(au).get('classe')))
         print('HP:',(nomes.get(au).get('hp')))
         print('MANA:',(nomes.get(au).get('mana')))
@@ -275,7 +276,13 @@ while True:
         print('Resistência:',(nomes.get(au).get('resistencia')))
         print('Instransigência:',(nomes.get(au).get('intransigencia')))
         print('Velocidade:',(nomes.get(au).get('velocidade')))
-        
+    elif do=='s':
+        with open('d:/ded.json','w') as f:
+            json.dump(nomes,f)
+        break
+    elif do=='p':
+        print(nomes)
+        do = input('O que deseja fazer? \n')
     else: 
         print('Não existe essa opção')
         do = input('O que você deseja fazer? \n')
