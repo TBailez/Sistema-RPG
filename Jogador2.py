@@ -109,10 +109,10 @@ while True:
             do = input('O que você deseja fazer? \n')
             break
         while True:
-            au=input('qual nome do jogador q vc deseja testar?')
+            au=input('Qual nome do jogador q vc deseja testar?')
             if au in nomes: break
             else: 
-                print('burro esse nome n existe')
+                print('Burro esse nome n existe')
         print('Os status de',au,'são:')
         print('Raça:',(nomes.get(au).get('raca')))
         print('Classe',(nomes.get(au).get('classe')))
@@ -136,7 +136,7 @@ while True:
         u2=0
         auxi=1
         for z in nomes:
-            v1=(nomes.get(z).get('velocidade'))
+            v1=(nomes.get(z).get('Velocidade'))
             n.insert(u,z)
             v.insert(u,v1)
             i.insert(u,(2.71828**((0.0423*v1)+0.0423)))
@@ -161,9 +161,9 @@ while True:
                                 while True:
                                     nomedef=input('Qual o nome do defensor?')
                                     if nomedef in nomes: break
-                                    else: print('burro esse nome n existe')
-                                d1=int(input("dado atk:"))
-                                d2=int(input("dado def:"))
+                                    else: print('Burro esse nome n existe')
+                                d1=int(input("Dado atk:"))
+                                d2=int(input("Dado def:"))
                                 dd=(d1-d2)
                                 f=int(nomes.get(n[u]).get('forca'))
                                 ba=int(nomes.get(n[u]).get('inventario').get('arma'))
@@ -211,18 +211,16 @@ while True:
         do = input('O que deseja fazer? \n')
     elif do=='e':
         if aux==0: 
-            print('n existem jogadores pra editar')
+            print('N existem jogadores pra editar')
             do = input('O que você deseja fazer? \n')
             break
         while True:
-            au=input('qual nome do jogador q vc deseja editar?')
+            au=input('Qual nome do jogador q vc deseja editar?')
             if au in nomes: break
             else: 
-                print('burro esse nome n existe')
+                print('Burro esse nome n existe')
         print('Os status de',au,'são:')
-        
         input('Raça:',(nomes.get(au).get('raca')),'Nova raça: ')
-        
         print('Classe',(nomes.get(au).get('classe')))
         print('HP:',(nomes.get(au).get('hp')))
         print('MANA:',(nomes.get(au).get('mana')))
@@ -230,8 +228,7 @@ while True:
         print('Inteligência:',(nomes.get(au).get('inteligencia')))
         print('Resistência:',(nomes.get(au).get('resistencia')))
         print('Instransigência:',(nomes.get(au).get('intransigencia')))
-        print('Velocidade:',(nomes.get(au).get('velocidade')))
-        
+        print('Velocidade:',(nomes.get(au).get('velocidade')))  
     else: 
         print('N existe essa opção')
         do = input('O que você deseja fazer? ')
