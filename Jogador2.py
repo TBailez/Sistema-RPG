@@ -1,16 +1,16 @@
 #mudar o json
 import json
 
-with open('d:/ded.json') as f:
+with open('c:/Sistema RPG/ded.json') as f:
     ded=json.load(f)
-with open('d:/Racas.json')as g:
+with open('c:/Sistema RPG/ded.json')as g:
     Racas=json.load(g)
 nomes=ded.copy()
 rAcas=Racas.copy()
 dados={}
 aux=nomes.get('qj')
 #nomes.update({'qj':0})
-#with open('d:/ded.json','w') as f:
+#with open('c:/Sistema RPG/ded.json','w') as f:
 #    json.dump(nomes,f)
 aux1=0
 aux2=0
@@ -259,7 +259,7 @@ while True:
             aux3+=1
         do = input('O que deseja fazer? \n')
     elif do=='s':
-        with open('d:/ded.json','w') as f:
+        with open('c:/Sistema RPG/ded.json','w') as f:
             json.dump(nomes,f)
         do = input('O que deseja fazer? \n')
     elif do=='p':
