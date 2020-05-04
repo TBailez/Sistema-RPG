@@ -1,11 +1,12 @@
 #mudar o json
-
 import json
-
 
 with open('d:/ded.json') as f:
     ded=json.load(f)
+with open('d:/Racas.json')as g:
+    Racas=json.load(g)
 nomes=ded.copy()
+rAcas=Racas.copy()
 dados={}
 aux=nomes.get('qj')
 aux1=0
@@ -27,71 +28,20 @@ while True:
         #    print("Ótima escolha")
         #else:
         #    print("As opções eram sim ou não, mas tudo bem, vou considerar um não!")
-        int_CHP = 0
-        int_CMN = 0
-        int_FOR = 0
-        int_INT = 0
-        int_RES = 0
-        int_ING = 0
-        int_VEL = 0
         RAÇA=input('Qual a sua Raça?\n')
-        CLASSE=input('Qual a sua classe\n') 
-        if RAÇA.lower() == 'humano':
-            print('Você pode distribuir 3 pontos a mais')
-        elif RAÇA.lower() == 'elfo':
-            int_INT += 2
-            int_VEL += 1
-        elif RAÇA.lower() == 'orc':
-            int_FOR += 2
-            int_RES += 2
-            int_CHP += 1
-            int_INT -= 1
-            int_VEL -= 1
-        elif RAÇA.lower() == 'anão':
-            int_FOR += 1
-            int_RES += 2
-            int_ING += 2
-            int_VEL -= 2
-        elif RAÇA.lower() == 'tiefling':
-            int_INT += 2
-            int_ING += 1
-            int_CHP += 1
-        elif RAÇA.lower() == 'qunari':
-            int_FOR += 2
-            int_ING -= 1
-            int_VEL += 2
-        elif RAÇA.lower() == 'deva':
-            int_FOR -= 1
-            int_RES -= 1
-            int_INT += 1
-            int_ING += 1
-            int_CMN += 2 
-        elif RAÇA.lower() == 'hafling':
-            int_FOR -= 1
-            int_RES -= 1
-            int_ING += 1
-            int_VEL += 3
-        elif RAÇA.lower() == 'fada':
-            int_FOR -= 2
-            int_RES -= 2
-            int_INT += 2
-            int_ING += 1
-            int_CMN += 1 
-            int_VEL += 3
-        elif RAÇA.lower() == 'tritão':
-            int_CHP += 1
-            int_CMN += 1
-            int_VEL += 1 
-        elif RAÇA.lower() == 'draconato':
-            int_ING += 2
-            int_CHP += 1 
-        elif RAÇA.lower() == 'myconid':
-            int_FOR += 1
-            int_RES += 3
-            int_ING += 1
-            int_CHP += 1 
-            int_VEL -= 3                 
         while True:
+            if RAÇA in rAcas: break
+            elif RAÇA=='humano': break
+            else: print('N existe essa raça')
+        CLASSE=input('Qual a sua classe\n') 
+        while True: 
+            int_CHP = rAcas.get(RAÇA).get('int_CHP')
+            int_CMN = rAcas.get(RAÇA).get('int_CMN')
+            int_FOR = rAcas.get(RAÇA).get('int_FOR')
+            int_INT = rAcas.get(RAÇA).get('int_INT')
+            int_RES = rAcas.get(RAÇA).get('int_RES')
+            int_ING = rAcas.get(RAÇA).get('int_ING')
+            int_VEL = rAcas.get(RAÇA).get('int_VEL')
             print('Quanto de força você tem? (',int_FOR,')+')
             FOR = int(input())
             print('Quanto de inteligência você tem? (',int_INT,')+ ')
@@ -128,11 +78,11 @@ while True:
                 int_ING = 0
                 int_VEL = 0
         info=input('Tem armadura?\n')
-        if info.lower() == 'sim':
-            BoAr=input('Quanto de bonus de armadura?')
+        if info.lower() == 'sim' or info=='s':
+            BoAr=input('Quanto de bonus de armadura?\n')
         else: BoAr=0
         info=input('Tem arma?\n')
-        if info.lower() == 'sim':
+        if info.lower() == 'sim' or info=='s':
             BoArm=input('Quanto de bonus de arma?\n')
         else: BoArm=0
         inventario={
@@ -140,7 +90,7 @@ while True:
             'arma':BoArm
         }
         dados={
-            'força':int_FOR,
+            'forca':int_FOR,
             'velocidade' : int_VEL,
             'resistencia' : int_RES,
             'hp' : HP,
@@ -153,6 +103,7 @@ while True:
         }
         nomes.update({nome:dados})
         aux=aux+1
+        nomes.update({'qj':aux})
         do=input('O que deseja fazer?\n')
     elif do=='Checar status Jogador'or do=='c':
         if aux==0: 
@@ -165,11 +116,11 @@ while True:
             else: 
                 print('Burro esse nome não existe')
         print('Os status de',au,'são:')
-        print('Raça:',(nomes.get(au).get('raça')))
+        print('Raça:',(nomes.get(au).get('raca')))
         print('Classe',(nomes.get(au).get('classe')))
         print('HP:',(nomes.get(au).get('hp')))
         print('MANA:',(nomes.get(au).get('mana')))
-        print('Força:',(nomes.get(au).get('força')))
+        print('Força:',(nomes.get(au).get('forca')))
         print('Inteligência:',(nomes.get(au).get('inteligencia')))
         print('Resistência:',(nomes.get(au).get('resistencia')))
         print('Instransigência:',(nomes.get(au).get('intransigencia')))
@@ -236,6 +187,7 @@ while True:
                                 else:
                                     print(" Dano=",int(dano*1.5),"(x1,5)")
                                 print('Se tentar parrear:')
+                                print('pa:',pa,'qa:',qa,)
                                 if pa<0 and desvio<0:
                                     if (pa+desvio)<=(-5): print(' Parry perfeito')
                                     else: print(' Parry inperfeito')
@@ -284,15 +236,17 @@ while True:
             if aux3==7: aux1='intransigencia'
             if aux3==8: aux1='velocidade'
             if aux3==0 or aux3==1:
-                print('Deseja mudar',aux1,'?(',aux1,'atual:',(nomes.get(au).get('raca')),')')
+                print('Deseja mudar',aux1,'?(',aux1,'atual:',(nomes.get(au).get(aux1)),')')
                 aux2=input()
                 if aux2=='s':
                     print('Nova',aux1,':')
                     aux2=input()
+                    #print('aux1:',aux1,'aux2:',aux2)
                     nomes[au].update({aux1:aux2})
+                    #print('nomes[au]',(nomes.get(au).get(aux1)))
                     aux2=0
             else:
-                print('Deseja mudar',aux1,'?(',aux1,'atual:',(nomes.get(au).get('raca')),')')
+                print('Deseja mudar',aux1,'?(',aux1,'atual:',(nomes.get(au).get(aux1)),')')
                 aux2=input()
                 if aux2=='s':
                     print('Nova',aux1,':')
@@ -304,7 +258,7 @@ while True:
     elif do=='s':
         with open('d:/ded.json','w') as f:
             json.dump(nomes,f)
-        break
+        do = input('O que deseja fazer? \n')
     elif do=='p':
         print(nomes)
         do = input('O que deseja fazer? \n')
