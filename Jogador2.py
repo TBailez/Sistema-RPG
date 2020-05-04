@@ -9,6 +9,8 @@ nomes=ded.copy()
 rAcas=Racas.copy()
 dados={}
 aux=nomes.get('qj')
+#with open('d:/ded.json','w') as f:
+#    json.dump('qj':0)
 aux1=0
 aux2=0
 aux3=1
