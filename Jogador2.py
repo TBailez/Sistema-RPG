@@ -1,5 +1,7 @@
 import json
 
+#mudar o json
+
 with open('d:/ded.json') as f:
     ded=json.load(f)
 nomes=ded.copy()
