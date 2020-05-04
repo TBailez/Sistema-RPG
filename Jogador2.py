@@ -11,7 +11,7 @@ dados={}
 aux=nomes.get('qj')
 #nomes.update({'qj':0})
 #with open('d:/ded.json','w') as f:
-#    json.dump(qj,f)
+#    json.dump(nomes,f)
 aux1=0
 aux2=0
 aux3=1
