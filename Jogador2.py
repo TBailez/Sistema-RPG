@@ -9,9 +9,6 @@ nomes=ded.copy()
 rAcas=Racas.copy()
 dados={}
 aux=nomes.get('qj')
-#nomes.update({'qj':0})
-#with open('c:/Sistema RPG/ded.json','w') as f:
-#    json.dump(nomes,f)
 aux1=0
 aux2=0
 aux3=1
