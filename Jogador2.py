@@ -7,12 +7,13 @@ with open('d:/ded.json') as f:
     ded=json.load(f)
 nomes=ded.copy()
 dados={}
-aux=0
+aux=nomes.get('qj')
+aux1=0
 aux2=0
 aux3=1
 do = input('O que você deseja fazer? \n')
 while True:
-    if do=='Criar jogador 1' or do =='Criar personagem ' or do == 'criar jogador 1' or do =='cp':
+    if do.lower()=='criar jogador' or do =='cp':
         nome = input('Qual é o seu nome? \n')
         #info = input('Você quer adicionar informações adicionais? \n')
         #if info == 'Sim' or info == 'SIM' or info == 'sim' or info =='s':
@@ -87,7 +88,7 @@ while True:
         elif RAÇA.lower() == 'myconid':
             int_FOR += 1
             int_RES += 3
-            int_ING -= 1
+            int_ING += 1
             int_CHP += 1 
             int_VEL -= 3                 
         while True:
@@ -186,14 +187,16 @@ while True:
         u2=0
         auxi=1
         for z in nomes:
-            v1=(nomes.get(z).get('velocidade'))
-            n.insert(u,z)
-            v.insert(u,v1)
-            i.insert(u,(2.71828**((0.0423*v1)+0.0423)))
-            q.insert(u,(int(i[u])))
-            v2.insert(u,v[u])
-            a.insert(u,(2.71828**((0.0423*v1)+0.0423)))
-            u+=1
+            if z=='qj': pass
+            else:
+                v1=(nomes.get(z).get('velocidade'))
+                n.insert(u,z)
+                v.insert(u,v1)
+                i.insert(u,(2.71828**((0.0423*v1)+0.0423)))
+                q.insert(u,(int(i[u])))
+                v2.insert(u,v[u])
+                a.insert(u,(2.71828**((0.0423*v1)+0.0423)))
+                u+=1
         u=0
         v.sort(reverse=True)
         x=1
@@ -261,24 +264,43 @@ while True:
         do = input('O que deseja fazer? \n')
     elif do=='e':
         if aux==0: 
-            print('Não existem jogadores pra editar')
+            print('Não existem jogadores pra testar')
             do = input('O que você deseja fazer? \n')
             break
         while True:
-            au=input('Qual nome do jogador que você deseja editar?\n')
+            au=input('Qual nome do jogador que você deseja testar?\n')
             if au in nomes: break
             else: 
-                print('Burro esse nome não existe\n')
-        print('Os status de',au,'são:')
-        input('Raça:',(nomes.get(au).get('raça')),'Nova raça: ')
-        print('Classe',(nomes.get(au).get('classe')))
-        print('HP:',(nomes.get(au).get('hp')))
-        print('MANA:',(nomes.get(au).get('mana')))
-        print('Força:',(nomes.get(au).get('forca')))
-        print('Inteligência:',(nomes.get(au).get('inteligencia')))
-        print('Resistência:',(nomes.get(au).get('resistencia')))
-        print('Instransigência:',(nomes.get(au).get('intransigencia')))
-        print('Velocidade:',(nomes.get(au).get('velocidade')))
+                print('Burro esse nome não existe')
+        aux3=0
+        while aux3<9:
+            if aux3==0: aux1='raca'
+            if aux3==1: aux1='classe'
+            if aux3==2: aux1='hp'
+            if aux3==3: aux1='mana'
+            if aux3==4: aux1='forca'
+            if aux3==5: aux1='resistencia'
+            if aux3==6: aux1='inteligencia'
+            if aux3==7: aux1='intransigencia'
+            if aux3==8: aux1='velocidade'
+            if aux3==0 or aux3==1:
+                print('Deseja mudar',aux1,'?(',aux1,'atual:',(nomes.get(au).get('raca')),')')
+                aux2=input()
+                if aux2=='s':
+                    print('Nova',aux1,':')
+                    aux2=input()
+                    nomes[au].update({aux1:aux2})
+                    aux2=0
+            else:
+                print('Deseja mudar',aux1,'?(',aux1,'atual:',(nomes.get(au).get('raca')),')')
+                aux2=input()
+                if aux2=='s':
+                    print('Nova',aux1,':')
+                    aux2=int(input())
+                    nomes[au].update({aux1:aux2})
+                    aux2=0
+            aux3+=1
+        do = input('O que deseja fazer? \n')
     elif do=='s':
         with open('d:/ded.json','w') as f:
             json.dump(nomes,f)
