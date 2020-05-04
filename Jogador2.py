@@ -32,56 +32,56 @@ while True:
         int_VEL = 0
         RAÇA=input('Qual a sua Raça?\n')
         CLASSE=input('Qual a sua classe\n') 
-        if RAÇA == 'Humano' or RAÇA =='humano' or RAÇA == 'HUMANO' :
+        if RAÇA.lower() == 'Humano':
             print('Você pode distribuir 3 pontos a mais')
-        elif RAÇA == 'Elfo' or RAÇA == 'elfo' or RAÇA =='ELFO':
+        elif RAÇA.lower() == 'Elfo':
             int_INT += 2
             int_VEL += 1
-        elif RAÇA == 'Orc' or RAÇA == 'orc' or RAÇA == 'ORC':
+        elif RAÇA.lower() == 'Orc':
             int_FOR += 2
             int_RES += 2
             int_CHP += 1
             int_INT -= 1
             int_VEL -= 1
-        elif RAÇA == 'Anão' or RAÇA == 'anão' or RAÇA =='anao':
+        elif RAÇA.lower() == 'Anão':
             int_FOR += 1
             int_RES += 2
             int_ING += 2
             int_VEL -= 2
-        elif RAÇA == 'Tiefling' or RAÇA == 'TIEFLING' or RAÇA == 'tiefling':
+        elif RAÇA.lower() == 'Tiefling':
             int_INT += 2
             int_ING += 1
             int_CHP += 1
-        elif RAÇA == 'Qunari' or RAÇA == 'QUNARI' or RAÇA == 'qunari':
+        elif RAÇA.lower() == 'Qunari':
             int_FOR += 2
             int_ING -= 1
             int_VEL += 2
-        elif RAÇA == 'Deva' or RAÇA == 'DEVA' or RAÇA == 'deva':
+        elif RAÇA.lower() == 'Deva':
             int_FOR -= 1
             int_RES -= 1
             int_INT += 1
             int_ING += 1
             int_CMN += 2 
-        elif RAÇA == 'Hafling' or RAÇA == 'HAFLING' or RAÇA == 'hafling':
+        elif RAÇA.lower() == 'Hafling':
             int_FOR -= 1
             int_RES -= 1
             int_ING += 1
             int_VEL += 3
-        elif RAÇA == 'Fada' or RAÇA == 'FADA' or RAÇA == 'fada':
+        elif RAÇA.lower() == 'Fada':
             int_FOR -= 2
             int_RES -= 2
             int_INT += 2
             int_ING += 1
             int_CMN += 1 
             int_VEL += 3
-        elif RAÇA == 'Tritão' or RAÇA == 'TRITÃO' or RAÇA == 'tritão':
+        elif RAÇA.lower() == 'Tritão':
             int_CHP += 1
             int_CMN += 1
             int_VEL += 1 
-        elif RAÇA == 'Draconato' or RAÇA == 'DRACONATO' or RAÇA == 'draconato':
+        elif RAÇA.lower() == 'Draconato':
             int_ING += 2
             int_CHP += 1 
-        elif RAÇA == 'Myconid' or RAÇA == 'MYCONID' or RAÇA == 'myconid':
+        elif RAÇA.lower() == 'Myconid':
             int_FOR += 1
             int_RES += 3
             int_ING -= 1
@@ -124,11 +124,11 @@ while True:
                 int_ING = 0
                 int_VEL = 0
         info=input('Tem armadura?\n')
-        if info == 'Sim' or info == 'SIM' or info == 'sim' or info =='s':
+        if info.lower() == 'Sim':
             BoAr=input('Quanto de bonus de armadura?')
         else: BoAr=0
         info=input('Tem arma?\n')
-        if info == 'Sim' or info == 'SIM' or info == 'sim' or info =='s':
+        if info.lower() == 'Sim':
             BoArm=input('Quanto de bonus de arma?\n')
         else: BoArm=0
         inventario={
