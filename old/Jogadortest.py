@@ -1,7 +1,7 @@
 #mudar o json
 import json
 
-with open('c:/Sistema RPG/ded.json') as f:
+with open('old\ded.json') as f:
     ded=json.load(f)
 nomes=ded.get('nomes').copy()
 npcs=ded.get('npcs').copy()
