@@ -9,22 +9,28 @@ with open('Beta/data/npcs.json') as g:
 with open('Beta/data/Racas.json') as k:
     Racas=json.load(k)
 
+with open('Beta/data/classes.json') as l:
+    classes=json.load(l)
+
 def personagem():
         nome = input('Qual é o seu nome? \n')
         npc=input('É um npc?\n')
         while True:
-            RAÇA=input('Qual a sua Raça?\n')
+            RAÇA=input('Qual a sua raça?\n')
             if RAÇA in Racas: break
-            else: print('N existe essa raça')
-        CLASSE=input('Qual a sua classe\n') 
+            else: print('Não existe essa raça')
+        while True:    
+            CLASSE=input('Qual a sua classe\n') 
+            if CLASSE in classes: break
+            else: print('Não existe essa classe')
         while True:
-            int_CHP = Racas.get(RAÇA).get('int_CHP')
-            int_CMN = Racas.get(RAÇA).get('int_CMN')
-            int_FOR = Racas.get(RAÇA).get('int_FOR')
-            int_INT = Racas.get(RAÇA).get('int_INT')
-            int_RES = Racas.get(RAÇA).get('int_RES')
-            int_ING = Racas.get(RAÇA).get('int_ING')
-            int_VEL = Racas.get(RAÇA).get('int_VEL')
+            int_CHP = Racas.get(RAÇA).get('int_CHP') + classes.get(CLASSE).get('int_CHP')
+            int_CMN = Racas.get(RAÇA).get('int_CMN') + classes.get(CLASSE).get('int_CMN')
+            int_FOR = Racas.get(RAÇA).get('int_FOR') + classes.get(CLASSE).get('int_FOR')
+            int_INT = Racas.get(RAÇA).get('int_INT') + classes.get(CLASSE).get('int_RES')
+            int_RES = Racas.get(RAÇA).get('int_RES') + classes.get(CLASSE).get('int_INT') 
+            int_ING = Racas.get(RAÇA).get('int_ING') + classes.get(CLASSE).get('int_ING')
+            int_VEL = Racas.get(RAÇA).get('int_VEL') + classes.get(CLASSE).get('int_VEL')
             print('Quanto de força você tem? (',int_FOR,')+')
             FOR = int(input())
             print('Quanto de inteligência você tem? (',int_INT,')+ ')
@@ -49,10 +55,10 @@ def personagem():
             ATR =int_CHP+int_CMN+int_FOR+int_ING+int_INT+int_RES+int_VEL
             HP = int_CHP*15
             MN = int_CMN*15
-            if ATR==18: break
+            if ATR==21: break
             else:
-                if ATR>18: print('Você distribuiu pontos demais, vai ter que recomeçar do zero por fazer tudo errado')
-                if ATR<18: print('Você não distribuiu todos os pontos, vai ter que recomeçar do zero por fazer tudo errado')
+                if ATR>21: print('Você distribuiu pontos demais, vai ter que recomeçar do zero por fazer tudo errado')
+                if ATR<21: print('Você não distribuiu todos os pontos, vai ter que recomeçar do zero por fazer tudo errado')
                 int_CHP = 0
                 int_CMN = 0
                 int_FOR = 0
