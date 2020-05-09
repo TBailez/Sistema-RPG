@@ -2,6 +2,7 @@ from .batalha.testedebatalha import batalha
 from .jogadores.criacao_personagem import personagem
 from .jogadores.checar import checar
 from .jogadores.editor import editar
+from .jogadores.print import printar
 
 def menu(command):
     if command == "cp": 
@@ -12,4 +13,6 @@ def menu(command):
         checar()
     elif command == "e":
         editar()
+    elif command == "p":
+        printar()
     else: print('Não existe essa opção')

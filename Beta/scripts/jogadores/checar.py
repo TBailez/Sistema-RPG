@@ -1,4 +1,5 @@
 import json
+from .print import printar
 
 with open('Beta/data/nomes.json') as f:
     nomes=json.load(f)
@@ -12,6 +13,7 @@ def checar():
         while True:
             au=input('Qual nome do personagem que você deseja testar?\n')
             if au in nomes or au in npcs: break
+            elif au.lower()=='checar' or au.lower()=='lista': printar()
             elif au.lower()=='exit' or au.lower()=='sair':
                 sair=True
                 break
