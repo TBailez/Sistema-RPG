@@ -29,4 +29,6 @@ def checar():
         print('Resistência:',(non.get(au).get('resistencia')))
         print('Instransigência:',(non.get(au).get('intransigencia')))
         print('Velocidade:',(non.get(au).get('velocidade')))
+        print('    arma:',non.get(au).get('inventario').get('arma'))
+        print('    armadura:',non.get(au).get('inventario').get('armadura'))
         break
