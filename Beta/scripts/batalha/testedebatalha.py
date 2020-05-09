@@ -116,4 +116,4 @@ def batalha():
             u=u+1
         u=0
         x=int(input('Quer continuar o combate?(1=s)'))
-    do = input('O que deseja fazer? \n')
+    
