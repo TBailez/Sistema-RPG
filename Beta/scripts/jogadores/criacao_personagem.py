@@ -7,26 +7,24 @@ with open('Beta/data/npcs.json') as g:
     npcs=json.load(g)
 
 with open('Beta/data/Racas.json') as k:
-   Racas=json.load(k)
-rAcas=Racas.copy()
+    Racas=json.load(k)
 
 def personagem():
         nome = input('Qual é o seu nome? \n')
         npc=input('É um npc?\n')
-        RAÇA=input('Qual a sua Raça?\n')
         while True:
-            if RAÇA in rAcas: break
-            elif RAÇA=='humano': break
+            RAÇA=input('Qual a sua Raça?\n')
+            if RAÇA in Racas: break
             else: print('N existe essa raça')
         CLASSE=input('Qual a sua classe\n') 
-        while True: 
-            int_CHP = rAcas.get(RAÇA).get('int_CHP')
-            int_CMN = rAcas.get(RAÇA).get('int_CMN')
-            int_FOR = rAcas.get(RAÇA).get('int_FOR')
-            int_INT = rAcas.get(RAÇA).get('int_INT')
-            int_RES = rAcas.get(RAÇA).get('int_RES')
-            int_ING = rAcas.get(RAÇA).get('int_ING')
-            int_VEL = rAcas.get(RAÇA).get('int_VEL')
+        while True:
+            int_CHP = Racas.get(RAÇA).get('int_CHP')
+            int_CMN = Racas.get(RAÇA).get('int_CMN')
+            int_FOR = Racas.get(RAÇA).get('int_FOR')
+            int_INT = Racas.get(RAÇA).get('int_INT')
+            int_RES = Racas.get(RAÇA).get('int_RES')
+            int_ING = Racas.get(RAÇA).get('int_ING')
+            int_VEL = Racas.get(RAÇA).get('int_VEL')
             print('Quanto de força você tem? (',int_FOR,')+')
             FOR = int(input())
             print('Quanto de inteligência você tem? (',int_INT,')+ ')
@@ -86,5 +84,13 @@ def personagem():
             'classe':CLASSE,
             'inventario':inventario
         }
-        if npc.lower()=='sim' or npc=='s': npcs.update({nome:dados})
-        else: nomes.update({nome:dados})
+        if npc.lower()=='sim' or npc=='s':
+            npcs.update({nome:dados})
+            with open('Beta/data/npcs.json','w') as g:
+                json.dump(npcs,g)
+            print('Salvo')
+        else:
+            nomes.update({nome:dados})
+            with open('Beta/dada/nomes.json','w') as f:
+                json.dump(nomes,f)
+            print('Salvo')
