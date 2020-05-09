@@ -1,10 +1,7 @@
-
-<<<<<<< HEAD
-print('lala')
-=======
->>>>>>> d2ab195fcfa07aa6d82e5d3b679a34debf9ceb64
+from .batalha.testedebatalha import batalha
 
 def menu(command):
-    if command == "cp":
+    if command == "cp": pass
     elif command == "co":
-    elif command == "s":
+        batalha()
+    elif command == "s": pass
