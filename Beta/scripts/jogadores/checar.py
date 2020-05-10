@@ -7,6 +7,15 @@ with open('Beta/data/nomes.json') as f:
 with open('Beta/data/npcs.json') as g:
     npcs=json.load(g)
 
+with open('Beta/data/Racas.json') as h:
+    Racas=json.load(h)
+
+with open('Beta/data/classes.json') as i:
+    classes=json.load(i)
+
+with open('Beta/data/magias.json') as j:
+    magias=json.load(j)
+
 def checar():
     sair=0
     while True:
@@ -14,6 +23,39 @@ def checar():
             au=input('Qual nome do personagem que você deseja testar?\n')
             if au in nomes or au in npcs: break
             elif au.lower()=='checar' or au.lower()=='lista': printar()
+            elif au.lower()=='classes' or au.lower()=='c':
+                for c in classes:
+                    print(c)
+                    print('  Força',classes.get(c).get('int_FOR'))
+                    print('  Inteligência',classes.get(c).get('int_INT'))
+                    print('  Resistência',classes.get(c).get('int_RES'))
+                    print('  Intransigência',classes.get(c).get('int_ING'))
+                    print('  Velocidade',classes.get(c).get('int_VEL'))
+                    print('  CHP',classes.get(c).get('int_CHP'))
+                    print('  CMN',classes.get(c).get('int_CMN'))
+                sair=True
+                break
+            elif au.lower()=='racas' or au.lower()=='r':
+                for r in Racas:
+                    print(r)
+                    print('  Força',Racas.get(r).get('int_FOR'))
+                    print('  Inteligência',Racas.get(r).get('int_INT'))
+                    print('  Resistência',Racas.get(r).get('int_RES'))
+                    print('  Intransigência',Racas.get(r).get('int_ING'))
+                    print('  Velocidade',Racas.get(r).get('int_VEL'))
+                    print('  CHP',Racas.get(r).get('int_CHP'))
+                    print('  CMN',Racas.get(r).get('int_CMN'))
+                sair=True
+                break
+            elif au.lower()=='magias' or au.lower()=='m':
+                for m in magias:
+                    print(m)
+                    print('  Requisito',magias.get(m).get('requisito'))
+                    print('  Dificuldade',magias.get(m).get('dificuldade'))
+                    print('  Mana',magias.get(m).get('mana'))
+                    print('  Dano',magias.get(m).get('dano'))
+                    print('  Velocidade',magias.get(m).get('velocidade'))
+                sair=True
             elif au.lower()=='exit' or au.lower()=='sair':
                 sair=True
                 break

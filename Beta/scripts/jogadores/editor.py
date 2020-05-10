@@ -7,6 +7,7 @@ with open('Beta/data/npcs.json') as g:
     npcs=json.load(g)
 
 def editar():
+    print('editor n esta funfando')
     while True:
         au=input('Qual nome do personagem que você deseja testar?\n')
         if au in nomes or au in npcs: break
@@ -43,6 +44,11 @@ def editar():
                     if aux3==1: aux1='armadura'
                     if aux3==2: aux1='gold'
                     aux2=input('Deseja mudar',aux1,'?(',aux1,'atual:',non.get(au).get('inventario').get(aux1),')')
+
+
+#     aqui q n funfa pq n sei dar update em dicionario dentro de dicionario
+
+
                     #if aux2=='s':
                     #    aux2=int(input('Nova',aux1,':\n')
                     #    non.update(au).update()
