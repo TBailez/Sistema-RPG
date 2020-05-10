@@ -33,4 +33,5 @@ def checar():
         print('Velocidade:',(non.get(au).get('velocidade')))
         print('    arma:',non.get(au).get('inventario').get('arma'))
         print('    armadura:',non.get(au).get('inventario').get('armadura'))
+        print('    gold:',non.get(au).get('inventario').get('gold'))
         break

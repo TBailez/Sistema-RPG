@@ -37,17 +37,16 @@ def editar():
             print('Deseja mudar',aux1,'?(',aux1,'atual:',(non.get(au).get(aux1)),')')
             aux2=input()
             if aux2=='s':
-                aux2=input('Deseja mudar a arma?')
-                if aux2=='s':
-                    aux2=input('Nova arma')
-                    ni={'arma':aux2,'armadura':(non.get(au).get('inventario').get('armadura'))}
-                    non[au].update({'inventario':ni})
-                aux2=input('Deseja mudar a armadura?')
-                if aux2=='s':
-                    aux2=input('Nova armadura')
-                    ni={'arma':(non.get(au).get('inventario').get('arma')),'armadura':aux2}
-                    non[au].update({'inventario':ni})
-                aux2=0       
+                aux3=0
+                while aux3<2:
+                    if aux3==0: aux1='arma'
+                    if aux3==1: aux1='armadura'
+                    if aux3==2: aux1='gold'
+                    aux2=input('Deseja mudar',aux1,'?(',aux1,'atual:',non.get(au).get('inventario').get(aux1),')')
+                    #if aux2=='s':
+                    #    aux2=int(input('Nova',aux1,':\n')
+                    #    non.update(au).update()
+                    #aux3+=1      
         else:
             print('Deseja mudar',aux1,'?(',aux1,'atual:',(non.get(au).get(aux1)),')')
             aux2=input()
