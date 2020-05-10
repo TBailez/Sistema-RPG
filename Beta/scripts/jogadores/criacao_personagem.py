@@ -15,6 +15,7 @@ with open('Beta/data/classes.json') as l:
 def personagem():
         nome = input('Qual é o seu nome? \n')
         npc=input('É um npc?\n')
+        gold=input('Qunato de dinheiro inicial você tem?\n')
         while True:
             RAÇA=input('Qual a sua raça?\n')
             if RAÇA in Racas: break
@@ -75,6 +76,7 @@ def personagem():
             BoArm=input('Quanto de bonus de arma?\n')
         else: BoArm=0
         inventario={
+            'gold':gold,
             'armadura':BoAr,
             'arma':BoArm
         }
