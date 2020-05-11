@@ -16,7 +16,7 @@ with open('Beta/data/magias.json') as j:
     magias=json.load(j)
 
 def printar():
-    ldq=input('Lista de que?(personagens,jogadores,npcs,classes,raças)')
+    ldq=input('Lista de que?(personagens,jogadores,npcs,classes,raças,magias)')
     if ldq.lower()=='personagens' or ldq.lower()=='jogadores' or ldq.lower()=='sim' or ldq.lower()=='p' or ldq.lower()=='j' or ldq.lower()=='s': 
         print('Lista de jogadores: ')
         for n in nomes: print('  ',n)

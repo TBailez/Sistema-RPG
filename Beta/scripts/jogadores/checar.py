@@ -55,7 +55,9 @@ def checar():
                     print('  Mana',magias.get(m).get('mana'))
                     print('  Dano',magias.get(m).get('dano'))
                     print('  Velocidade',magias.get(m).get('velocidade'))
+                    print('  Classes',magias.get(m).get('classes'))
                 sair=True
+                break
             elif au.lower()=='exit' or au.lower()=='sair':
                 sair=True
                 break
