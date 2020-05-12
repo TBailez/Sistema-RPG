@@ -3,6 +3,9 @@ import json
 with open('Beta/data/magias.json') as f:
     magias=json.load(f)
 
+with open('Beta/data/classes.json') as g:
+    classes=json.load(g)
+
 while True:
     while True:
         name=input('Qual o nome da magia?\n')
@@ -13,12 +16,33 @@ while True:
     m=int(input('mana?\n'))
     dano=int(input('dano?\n'))
     v=int(input('velocidade?\n'))
+    c=[]
+    while True:
+        cl=input('Qual classe?')
+        if cl=='all' or cl=='a':
+            c.append("clerigo")
+            c.append("druida")
+            c.append("wizard")
+            c.append("blood mage")
+            c.append("sorcerer")
+            c.append("dark lord")
+            break
+        if cl in classes:
+            c.append(cl)
+            con=input('Dejesa adicionar outra classe?')
+            if con=='s': pass
+            else: break
+        elif c=='l':
+            for cla in classes:
+                print(cla)
+        else: print('burro essa classe n exite')
     dados={
         'requisito': r,
         'dificuldade': d,
         'mana': m,
         'dano': dano,
-        'velocidade': v
+        'velocidade': v,
+        'classes': c
     }
     magias.update({name:dados})
     c=input('dejeja criar outra magia?')

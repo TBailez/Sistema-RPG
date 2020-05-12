@@ -34,35 +34,39 @@ while True:
             print('Deseja mudar as',aux1,'?(',aux1,'atuais:',(me.get(aux1)),')')
             aux2=input()
             if aux2=='s':
-                o=input('Deseja adicionar ou remover uma classe?')
-                if o=='a':
-                    while True:
-                        qual=input('Qual classe deseja adicionar?')
-                        continuar=0
-                        if qual in classes: break
-                        elif qual=='lista':
-                            for cl in classes: print(cl)
-                            continuar=1
-                        elif continuar==0: print('Não existe essa classe(Digite lista se quiser ver a lista de classes)')
-                        else: print('Erro 2')
-                    clase.append(qual)
-                    print(clase)
-                    me.update({'classes':clase})
-                if o=='r':
-                    while True:
-                        qual=input('Qual classe deseja remover?')
-                        continuar=0
-                        if qual in me['classes']: break
-                        elif qual=='lista':
-                            for cla in me['classes']: print(cla)
-                            continuar=1
-                        elif continuar==0: print('Não existe essa classe nessa maiga(Digite lista se quiser ver a lista de classes dessa magia)')
-                        else: print('Erro 3')
-                    clase.remove(qual)
-                    print(clase)
-                    me.update({'classes':clase})
+                while True:
+                    o=input('Deseja adicionar ou remover uma classe?')
+                    if o=='a':
+                        while True:
+                            qual=input('Qual classe deseja adicionar?')
+                            continuar=0
+                            if qual in classes: break
+                            elif qual=='lista':
+                                for cl in classes: print(cl)
+                                continuar=1
+                            elif continuar==0: print('Não existe essa classe(Digite lista se quiser ver a lista de classes)')
+                            else: print('Erro 2')
+                        clase.append(qual)
+                        print(clase)
+                        me.update({'classes':clase})
+                    if o=='r':
+                        while True:
+                            qual=input('Qual classe deseja remover?')
+                            continuar=0
+                            if qual in me['classes']: break
+                            elif qual=='lista':
+                                for cla in me['classes']: print(cla)
+                                continuar=1
+                            elif continuar==0: print('Não existe essa classe nessa maiga(Digite lista se quiser ver a lista de classes dessa magia)')
+                            else: print('Erro 3')
+                        clase.remove(qual)
+                        print(clase)
+                        me.update({'classes':clase})
+                decisao=input('Deseja fazer outra mudança nas classes?')
+                if decisao=='s': pass
+                else: break
         else:
-            print('Deseja mudar',aux1,'?(',aux1,'atual:',me.get(aux1),')\n')
+            print('Deseja mudar',aux1,'?(',aux1,'atual:',me.get(aux1),')')
             aux2=input()
             if aux2=='s':
                 print('Nova',aux1,':')
