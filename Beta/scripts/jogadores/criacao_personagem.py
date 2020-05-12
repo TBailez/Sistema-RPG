@@ -56,10 +56,10 @@ def personagem():
             ATR =int_CHP+int_CMN+int_FOR+int_ING+int_INT+int_RES+int_VEL
             HP = int_CHP*15
             MN = int_CMN*15
-            if ATR==21: break
+            if ATR==21 or ATR==23 and CLASSE == 'dark lord': break
             else:
-                if ATR>21: print('Você distribuiu pontos demais, vai ter que recomeçar do zero por fazer tudo errado')
-                if ATR<21: print('Você não distribuiu todos os pontos, vai ter que recomeçar do zero por fazer tudo errado')
+                if ATR>21 or ATR>23 and CLASSE == 'dark lord': print('Você distribuiu pontos demais, vai ter que recomeçar do zero por fazer tudo errado')
+                if ATR<21 or ATR<23 and CLASSE == 'dark lord': print('Você não distribuiu todos os pontos, vai ter que recomeçar do zero por fazer tudo errado')
                 int_CHP = 0
                 int_CMN = 0
                 int_FOR = 0
