@@ -6,7 +6,7 @@ with open('Beta/data/nomes.json') as f:
 with open('Beta/data/npcs.json') as g:
     npcs=json.load(g)
 
-def restorar():
+def restaurar():
     while True:
         perso=input('Qual personagem você quer restorar?\n')
         if perso in nomes or perso in npcs:
@@ -27,7 +27,7 @@ def restorar():
             print('Sua mana foi restourada para',nomes[perso]['mana'])
         else: print('Esse nome não existe')
 
-restorar()
+restaurar()
 
 
  
