@@ -3,6 +3,7 @@ def level():
     xp=int(input('Quanto de xp inicial você tem?\n'))
     if xp < 50:
       lvl = 1
+      print(lvl)
     elif xp < 300:
       lvl = 2
     elif xp < 1300:
@@ -39,6 +40,5 @@ def level():
       lvl = 18
     elif xp < 300000:
       lvl = 19
-    elif xp > 300000:
+    elif xp > 250000:
       lvl = 20
-    print('O seu nivel é',(lvl))

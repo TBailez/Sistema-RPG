@@ -1,4 +1,4 @@
-import nivel as nvl
+from nivel import level
 import json
 
 with open('Beta/data/nomes.json') as f:
@@ -12,7 +12,6 @@ with open('Beta/data/Racas.json') as k:
 
 with open('Beta/data/classes.json') as l:
     classes=json.load(l)
-
 def personagem():
         nome = input('Qual é o seu nome? \n')
         npc=input('É um npc?\n')
