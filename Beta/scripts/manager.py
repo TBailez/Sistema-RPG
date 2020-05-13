@@ -4,6 +4,7 @@ from .jogadores.checar import checar
 from .jogadores.editor import editar
 from .jogadores.print import printar
 from .jogadores.nivel import level
+from .funcoes.mestre import 
 
 def menu(command):
     if command == "cp": 
