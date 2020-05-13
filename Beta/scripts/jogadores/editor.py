@@ -69,6 +69,6 @@ def editar():
         print('Salvo')
     if au in nomes:
         nomes.update({au:non.get(au)})
-        with open('Beta/dada/nomes.json','w') as f:
+        with open('Beta/data/nomes.json','w') as f:
             json.dump(nomes,f)
         print('Salvo')

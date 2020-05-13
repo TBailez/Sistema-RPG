@@ -1,4 +1,3 @@
-from nivel import level
 import json
 
 with open('Beta/data/nomes.json') as f:

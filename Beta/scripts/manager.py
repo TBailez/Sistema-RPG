@@ -3,7 +3,6 @@ from .jogadores.criacao_personagem import personagem
 from .jogadores.checar import checar
 from .jogadores.editor import editar
 from .jogadores.print import printar
-from .jogadores.nivel import level
 from .funcoes.restore import restaurar
 
 def menu(command):
