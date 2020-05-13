@@ -1,3 +1,4 @@
+import nivel as nvl
 import json
 
 with open('Beta/data/nomes.json') as f:
