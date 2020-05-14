@@ -55,11 +55,11 @@ def melee(natk,q,combatentes):
         if od.lower()=='parear' or od.lower()=='p': danof=danop
         if nomedef in nomes:
             nomes[nomedef]['hp']=nomes.get(nomedef).get('hp')-danof
-            print('teste parcial,hp de nomedef:',nomes.get(nomedef).get('hp'))
+            #print('teste parcial,hp de nomedef:',nomes.get(nomedef).get('hp'))
             with open('Beta/data/npcs.json','w') as g:
                 json.dump(npcs,g)
         if nomedef in npcs:
             npcs[nomedef]['hp']=npcs.get(nomedef).get('hp')-danof
-            print('teste parcial,hp de nomedef:',npcs.get(nomedef).get('hp'))
+            #print('teste parcial,hp de nomedef:',npcs.get(nomedef).get('hp'))
             with open('Beta/data/npcs.json','w') as g:
                 json.dump(npcs,g)
