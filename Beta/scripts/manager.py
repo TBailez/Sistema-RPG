@@ -4,6 +4,7 @@ from .jogadores.checar import checar
 from .jogadores.editor import editar
 from .jogadores.print import printar
 from .funcoes.restore import restaurar
+from .funcoes.adicionar import add
 
 def menu(command):
     if command == "cp": 
@@ -18,4 +19,6 @@ def menu(command):
         printar()
     elif command == "r":
         restaurar()
+    elif command == "a":
+        add()
     else: print('Não existe essa opção')
