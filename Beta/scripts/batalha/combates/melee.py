@@ -42,7 +42,9 @@ def melee(natk,q,combatentes):
             print(" Dano=",danon)
         print('Se tentar parrear:')
         if parry<0 and desvio<0:
-            if (parry+desvio)<=(-5): print(' Parry perfeito')
+            if (parry+desvio)<=(-5): 
+                print(' Parry perfeito')
+                
             else: print(' Parry inperfeito')
             danop=0
         else:
