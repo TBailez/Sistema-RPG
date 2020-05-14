@@ -42,7 +42,7 @@ def melee(natk,q,combatentes):
         armad_def=non.get('inventario').get('armadura')
         if armad_def in armadura: armadura_def=int(armadura.get(armad_def).get('rme'))
         quo_def=int(non.get('resistencia'))+armadura_def
-        #
+        #fim
         dano=quo_atk-quo_def
         desvio=quo_vel_atk-int(non.get('velocidade'))
         parry=quo_atk-(f_def+boar_def)

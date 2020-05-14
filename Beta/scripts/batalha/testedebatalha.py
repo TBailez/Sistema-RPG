@@ -22,7 +22,7 @@ def batalha():
     for npc in npcs:
         print('  ',npc)
     while True:
-        NPC=input('Quais npcs estaram no combate?(para não adicionar mais npcs digite exit)')
+        NPC=input('Quais npcs estaram no combate?(para não adicionar mais npcs digite exit)\n')
         if NPC in npcs: 
             n.append(NPC)
             u=(npcs.get(NPC).get('velocidade'))
@@ -62,7 +62,7 @@ def batalha():
                     while True:
                         #ve oq q faz com isso aqui
                         print('vez de',n[u],'atacar')
-                        TdC=input('Qual o tipo de combate?')
+                        TdC=input('Qual o tipo de combate?\n')
                         if TdC=='me':
                             melee(n[u],q[u],n)
                             break
