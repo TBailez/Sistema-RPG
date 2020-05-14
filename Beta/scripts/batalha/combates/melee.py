@@ -35,13 +35,31 @@ def melee(natk,q,combatentes):
         if d2==20: int(dano=dano/2)
         print("Se tentar bloquear:\n Dano =",dano,'\nSe tentar desviar:')
         if desvio<=0:
+            danon=0
             print(" Desvio")
         else:
-            print(" Dano=",int(dano*1.5),)
+            danon=int(dano*1.5)
+            print(" Dano=",danon)
         print('Se tentar parrear:')
         if parry<0 and desvio<0:
             if (parry+desvio)<=(-5): print(' Parry perfeito')
             else: print(' Parry inperfeito')
+            danop=0
         else:
-            print(' Dano=',dano+int(non.get('inventario').get('armadura')))
+            danop=dano+int(non.get('inventario').get('armadura'))
+            print(' Dano=',danop)
         quanti=quanti+1
+        od=input('Qual a opção do defensor?')
+        if od.lower()=='bloquar' or od.lower()=='b': danof=dano
+        if od.lower()=='desviar' or od.lower()=='d': danof=danon
+        if od.lower()=='parear' or od.lower()=='p': danof=danop
+        if nomedef in nomes:
+            nomes[nomedef]['hp']=nomes.get(nomedef).get('hp')-danof
+            print('teste parcial,hp de nomedef:',nomes.get(nomedef).get('hp'))
+            with open('Beta/data/npcs.json','w') as g:
+                json.dump(npcs,g)
+        if nomedef in npcs:
+            npcs[nomedef]['hp']=npcs.get(nomedef).get('hp')-danof
+            print('teste parcial,hp de nomedef:',npcs.get(nomedef).get('hp'))
+            with open('Beta/data/npcs.json','w') as g:
+                json.dump(npcs,g)

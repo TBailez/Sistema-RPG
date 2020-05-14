@@ -68,6 +68,29 @@ def checar():
         print('Os status de',au,'são:')
         print('Raça:',(non.get(au).get('raca')))
         print('Classe',(non.get(au).get('classe')))
+        xp=(non.get(au).get('xp'))
+        if xp>=294850: lvl=20
+        elif xp>=225850: lvl=19
+        elif xp>=183850: lvl=18
+        elif xp>=148850: lvl=17
+        elif xp>=121350: lvl=16
+        elif xp>=101350: lvl=15
+        elif xp>=84100: lvl=14
+        elif xp>=69100: lvl=13
+        elif xp>=55600: lvl=12
+        elif xp>=44400: lvl=11
+        elif xp>=33900: lvl=10
+        elif xp>=24300: lvl=9
+        elif xp>=16800: lvl=8
+        elif xp>=10550: lvl=7
+        elif xp>=5550: lvl=6
+        elif xp>=3050: lvl=5
+        elif xp>=1300: lvl=4
+        elif xp>=300: lvl=3
+        elif xp>=50: lvl=2
+        else: lvl=1
+        print('Lvl:',lvl)
+        print('xp:',xp)
         print('HP:',(non.get(au).get('hp')))
         print('MANA:',(non.get(au).get('mana')))
         print('Força:',(non.get(au).get('forca')))

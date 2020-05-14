@@ -37,7 +37,6 @@ def batalha():
     u2=0
     for z in nomes: 
         n.append(z)
-        print(nomes)
         u=nomes.get(z).get('velocidade')
         u2=(2.71828**((0.0423*u+0.0423)))
         v.append(u)
@@ -59,7 +58,8 @@ def batalha():
             while u<(len(n)):
                 if v[u2]==v2[u]:
                     while True:
-                        TdC=input('Qual o tipo de combate?')
+                        #print('vez de',n[u],'atacar')
+                        TdC='me'#input('Qual o tipo de combate?')
                         if TdC=='me':
                             melee(n[u],q[u],n)
                             break
@@ -87,4 +87,14 @@ def batalha():
             u=u+1
         u=0
         x=int(input('Quer continuar o combate?(1=s)'))
-    
+    for na in nomes:
+        print('hp de',na,':',nomes.get(na).get('hp'))
+        nomes[na]['hp']=(nomes.get(na).get('chp'))*15
+        with open('Beta/data/nomes.json','w') as f:
+            json.dump(nomes,f)
+    for na2 in npcs:
+        print('hp de',na2,':',npcs.get(na2).get('hp'))
+        if na2 in n:
+            npcs[na2]['hp']=(npcs.get(na2).get('chp'))*15
+            with open('Beta/data/npcs.json','w') as g:
+                json.dump(npcs,g)

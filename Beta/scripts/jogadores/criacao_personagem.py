@@ -23,6 +23,27 @@ def personagem():
             CLASSE=input('Qual a sua classe\n') 
             if CLASSE in classes: break
             else: print('Não existe essa classe')
+        lvl=input('Qual nivel do personagem?')
+        if lvl==20: xp=294850
+        if lvl==19: xp=225850
+        if lvl==18: xp=183850
+        if lvl==17: xp=148850
+        if lvl==16: xp=121350
+        if lvl==15: xp=101350
+        if lvl==14: xp=84100
+        if lvl==13: xp=69100
+        if lvl==12: xp=55600
+        if lvl==11: xp=44400
+        if lvl==10: xp=33900
+        if lvl==9: xp=24300
+        if lvl==8: xp=16800
+        if lvl==7: xp=10550
+        if lvl==6: xp=5550
+        if lvl==5: xp=3050
+        if lvl==4: xp=1300
+        if lvl==3: xp=300
+        if lvl==2: xp=50
+        if lvl==1: xp=0
         while True:
             int_CHP = Racas.get(RAÇA).get('int_CHP') + classes.get(CLASSE).get('int_CHP')
             int_CMN = Racas.get(RAÇA).get('int_CMN') + classes.get(CLASSE).get('int_CMN')
@@ -91,7 +112,9 @@ def personagem():
             'intransigencia' : int_ING,
             'raca':RAÇA,
             'classe':CLASSE,
-            'inventario':inventario
+            'inventario':inventario,
+            'lvl': lvl,
+            'xp': xp
         }
         if npc.lower()=='sim' or npc=='s':
             npcs.update({nome:dados})

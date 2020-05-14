@@ -10,6 +10,7 @@ with open('Beta/data/magias.json') as h:
     magias=json.load(h)
 
 def magical(natk,q,combatentes):
+    print('Combate magico n ta funfando 100%')
     print("Vez de",natk,"atacar",q,"vez(es)")
     quanti=0
     while quanti<q:
@@ -56,3 +57,15 @@ def magical(natk,q,combatentes):
         #else:
         #    print(' Dano=',dano+int(non.get('inventario').get('armadura')))
         quanti=quanti+1
+        od=input('Qual a opção do defensor?')
+        if od.lower()=='bloquar' or od.lower()=='b': danof=dano
+        if od.lower()=='desviar' or od.lower()=='d': danof=dano*1.5
+        #if od.lower()=='parear' or od.lower()=='p': danof=dano+int(non.get('inventario').get('armadura'))
+        if nomedef in nomes:
+            nomes[nomedef]['hp']=nomes.get(nomedef).get('hp')-danof
+            with open('Beta/data/npcs.json','w') as g:
+                json.dump(npcs,g)
+        if nomedef in npcs:
+            npcs[nomedef]['hp']=npcs.get(nomedef).get('hp')-danof
+            with open('Beta/data/npcs.json','w') as g:
+                json.dump(npcs,g)

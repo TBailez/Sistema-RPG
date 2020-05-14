@@ -5,6 +5,7 @@ from .jogadores.editor import editar
 from .jogadores.print import printar
 from .funcoes.restore import restaurar
 from .funcoes.adicionar import add
+from .funcoes.lvlup import lvlup
 
 def menu(command):
     if command == "cp": 
@@ -21,4 +22,6 @@ def menu(command):
         restaurar()
     elif command == "a":
         add()
+    elif command=="lu":
+        lvlup(0,0,0)
     else: print('Não existe essa opção')
