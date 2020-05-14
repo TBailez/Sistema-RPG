@@ -11,6 +11,12 @@ with open('Beta/data/Racas.json') as k:
 
 with open('Beta/data/classes.json') as l:
     classes=json.load(l)
+    
+with open('Beta/data/armas.json') as o:
+    armas=json.load(o)
+
+with open('Beta/data/armadura.json') as q:
+    armaduras=json.load(q)
 def personagem():
         nome = input('Qual é o seu nome? \n')
         npc=input('É um npc?\n')
@@ -23,27 +29,29 @@ def personagem():
             CLASSE=input('Qual a sua classe\n') 
             if CLASSE in classes: break
             else: print('Não existe essa classe')
-        lvl=input('Qual nivel do personagem?')
+        lvl=input('Qual nivel do personagem?\n') 
         if lvl==20: xp=294850
-        if lvl==19: xp=225850
-        if lvl==18: xp=183850
-        if lvl==17: xp=148850
-        if lvl==16: xp=121350
-        if lvl==15: xp=101350
-        if lvl==14: xp=84100
-        if lvl==13: xp=69100
-        if lvl==12: xp=55600
-        if lvl==11: xp=44400
-        if lvl==10: xp=33900
-        if lvl==9: xp=24300
-        if lvl==8: xp=16800
-        if lvl==7: xp=10550
-        if lvl==6: xp=5550
-        if lvl==5: xp=3050
-        if lvl==4: xp=1300
-        if lvl==3: xp=300
-        if lvl==2: xp=50
-        if lvl==1: xp=0
+        elif lvl==19: xp=225850
+        elif lvl==18: xp=183850
+        elif lvl==17: xp=148850
+        elif lvl==16: xp=121350
+        elif lvl==15: xp=101350
+        elif lvl==14: xp=84100
+        elif lvl==13: xp=69100
+        elif lvl==12: xp=55600
+        elif lvl==11: xp=44400
+        elif lvl==10: xp=33900
+        elif lvl==9: xp=24300
+        elif lvl==8: xp=16800
+        elif lvl==7: xp=10550
+        elif lvl==6: xp=5550
+        elif lvl==5: xp=3050
+        elif lvl==4: xp=1300
+        elif lvl==3: xp=300
+        elif lvl==2: xp=50
+        elif lvl==1: xp=0
+        elif int(lvl)<1 :print('Valor inválido')  
+        elif int(lvl)>20:print('Valor inválido')      
         while True:
             int_CHP = Racas.get(RAÇA).get('int_CHP') + classes.get(CLASSE).get('int_CHP')
             int_CMN = Racas.get(RAÇA).get('int_CMN') + classes.get(CLASSE).get('int_CMN')
@@ -87,13 +95,19 @@ def personagem():
                 int_RES = 0
                 int_ING = 0
                 int_VEL = 0
-        info=input('Tem armadura?\n')
-        if info.lower() == 'sim' or info=='s':
-            BoAr=input('Quanto de bonus de armadura?\n')
-        else: BoAr=0
         info=input('Tem arma?\n')
         if info.lower() == 'sim' or info=='s':
-            BoArm=input('Quanto de bonus de arma?\n')
+            while True:
+             BoArm=input('Qual a sua arma?\n')
+             if BoArm in armas: break
+             else: print('Essa arma não existe')
+        else: BoArm=0
+        info=input('Tem armadrua?\n')
+        if info.lower() == 'sim' or info=='s':
+            while True:
+             BoAr=input('Qual a sua armadura?\n')
+             if BoAr in armaduras: break
+             else: print('Essa armadura não existe')
         else: BoArm=0
         inventario={
             'gold':gold,
