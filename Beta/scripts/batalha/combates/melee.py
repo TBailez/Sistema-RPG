@@ -63,8 +63,11 @@ def melee(natk,q,combatentes):
             else: print(' Parry inperfeito')
             danop=0
         else:
-            danop=dano+int(non.get('inventario').get('armadura'))
+            #inicio
+            danopa=non.get('inventario').get('armadura')
+            danop=int(armadura[danopa]['rme'])+dano
             print(' Dano=',danop)
+            #fim
         quanti=quanti+1
         od=input('Qual a opção do defensor?')
         if od.lower()=='bloquar' or od.lower()=='b': danof=dano
