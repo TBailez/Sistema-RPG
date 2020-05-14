@@ -58,8 +58,9 @@ def batalha():
             while u<(len(n)):
                 if v[u2]==v2[u]:
                     while True:
-                        #print('vez de',n[u],'atacar')
-                        TdC='me'#input('Qual o tipo de combate?')
+                        #ve oq q faz com isso aqui
+                        print('vez de',n[u],'atacar')
+                        TdC=input('Qual o tipo de combate?')
                         if TdC=='me':
                             melee(n[u],q[u],n)
                             break
