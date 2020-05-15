@@ -2,6 +2,8 @@ import json
 from .combates.melee import melee
 from .combates.magical import magical
 
+# n sei importar funções q n estam dentro de scripts
+
 with open('Beta/data/nomes.json') as f:
     nomes=json.load(f)
 
@@ -17,7 +19,6 @@ def batalha():
     auxq=[]
     v2=[]
     a2=[]
-    #auxi=1
     print('Npc list:')
     for npc in npcs:
         print('  ',npc)
@@ -55,21 +56,41 @@ def batalha():
     x='s'
     aux=2
     print('Combatentes:',n)
+    na='0'
     while x=='s':
         while u2<(len(n)):
             while u<(len(n)):
-                if v[u2]==v2[u]:
+                if v[u2]==v2[u] and not n[u]==na:
                     while True:
                         #ve oq q faz com isso aqui
                         print('vez de',n[u],'atacar')
                         TdC=input('Qual o tipo de combate?\n')
                         if TdC=='me':
-                            melee(n[u],q[u],n)
+                            nomedef=melee(n[u],q[u],n)
+                            if nomedef in nomes:
+                                with open('Beta/data/nomes.json') as j:
+                                    nomesm=json.load(j)
+                                nomes[nomedef]['hp']=nomesm.get(nomedef).get('hp')
+                            else: 
+                                with open('Beta/data/npcs.json') as h:
+                                    npcsm=json.load(h)
+                                npcs[nomedef]['hp']=npcsm.get(nomedef).get('hp')
+                            #print('teste: hp de nomedef=',nomes.get(nomedef).get('hp'))
                             break
                         elif TdC=='ma':
-                            magical(n[u],q[u],n)
+                            nomedef=magical(n[u],q[u],n)
+                            if nomedef in nomes:
+                                with open('Beta/data/nomes.json') as j:
+                                    nomesm=json.load(j)
+                                nomes[nomedef]['hp']=nomesm.get(nomedef).get('hp')
+                            else: 
+                                with open('Beta/data/npcs.json') as h:
+                                    npcsm=json.load(h)
+                                npcs[nomedef]['hp']=npcsm.get(nomedef).get('hp')
+                            #print('teste: hp de nomedef=',nomes.get(nomedef).get('hp'))
                             break
                         else: print('Não existe essa opção')
+                    na=n[u]
                     break
                 else: u+=1
             u=0
@@ -89,14 +110,8 @@ def batalha():
         aux+=1
         u=0
         x=input('Deseja continuar o combate?')
-    for na in nomes:
-        print('hp de',na,':',nomes.get(na).get('hp'))
-        nomes[na]['hp']=(nomes.get(na).get('chp'))*15
-        with open('Beta/data/nomes.json','w') as f:
-            json.dump(nomes,f)
-    for na2 in npcs:
-        print('hp de',na2,':',npcs.get(na2).get('hp'))
-        if na2 in n:
-            npcs[na2]['hp']=(npcs.get(na2).get('chp'))*15
-            with open('Beta/data/npcs.json','w') as g:
-                json.dump(npcs,g)
+    #for na in nomes:
+    #    restaurar(na,'f',1)
+    #for na2 in npcs:
+    #    if na2 in n:
+    #        restaurar(na2,'f',1)

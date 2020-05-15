@@ -23,26 +23,34 @@ def melee(natk,q,combatentes):
         d1=int(input("dado atk:"))
         d2=int(input("dado def:"))
         dd=(d1-d2)
+
+
         if natk in nomes: non=nomes.get(natk)
         else: non=npcs.get(natk)
         f=int(non.get('forca'))
-        #estou marcando onde mudei para ficar facil de notar
         ar=non.get('inventario').get('arma')
         if ar in armas: boar=int(armas.get(ar).get('dme'))
-        #fim
+        else: boar=0
+
+
         quo_atk=f+boar+dd
         quo_vel_atk=dd+int(non.get('velocidade'))
+
+
         if nomedef in nomes: non=nomes.get(nomedef)
         else: non=npcs.get(nomedef)
         f_def=int(non.get('forca'))
-        #inicio
         ar_def=non.get('inventario').get('arma')
-        if ar_def in armas: boar_def=int(armas.get(ar).get('dme'))
-        #fim/inicio
+        if ar_def in armas: 
+            print('entrou aqui')
+            boar_def=int(armas.get(ar).get('dme'))
+        else: boar_def=0
         armad_def=non.get('inventario').get('armadura')
         if armad_def in armadura: armadura_def=int(armadura.get(armad_def).get('rme'))
+        else: armadura_def=0
+        
+
         quo_def=int(non.get('resistencia'))+armadura_def
-        #fim
         dano=quo_atk-quo_def
         desvio=quo_vel_atk-int(non.get('velocidade'))
         parry=quo_atk-(f_def+boar_def)
@@ -63,11 +71,9 @@ def melee(natk,q,combatentes):
             else: print(' Parry inperfeito')
             danop=0
         else:
-            #inicio
             danopa=non.get('inventario').get('armadura')
             danop=int(armadura[danopa]['rme'])+dano
             print(' Dano=',danop)
-            #fim
         quanti=quanti+1
         od=input('Qual a opção do defensor?')
         if od.lower()=='bloquar' or od.lower()=='b': danof=dano
@@ -75,11 +81,10 @@ def melee(natk,q,combatentes):
         if od.lower()=='parear' or od.lower()=='p': danof=danop
         if nomedef in nomes:
             nomes[nomedef]['hp']=nomes.get(nomedef).get('hp')-danof
-            #print('teste parcial,hp de nomedef:',nomes.get(nomedef).get('hp'))
-            with open('Beta/data/npcs.json','w') as g:
-                json.dump(npcs,g)
+            with open('Beta/data/nomes.json','w') as g:
+                json.dump(nomes,g)
         if nomedef in npcs:
             npcs[nomedef]['hp']=npcs.get(nomedef).get('hp')-danof
-            #print('teste parcial,hp de nomedef:',npcs.get(nomedef).get('hp'))
             with open('Beta/data/npcs.json','w') as g:
                 json.dump(npcs,g)
+    return nomedef

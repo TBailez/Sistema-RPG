@@ -16,13 +16,14 @@ with open('Beta/data/classes.json') as i:
 with open('Beta/data/magias.json') as j:
     magias=json.load(j)
 
-def checar():
+def checar(au2,y):
     sair=0
     while True:
         while True:
-            au=input('Qual nome do personagem que você deseja testar?\n')
+            if y==1: au=au2
+            else: au=input('Qual nome do personagem que você deseja testar?\n')
             if au in nomes or au in npcs: break
-            elif au.lower()=='checar' or au.lower()=='lista': printar()
+            elif au.lower()=='checar' or au.lower()=='lista': printar('a',1)
             elif au.lower()=='classes' or au.lower()=='c':
                 for c in classes:
                     print(c)

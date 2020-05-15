@@ -1,4 +1,5 @@
 import json
+from .melee import melee
 
 with open('Beta/data/nomes.json') as f:
     nomes=json.load(f)
@@ -18,19 +19,24 @@ def magical(natk,q,combatentes):
             nomedef=input('Qual o nome do defensor?\n')
             if nomedef in combatentes: break
             else: print('burro esse nome n existe')
+        if natk in nomes: non=nomes.get(natk)
+        else: non=npcs.get(natk)
         while True:
             for m in magias: print(m)
             spel=input('Qual spell será usado?')
             if spel in magias:
                 spell=magias.get(spel)
-                break
+                if non.get('mana')<spell.get('mana'):
+                    print('O atacante n tem mana sufuciente pra esse spel(mana do personagem:',non.get('mana'),'/mana do spel:',spell.get('mana'),')')
+                else: break
+            elif spel=='melee':
+                melee(natk,q,combatentes)
             else: print('Burro esse spell não existe')
         print(spell)
         d1=int(input("dado atk:"))
         d2=int(input("dado def:"))
         dd=(d1-d2)
-        if natk in nomes: non=nomes.get(natk)
-        else: non=npcs.get(natk)
+        non['mana']-=spell.get('mana')
         i=int(non.get('inteligencia'))
         boar=int(non.get('inventario').get('arma'))
         quo_atk=i+boar+dd+spell.get('dano')
@@ -69,3 +75,4 @@ def magical(natk,q,combatentes):
             npcs[nomedef]['hp']=npcs.get(nomedef).get('hp')-danof
             with open('Beta/data/npcs.json','w') as g:
                 json.dump(npcs,g)
+    return nomedef
