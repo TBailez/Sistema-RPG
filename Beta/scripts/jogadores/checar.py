@@ -1,23 +1,22 @@
 import json
 from .print import printar
 
-with open('Beta/data/nomes.json') as f:
-    nomes=json.load(f)
-
-with open('Beta/data/npcs.json') as g:
-    npcs=json.load(g)
-
-with open('Beta/data/Racas.json') as h:
-    Racas=json.load(h)
-
-with open('Beta/data/classes.json') as i:
-    classes=json.load(i)
-
-with open('Beta/data/magias.json') as j:
-    magias=json.load(j)
-
 def checar(au2,y):
-    sair=0
+    with open('Beta/data/nomes.json') as f:
+        nomes=json.load(f)
+
+    with open('Beta/data/npcs.json') as g:
+        npcs=json.load(g)
+
+    with open('Beta/data/Racas.json') as h:
+        Racas=json.load(h)
+
+    with open('Beta/data/classes.json') as i:
+        classes=json.load(i)
+
+    with open('Beta/data/magias.json') as j:
+        magias=json.load(j)
+        sair=0
     while True:
         while True:
             if y==1: au=au2
@@ -62,7 +61,9 @@ def checar(au2,y):
             elif au.lower()=='exit' or au.lower()=='sair':
                 sair=True
                 break
-            else: print('Burro esse nome não existe')
+            else:
+                print('Burro esse nome não existe')
+                if y==1: return 0
         if sair: break
         if au in nomes: non=nomes.copy()
         if au in npcs: non=npcs.copy()

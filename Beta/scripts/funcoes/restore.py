@@ -1,12 +1,12 @@
 import json
 
-with open('Beta/data/nomes.json') as f:
-    nomes=json.load(f)
-
-with open('Beta/data/npcs.json') as g:
-    npcs=json.load(g)
-
 def restaurar(p,s,y):
+    with open('Beta/data/nomes.json') as f:
+        nomes=json.load(f)
+
+    with open('Beta/data/npcs.json') as g:
+        npcs=json.load(g)
+
     while True:
         if y==1: perso=p
         else: perso=input('Qual personagem você quer restaurar?\n')

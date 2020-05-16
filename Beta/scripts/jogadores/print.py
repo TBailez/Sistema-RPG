@@ -1,21 +1,20 @@
 import json
 
-with open('Beta/data/nomes.json') as f:
-    nomes=json.load(f)
-
-with open('Beta/data/npcs.json') as g:
-    npcs=json.load(g)
-
-with open('Beta/data/Racas.json') as h:
-    Racas=json.load(h)
-
-with open('Beta/data/classes.json') as i:
-    classes=json.load(i)
-
-with open('Beta/data/magias.json') as j:
-    magias=json.load(j)
-
 def printar(l,y):
+    with open('Beta/data/nomes.json') as f:
+        nomes=json.load(f)
+
+    with open('Beta/data/npcs.json') as g:
+        npcs=json.load(g)
+
+    with open('Beta/data/Racas.json') as h:
+        Racas=json.load(h)
+
+    with open('Beta/data/classes.json') as i:
+        classes=json.load(i)
+
+    with open('Beta/data/magias.json') as j:
+        magias=json.load(j)
     if y==1: ldq=l
     else: ldq=input('Lista de que?(personagens,jogadores,npcs,classes,raças,magias)')
     if ldq.lower()=='personagens' or ldq.lower()=='jogadores' or ldq.lower()=='all' or ldq.lower()=='p' or ldq.lower()=='j' or ldq.lower()=='a': 

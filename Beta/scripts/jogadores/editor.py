@@ -1,71 +1,87 @@
 import json
 
-with open('Beta/data/nomes.json') as f:
-    nomes=json.load(f)
+def editar(N,y):
+    with open('Beta/data/nomes.json') as f:
+        nomes=json.load(f)
 
-with open('Beta/data/npcs.json') as g:
-    npcs=json.load(g)
-
-def editar():
+    with open('Beta/data/npcs.json') as g:
+        npcs=json.load(g)
+    if y==1: au=N
+    else: au=input('Qual nome do personagem que você deseja editar?\n')
     while True:
-        au=input('Qual nome do personagem que você deseja editar?\n')
         if au in nomes or au in npcs: break
-        else: print('Burro esse nome não existe')
-    if au in nomes: non=nomes.copy()
-    if au in npcs: non=npcs.copy()
-    aux3=0
-    while aux3<11:
-        if aux3==0: aux1='raca'
-        if aux3==1: aux1='classe'
-        if aux3==2: aux1='hp'
-        if aux3==3: aux1='mana'
-        if aux3==4: aux1='forca'
-        if aux3==5: aux1='resistencia'
-        if aux3==6: aux1='inteligencia'
-        if aux3==7: aux1='intransigencia'
-        if aux3==8: aux1='velocidade'
-        if aux3==9: aux1='xp'
-        if aux3==10: aux1='inventario'
-        if aux3==0 or aux3==1:
-            print('Deseja mudar',aux1,'?(',aux1,'atual:',(non.get(au).get(aux1)),')')
-            aux2=input()
-            if aux2=='s':
-                print('Nova',aux1,':')
-                aux2=input()
-                non[au].update({aux1:aux2})
-                aux2=0
-        elif aux3==10:
-            print('Deseja mudar',aux1,'?(',aux1,'atual:',(non.get(au).get(aux1)),')')
-            aux2=input()
-            if aux2=='s':
-                aux4=0
-                while aux4<3:
-                    if aux4==0: aux1='arma'
-                    if aux4==1: aux1='armadura'
-                    if aux4==2: aux1='gold'
-                    print('Deseja mudar',aux1,'?(',aux1,'atual:',non.get(au).get('inventario').get(aux1),')')
-                    aux2=input()
-                    if aux2=='s':
-                        print('Nova',aux1,':')
-                        aux2=int(input())
-                        non[au]['inventario'][aux1]=aux2
-                    aux4+=1
         else:
-            print('Deseja mudar',aux1,'?(',aux1,'atual:',(non.get(au).get(aux1)),')')
+            print('Burro esse nome não existe')
+            if y==1: return 0
+    if au in nomes: non=nomes.get(au)
+    if au in npcs: non=npcs.get(au)
+    for aux3 in non:
+        if aux3=='raca' or aux3=='classe':
+            print('Deseja mudar',aux3,'?(',aux3,'atual:',(non.get(aux3)),')')
             aux2=input()
             if aux2=='s':
-                print('Nova',aux1,':')
-                aux2=int(input())
-                non[au].update({aux1:aux2})
+                print('Nova',aux3,':')
+                aux2=input()
+                non.update({aux3:aux2})
                 aux2=0
-        aux3+=1
+        elif aux3=='inventario':
+            print('Deseja mudar',aux3,'?(',aux3,'atual:',(non.get(aux3)),')')
+            aux2=input()
+            if aux2=='s':
+                for inv in non.get('inventario'):
+                    if inv=='itens':
+                        aux2=input('Deseja editar os itens?')
+                        if aux2=='s':
+                            print('Itens de',au,':',non.get('inventario').get('itens'))
+                            while True:
+                                o=input('Deseja adicionar ou remover um item?(Para sair digite sair ou exit ou s)')
+                                os=o.split(sep=' ')
+                                if o.lower()=='adicionar' or o=='a' or os[0]=='add':
+                                    if len(os)==2:
+                                        itens_de_au=non.get('inventario').get('itens')
+                                        itens_de_au.append(os[1])
+                                    else:
+                                        aux2=input('Adicionar qual item?\n')
+                                        itens_de_au=non.get('inventario').get('itens')
+                                        itens_de_au.append(aux2)
+                                elif o.lower()=='remover' or o=='r' or os[0]=='r':
+                                    if len(os)==2:
+                                        if os[1] in non.get('inventario').get('itens'):
+                                            itens_de_au=non.get('inventario').get('itens')
+                                            itens_de_au.remove(os[1])
+                                        else: print('Esse item não está no inventario desse personagem')
+                                    else:
+                                        aux2=input('Remover qual item?\n')
+                                        itens_de_au=non.get('inventario').get('itens')
+                                        itens_de_au.remove(aux2)
+                                elif o.lower()=='sair' or o.lower()=='exit' or 0=='s': break
+                                else: print('Não existe essa opção')
+                    else:
+                        print('Deseja mudar',inv,'?(',inv,'atual:',non.get('inventario').get(inv),')')
+                        aux2=input()
+                        if aux2=='s':
+                            if inv=='gold':
+                                aux2=int(input('Novo gold:\n'))
+                                non['inventario']['gold']=aux2
+                            else:
+                                print('Nova',inv,':')
+                                aux2=input()
+                                non['inventario'][inv]=aux2
+        else:
+            print('Deseja mudar',aux3,'?(',aux3,'atual:',(non.get(aux3)),')')
+            aux2=input()
+            if aux2=='s':
+                print('Nova',aux3,':')
+                aux2=int(input())
+                non.update({aux3:aux2})
+                aux2=0
     if au in npcs:
-        npcs.update({au:non.get(au)})
+        npcs.update({au:non})
         with open('Beta/data/npcs.json','w') as g:
             json.dump(npcs,g)
         print('Salvo')
     if au in nomes:
-        nomes.update({au:non.get(au)})
+        nomes.update({au:non})
         with open('Beta/data/nomes.json','w') as f:
             json.dump(nomes,f)
         print('Salvo')

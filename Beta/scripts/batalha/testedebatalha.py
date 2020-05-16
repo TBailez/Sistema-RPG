@@ -2,15 +2,13 @@ import json
 from .combates.melee import melee
 from .combates.magical import magical
 
-# n sei importar funções q n estam dentro de scripts
-
-with open('Beta/data/nomes.json') as f:
-    nomes=json.load(f)
-
-with open('Beta/data/npcs.json') as g:
-    npcs=json.load(g)
-
 def batalha():
+    with open('Beta/data/nomes.json') as f:
+        nomes=json.load(f)
+
+    with open('Beta/data/npcs.json') as g:
+        npcs=json.load(g)
+    
     n=[]
     v=[]
     i=[]
@@ -75,7 +73,6 @@ def batalha():
                                 with open('Beta/data/npcs.json') as h:
                                     npcsm=json.load(h)
                                 npcs[nomedef]['hp']=npcsm.get(nomedef).get('hp')
-                            #print('teste: hp de nomedef=',nomes.get(nomedef).get('hp'))
                             break
                         elif TdC=='ma':
                             nomedef=magical(n[u],q[u],n)
@@ -87,7 +84,6 @@ def batalha():
                                 with open('Beta/data/npcs.json') as h:
                                     npcsm=json.load(h)
                                 npcs[nomedef]['hp']=npcsm.get(nomedef).get('hp')
-                            #print('teste: hp de nomedef=',nomes.get(nomedef).get('hp'))
                             break
                         else: print('Não existe essa opção')
                     na=n[u]
@@ -110,8 +106,4 @@ def batalha():
         aux+=1
         u=0
         x=input('Deseja continuar o combate?')
-    #for na in nomes:
-    #    restaurar(na,'f',1)
-    #for na2 in npcs:
-    #    if na2 in n:
-    #        restaurar(na2,'f',1)
+    return(n)

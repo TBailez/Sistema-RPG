@@ -1,18 +1,18 @@
 import json
 
-with open('Beta/data/nomes.json') as f:
-    nomes=json.load(f)
-
-with open('Beta/data/npcs.json') as g:
-    npcs=json.load(g)
-
-with open('Beta/data/inventario/armas.json') as h:
-    armas=json.load(h)
-
-with open('Beta/data/inventario/armadura.json') as i:
-    armadura=json.load(i)
-
 def melee(natk,q,combatentes):
+    with open('Beta/data/nomes.json') as f:
+        nomes=json.load(f)
+
+    with open('Beta/data/npcs.json') as g:
+        npcs=json.load(g)
+
+    with open('Beta/data/inventario/armas.json') as h:
+        armas=json.load(h)
+
+    with open('Beta/data/inventario/armadura.json') as i:
+        armadura=json.load(i)
+
     print("Vez de",natk,"atacar",q,"vez(es)")
     quanti=0
     while quanti<q:
@@ -76,8 +76,12 @@ def melee(natk,q,combatentes):
             print(' Dano=',danop)
         quanti=quanti+1
         od=input('Qual a opção do defensor?')
-        if od.lower()=='bloquar' or od.lower()=='b': danof=dano
-        if od.lower()=='desviar' or od.lower()=='d': danof=danon
+        if od.lower()=='bloquar' or od.lower()=='b':
+            if dano<1: danof=1
+            else: danof=dano
+        if od.lower()=='desviar' or od.lower()=='d':
+            if danon<1: danof=1
+            else: danof=danon
         if od.lower()=='parear' or od.lower()=='p': danof=danop
         if nomedef in nomes:
             nomes[nomedef]['hp']=nomes.get(nomedef).get('hp')-danof

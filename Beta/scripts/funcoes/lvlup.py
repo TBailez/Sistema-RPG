@@ -1,12 +1,11 @@
 import json
 
-with open('Beta/data/nomes.json') as f:
-    nomes=json.load(f)
-
-with open('Beta/data/npcs.json') as g:
-    npcs=json.load(g)
-
 def lvlup(x,n,y):
+    with open('Beta/data/nomes.json') as f:
+        nomes=json.load(f)
+
+    with open('Beta/data/npcs.json') as g:
+        npcs=json.load(g)
     quebrar=False
     while y==0:
         name=input('Qual nome do personagem que você deseja dar lvl up?')
