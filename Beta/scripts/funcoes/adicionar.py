@@ -28,6 +28,12 @@ def add():
             gold=int(addgold) +int(nomes[perso]['inventario']['gold'])
             nomes[perso]['inventario']['gold'] = gold
             print('Seu gold foi modificado para',nomes[perso]['inventario']['gold'])
+         elif status=='xp':
+            print('Seu xp era de', nomes[perso]['xp'])
+            addxp=input('Quanto vai adicionar?\n')
+            xp=int(addxp) +int(nomes[perso]['xp'])
+            nomes[perso]['xp'] = xp
+            print('Seu xp foi atualizado para',nomes[perso]['xp'])
         else: print('Esse nome não existe')
         if perso in nomes:
          with open('Beta/data/nomes.json','w') as f:
