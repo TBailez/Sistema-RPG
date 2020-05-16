@@ -41,7 +41,7 @@ def useitem():
              it.remove(item)
          if item=='sp mana':
             addmana=20
-            if int(addmana)+int(nomes[perso]['mana'])<int(nomes[perso]['cmn']*15):
+            if int(addmana)+int(nomes[perso]['mana'])<int(nomes[perso]['cmana']*15):
              mana=int(addmana) +int(nomes[perso]['mana'])
              nomes[perso]['mana'] = mana    
              it.remove(item)
@@ -50,7 +50,7 @@ def useitem():
              it.remove(item)
          if item=='mp mana':
             addmana=50
-            if int(addmana)+int(nomes[perso]['mana'])<int(nomes[perso]['cmn']*15):
+            if int(addmana)+int(nomes[perso]['mana'])<int(nomes[perso]['cmana']*15):
              mana=int(addmana) +int(nomes[perso]['mana'])
              nomes[perso]['mana'] = mana    
              it.remove(item)
@@ -59,7 +59,7 @@ def useitem():
              it.remove(item)
          if item=='lp mana':
             addmana=100
-            if int(addmana)+int(nomes[perso]['mana'])<int(nomes[perso]['cmn']*15):
+            if int(addmana)+int(nomes[perso]['mana'])<int(nomes[perso]['cmana']*15):
              mana=int(addmana) +int(nomes[perso]['mana'])
              nomes[perso]['mana'] = mana    
              it.remove(item)
