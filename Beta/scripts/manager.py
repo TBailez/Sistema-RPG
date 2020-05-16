@@ -7,7 +7,7 @@ from .jogadores.print import printar
 from .funcoes.restore import restaurar
 from .funcoes.adicionar import add
 from .funcoes.lvlup import lvlup
-
+from .funcoes.addinv import additem
 with open('Beta/data/nomes.json') as f:
     nomes=json.load(f)
 
@@ -41,4 +41,6 @@ def menu(command):
         add()
     elif command=="lu":
         lvlup(0,0,0)
+    elif command == "ai":
+        additem()
     else: print('Não existe essa opção')
