@@ -102,4 +102,5 @@ def checar(au2,y):
         print('    arma:',non.get(au).get('inventario').get('arma'))
         print('    armadura:',non.get(au).get('inventario').get('armadura'))
         print('    gold:',non.get(au).get('inventario').get('gold'))
+        print('    itens:',non.get(au).get('inventario').get('itens'))
         break
