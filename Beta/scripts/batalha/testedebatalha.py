@@ -8,6 +8,12 @@ def batalha():
 
     with open('Beta/data/npcs.json') as g:
         npcs=json.load(g)
+
+    with open('Beta/data/inventario/armas.json') as h:
+        armas=json.load(h)
+
+    with open('Beta/data/inventario/armadura.json') as p:
+        armadura=json.load(p)
     
     n=[]
     v=[]
@@ -24,7 +30,13 @@ def batalha():
         NPC=input('Quais npcs estaram no combate?(para não adicionar mais npcs digite exit)\n')
         if NPC in npcs: 
             n.append(NPC)
-            u=(npcs.get(NPC).get('velocidade'))
+            dva=npcs.get(NPC).get('inventario').get('arma')
+            dvam=npcs.get(NPC).get('inventario').get('armadura')
+            if dva in armas: dvat=armas.get(dva).get('int_VEL')
+            else: dvat=0
+            if dvam in armadura: dvamt=armas.get(dvam).get('int_VEL')
+            debuff_vel=dvat+dvamt
+            u=(npcs.get(NPC).get('velocidade')-debuff_vel)
             u2=(2.71828**((0.0423*u+0.0423)))
             v.append(u)
             v2.append(u)
@@ -37,9 +49,15 @@ def batalha():
         else: print('Não existe esse npc')
     u=0
     u2=0
-    for z in nomes: 
+    for z in nomes:
+        dva=nomes.get(z).get('inventario').get('arma')
+        dvam=nomes.get(z).get('inventario').get('armadura')
+        if dva in armas: dvat=armas.get(dva).get('int_VEL')
+        else: dvat=0
+        if dvam in armadura: dvamt=armas.get(dvam).get('int_VEL')
+        debuff_vel=dvat+dvamt
         n.append(z)
-        u=nomes.get(z).get('velocidade')
+        u=nomes.get(z).get('velocidade')-debuff_vel
         u2=(2.71828**((0.0423*u+0.0423)))
         v.append(u)
         v2.append(u)

@@ -62,22 +62,40 @@ def magical(natk,q,combatentes):
             dd=(d1-d2)
             non['mana']-=spell.get('mana')
             i=int(non.get('inteligencia'))
-            boar=int(non.get('inventario').get('arma'))
-            quo_atk=i+boar+dd+spell.get('dano')
+            ing=non.get('intransigencia')
+            boar=non.get('inventario').get('arma')
+            if boar in armas: boar_atk=armas.get(boar).get('dma')
+            else: boar_atk=0
+            boarm=non.get('inventario').get('armadura')
+            if boarm in armadura: boarm_atk=armas.get(boarm).get('rma')
+            else: boarm_atk=0
+            
+            quo_atk=i+boar_atk+dd+spell.get('dano')
+            quo_def2=ing+boarm_atk
             quo_vel_atk=dd+int(spell.get('velocidade'))
 
 
             if nomedef in nomes: non=nomes.get(nomedef)
             else: non=npcs.get(nomedef)
             i_def=int(non.get('inteligencia'))
-            boar_def=armas.get(non.get('inventario').get('arma')).get('dma')
-            armadura_def=int(armadura.get(non.get('inventario').get('armadura')).get('rma'))
+            boar2=non.get('inventario').get('arma')
+            if boar2 in armas: boar_def=armas.get(boar2).get('dma')
+            else: boar_def=0
+            boarm2=non.get('inventario').get('armadura')
+            if boarm2 in armadura: armadura_def=int(armadura.get(boarm2).get('rma'))
+            else: armadura_def=0
+            
+
+            quo_atk2=spell.get('dano')+boar_def+i_def
             quo_def=int(non.get('intransigencia'))+armadura_def
             dano=quo_atk-quo_def
+            dano2=quo_atk2-quo_def2
             desvio=quo_vel_atk-int(non.get('velocidade'))
             parry=quo_atk-(i_def+boar_def)
             if d1==20: dano=dano*2
             if d2==20: int(dano=dano/2)
+            rp=False
+
             print("Se tentar bloquear:\n Dano =",dano,'\nSe tentar desviar:')
             if desvio<=0:
                 danod=0
@@ -88,7 +106,9 @@ def magical(natk,q,combatentes):
             print('Se tentar redirecionar a magia:')
             if parry<0 and desvio<0:
                 danop=0
-                if (parry+desvio)<=(-5): print(' Redirecionamento perfeito')
+                if (parry+desvio)<=(-5):
+                    print(' Redirecionamento perfeito')
+                    rp=True
                 else: print(' Redirecionamento inperfeito')
             else:
                 danop=dano+armadura_def
@@ -97,7 +117,12 @@ def magical(natk,q,combatentes):
             od=input('Qual a opção do defensor?')
             if od.lower()=='bloquar' or od.lower()=='b': danof=dano
             if od.lower()=='desviar' or od.lower()=='d': danof=danod
-            if od.lower()=='redirecionar' or od.lower()=='r': danof=danop
+            if od.lower()=='redirecionar' or od.lower()=='r':
+                if rp:
+                    d12=int(input('Dado do defensor(que agora está atacando)'))
+                    d22=int(input('Dado do atacante'))
+                    danof=dano2+(d12-d22)
+                else: danof=danop
             if od.lower()=='0': danof=0
         if nomedef in nomes:
             nomes[nomedef]['hp']=nomes.get(nomedef).get('hp')-danof

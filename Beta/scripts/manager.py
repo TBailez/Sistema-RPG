@@ -13,7 +13,7 @@ def menu(command):
     with open('Beta/data/nomes.json') as f:
         nomes=json.load(f)
     #cs=command split
-    cs=command.split(sep=' ')
+    cs=command.split(sep=',')
     if command == "cp": 
         personagem()
     elif command == "co":

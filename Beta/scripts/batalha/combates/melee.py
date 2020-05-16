@@ -28,12 +28,17 @@ def melee(natk,q,combatentes):
         if natk in nomes: non=nomes.get(natk)
         else: non=npcs.get(natk)
         f=int(non.get('forca'))
+        res=non.get('resistencia')
         ar=non.get('inventario').get('arma')
+        arm=non.get('inventario').get('armadura')
         if ar in armas: boar=int(armas.get(ar).get('dme'))
         else: boar=0
+        if arm in armadura: boarm=armas.get(arm).get('rme')
+        else: boarm=0
 
 
         quo_atk=f+boar+dd
+        quo_def2=boarm+res
         quo_vel_atk=dd+int(non.get('velocidade'))
 
 
@@ -49,9 +54,10 @@ def melee(natk,q,combatentes):
         if armad_def in armadura: armadura_def=int(armadura.get(armad_def).get('rme'))
         else: armadura_def=0
         
-
+        quo_atk2=(f_def+boar_def)
         quo_def=int(non.get('resistencia'))+armadura_def
         dano=quo_atk-quo_def
+        dano2=quo_atk2-quo_def2
         desvio=quo_vel_atk-int(non.get('velocidade'))
         parry=quo_atk-(f_def+boar_def)
         if d1==20: dano=dano*2
@@ -64,10 +70,11 @@ def melee(natk,q,combatentes):
             danon=int(dano*1.5)
             print(" Dano=",danon)
         print('Se tentar parrear:')
+        pp=False
         if parry<0 and desvio<0:
-            if (parry+desvio)<=(-5): 
+            if (parry+desvio)<=(-5):
                 print(' Parry perfeito')
-                
+                pp=True
             else: print(' Parry inperfeito')
             danop=0
         else:
@@ -82,7 +89,12 @@ def melee(natk,q,combatentes):
         if od.lower()=='desviar' or od.lower()=='d':
             if danon<1: danof=1
             else: danof=danon
-        if od.lower()=='parear' or od.lower()=='p': danof=danop
+        if od.lower()=='parear' or od.lower()=='p':
+            if pp:
+                d12=int(input('Dado do defensor(que agora está atacando)'))
+                d22=int(input('Dado do atacante'))
+                danof=dano2+(d12-d22)
+            else: danof=danop
         if nomedef in nomes:
             nomes[nomedef]['hp']=nomes.get(nomedef).get('hp')-danof
             with open('Beta/data/nomes.json','w') as g:

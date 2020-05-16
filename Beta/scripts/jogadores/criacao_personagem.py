@@ -18,7 +18,10 @@ def personagem():
 
     with open('Beta/data/inventario/armadura.json') as q:
         armaduras=json.load(q)
-        
+
+    with open('Beta/data/inventario/escudos.json') as a:
+        escudos=json.load(a)
+
     nome = input('Qual é o seu nome? \n')
     npc=input('É um npc?\n')
     gold=input('Quanto de dinheiro inicial você tem?\n')
@@ -101,6 +104,13 @@ def personagem():
             if BoArm in armas: break
             else: print('Essa arma não existe')
     else: BoArm=0
+    info=input('Tem escudo?\n')
+    if info.lower() == 'sim' or info=='s':
+        while True:
+            esc=input('Qual o seu escudo?\n')
+            if esc in escudos: break
+            else: print('Esse escudo não existe')
+    else: esc=0
     info=input('Tem armadrua?\n')
     if info.lower() == 'sim' or info=='s':
         while True:
@@ -113,6 +123,7 @@ def personagem():
         'gold':gold,
         'armadura':BoAr,
         'arma':BoArm,
+        'escudo':esc,
         'itens': itens
     }
     dados={
