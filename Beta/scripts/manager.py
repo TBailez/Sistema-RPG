@@ -8,7 +8,7 @@ from .funcoes.restore import restaurar
 from .funcoes.adicionar import add
 from .funcoes.lvlup import lvlup
 from .funcoes.addinv import additem
-
+from .funcoes.useit import useitem
 def menu(command):
     with open('Beta/data/nomes.json') as f:
         nomes=json.load(f)
@@ -47,4 +47,6 @@ def menu(command):
         lvlup(0,0,0)
     elif command == "ait":
         additem()
+    elif command == "uit":
+        useitem()
     else: print('Não existe essa opção')
