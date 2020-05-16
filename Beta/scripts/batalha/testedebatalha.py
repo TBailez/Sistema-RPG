@@ -43,7 +43,7 @@ def batalha():
             if dve in escudos: dvet=armas.get(dve).get('int_VEL')
             else: dvet=0
             debuff_vel=dvat+dvamt+dvet
-            u=(npcs.get(NPC).get('velocidade')-debuff_vel)
+            u=(npcs.get(NPC).get('velocidade')+debuff_vel)
             u2=(2.71828**((0.0423*u+0.0423)))
             v.append(u)
             v2.append(u)
@@ -68,7 +68,7 @@ def batalha():
         else: dvet=0
         debuff_vel=dvat+dvamt+dvet
         n.append(z)
-        u=nomes.get(z).get('velocidade')-debuff_vel
+        u=nomes.get(z).get('velocidade')+debuff_vel
         u2=(2.71828**((0.0423*u+0.0423)))
         v.append(u)
         v2.append(u)
