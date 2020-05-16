@@ -41,6 +41,6 @@ def menu(command):
         add()
     elif command=="lu":
         lvlup(0,0,0)
-    elif command == "ai":
+    elif command == "ait":
         additem()
     else: print('Não existe essa opção')

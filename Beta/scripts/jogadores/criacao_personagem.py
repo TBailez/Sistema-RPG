@@ -107,10 +107,12 @@ def personagem():
              if BoAr in armaduras: break
              else: print('Essa armadura não existe')
         else: BoArm=0
+        itens = list()
         inventario={
             'gold':gold,
             'armadura':BoAr,
-            'arma':BoArm
+            'arma':BoArm,
+            'itens': itens
         }
         dados={
             'forca':int_FOR,
