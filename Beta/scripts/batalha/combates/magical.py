@@ -17,6 +17,9 @@ def magical(natk,q,combatentes):
     with open('Beta/data/inventario/armadura.json') as i:
         armadura=json.load(i)
 
+    with open('Beta/data/inventario/escudos.json') as q:
+        escudos=json.load(q)
+
     #print('Combate magico n ta funfando 100%')
     print("Vez de",natk,"atacar",q,"vez(es)")
     quanti=0
@@ -84,6 +87,9 @@ def magical(natk,q,combatentes):
             boarm2=non.get('inventario').get('armadura')
             if boarm2 in armadura: armadura_def=int(armadura.get(boarm2).get('rma'))
             else: armadura_def=0
+            escu_def=non.get('inventario').get('escudo')
+            if escu_def in escudos: esc_def=int(escudos.get(escu_def).get('rme'))
+            else: esc_def=0
             
 
             quo_atk2=spell.get('dano')+boar_def+i_def
@@ -115,7 +121,9 @@ def magical(natk,q,combatentes):
                 print(' Dano=',danop)
             quanti=quanti+1
             od=input('Qual a opção do defensor?')
-            if od.lower()=='bloquar' or od.lower()=='b': danof=dano
+            if od.lower()=='bloquar' or od.lower()=='b':
+                if dano-esc_def<1: danof=1
+                else: danof=dano-esc_def
             if od.lower()=='desviar' or od.lower()=='d': danof=danod
             if od.lower()=='redirecionar' or od.lower()=='r':
                 if rp:

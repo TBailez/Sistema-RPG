@@ -15,6 +15,9 @@ def batalha():
     with open('Beta/data/inventario/armadura.json') as p:
         armadura=json.load(p)
     
+    with open('Beta/data/inventario/escudos.json') as q:
+        escudos=json.load(q)
+    
     n=[]
     v=[]
     i=[]
@@ -32,10 +35,14 @@ def batalha():
             n.append(NPC)
             dva=npcs.get(NPC).get('inventario').get('arma')
             dvam=npcs.get(NPC).get('inventario').get('armadura')
+            dve=npcs.get(NPC).get('inventario').get('escudo')
             if dva in armas: dvat=armas.get(dva).get('int_VEL')
             else: dvat=0
             if dvam in armadura: dvamt=armas.get(dvam).get('int_VEL')
-            debuff_vel=dvat+dvamt
+            else: dvamt=0
+            if dve in escudos: dvet=armas.get(dve).get('int_VEL')
+            else: dvet=0
+            debuff_vel=dvat+dvamt+dvet
             u=(npcs.get(NPC).get('velocidade')-debuff_vel)
             u2=(2.71828**((0.0423*u+0.0423)))
             v.append(u)
@@ -52,10 +59,14 @@ def batalha():
     for z in nomes:
         dva=nomes.get(z).get('inventario').get('arma')
         dvam=nomes.get(z).get('inventario').get('armadura')
+        dve=nomes.get(z).get('inventario').get('escudo')
         if dva in armas: dvat=armas.get(dva).get('int_VEL')
         else: dvat=0
         if dvam in armadura: dvamt=armas.get(dvam).get('int_VEL')
-        debuff_vel=dvat+dvamt
+        else: dvamt=0
+        if dve in escudos: dvet=armas.get(dve).get('int_VEL')
+        else: dvet=0
+        debuff_vel=dvat+dvamt+dvet
         n.append(z)
         u=nomes.get(z).get('velocidade')-debuff_vel
         u2=(2.71828**((0.0423*u+0.0423)))

@@ -13,6 +13,9 @@ def melee(natk,q,combatentes):
     with open('Beta/data/inventario/armadura.json') as i:
         armadura=json.load(i)
 
+    with open('Beta/data/inventario/escudos.json') as q:
+        escudos=json.load(q)
+
     print("Vez de",natk,"atacar",q,"vez(es)")
     quanti=0
     while quanti<q:
@@ -53,6 +56,9 @@ def melee(natk,q,combatentes):
         armad_def=non.get('inventario').get('armadura')
         if armad_def in armadura: armadura_def=int(armadura.get(armad_def).get('rme'))
         else: armadura_def=0
+        escu_def=non.get('inventario').get('escudo')
+        if escu_def in escudos: esc_def=int(escudos.get(escu_def).get('rme'))
+        else: esc_def=0
         
         quo_atk2=(f_def+boar_def)
         quo_def=int(non.get('resistencia'))+armadura_def
@@ -84,8 +90,8 @@ def melee(natk,q,combatentes):
         quanti=quanti+1
         od=input('Qual a opção do defensor?')
         if od.lower()=='bloquar' or od.lower()=='b':
-            if dano<1: danof=1
-            else: danof=dano
+            if dano-esc_def<1: danof=1
+            else: danof=dano-esc_def
         if od.lower()=='desviar' or od.lower()=='d':
             if danon<1: danof=1
             else: danof=danon
