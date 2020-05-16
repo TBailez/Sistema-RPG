@@ -39,14 +39,14 @@ def lvlup(x,n,y):
                     break
                 else: print('Não existe essa opção')
                 if quebrar: break
-            if nlvl==20: xp=294850
-            if nlvl==19: xp=225850
-            if nlvl==18: xp=183850
-            if nlvl==17: xp=148850
-            if nlvl==16: xp=121350
-            if nlvl==15: xp=101350
-            if nlvl==14: xp=84100
-            if nlvl==13: xp=69100
+            if nlvl==20: xp=300000
+            if nlvl==19: xp=225000
+            if nlvl==18: xp=185000
+            if nlvl==17: xp=150000
+            if nlvl==16: xp=120000
+            if nlvl==15: xp=100000
+            if nlvl==14: xp=85000
+            if nlvl==13: xp=69000
             if nlvl==12: xp=55600
             if nlvl==11: xp=44400
             if nlvl==10: xp=33900
@@ -56,7 +56,7 @@ def lvlup(x,n,y):
             if nlvl==6: xp=5550
             if nlvl==5: xp=3050
             if nlvl==4: xp=1300
-            if nlvl==3: xp=250
+            if nlvl==3: xp=300
             if nlvl==2: xp=50
             if nlvl==1: xp=0
             non[name]['lvl']=nlvl
@@ -79,14 +79,14 @@ def lvlup(x,n,y):
                     if nxp<0: nxp=0
                     break
                 else: print('Não existe essa opção')
-            if xp>=294850: lvl=20
-            elif xp>=225850: lvl=19
-            elif xp>=183850: lvl=18
-            elif xp>=148850: lvl=17
-            elif xp>=121350: lvl=16
-            elif xp>=101350: lvl=15
-            elif xp>=84100: lvl=14
-            elif xp>=69100: lvl=13
+            if xp>=300000: lvl=20
+            elif xp>=225000: lvl=19
+            elif xp>=185000: lvl=18
+            elif xp>=150000: lvl=17
+            elif xp>=120000: lvl=16
+            elif xp>=100000: lvl=15
+            elif xp>=85000: lvl=14
+            elif xp>=69000: lvl=13
             elif xp>=55600: lvl=12
             elif xp>=44400: lvl=11
             elif xp>=33900: lvl=10

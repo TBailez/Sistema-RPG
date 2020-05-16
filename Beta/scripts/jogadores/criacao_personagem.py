@@ -34,14 +34,14 @@ def personagem():
         if CLASSE in classes: break
         else: print('Não existe essa classe')
     lvl=int(input('Qual nivel do personagem?\n'))
-    if lvl==20: xp=294850
-    if lvl==19: xp=225850
-    if lvl==18: xp=183850
-    if lvl==17: xp=148850
-    if lvl==16: xp=121350
-    if lvl==15: xp=101350
-    if lvl==14: xp=84100
-    if lvl==13: xp=69100
+    if lvl==20: xp=300000
+    if lvl==19: xp=225000
+    if lvl==18: xp=185000
+    if lvl==17: xp=150000
+    if lvl==16: xp=120000
+    if lvl==15: xp=100000
+    if lvl==14: xp=85000
+    if lvl==13: xp=69000
     if lvl==12: xp=55600
     if lvl==11: xp=44400
     if lvl==10: xp=33900
