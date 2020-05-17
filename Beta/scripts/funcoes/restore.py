@@ -51,6 +51,3 @@ def restaurar(p,s,y):
         with open('Beta/data/npcs.json','w') as g:
             json.dump(npcs,g)
         print('Salvo')
-
-
- 

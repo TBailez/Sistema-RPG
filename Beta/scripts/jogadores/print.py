@@ -15,6 +15,16 @@ def printar(l,y):
 
     with open('Beta/data/magias.json') as j:
         magias=json.load(j)
+    
+    with open('Beta/data/inventario/armas.json') as k:
+        armas=json.load(k)
+
+    with open('Beta/data/inventario/armadura.json') as le:
+        armaduras=json.load(le)
+
+    with open('Beta/data/inventario/escudos.json') as e:
+        escudos=json.load(e)
+
     if y==1: ldq=l
     else: ldq=input('Lista de que?(personagens,jogadores,npcs,classes,raças,magias)')
     if ldq.lower()=='personagens' or ldq.lower()=='jogadores' or ldq.lower()=='all' or ldq.lower()=='p' or ldq.lower()=='j' or ldq.lower()=='a': 
@@ -32,3 +42,12 @@ def printar(l,y):
     if ldq.lower()=='magias' or ldq.lower()=='all' or ldq.lower()=='m' or ldq.lower()=='a':
         print('Lista de magias:')
         for m in magias: print('  ',m)
+    if ldq.lower()=='armas' or ldq.lower()=='all' or ldq.lower()=='ar' or ldq.lower()=='a':
+        print('Lista de armas:')
+        for ar in armas: print('  ',ar)
+    if ldq.lower()=='armaduras' or ldq.lower()=='all' or ldq.lower()=='arm' or ldq.lower()=='a':
+        print('Lista de armaduras:')
+        for arm in armaduras: print('  ',arm)
+    if ldq.lower()=='escudos' or ldq.lower()=='all' or ldq.lower()=='es' or ldq.lower()=='a':
+        print('Lista de escudos:')
+        for es in escudos: print('  ',es)

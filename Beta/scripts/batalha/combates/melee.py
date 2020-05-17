@@ -1,11 +1,8 @@
 import json
 
 def melee(natk,q,combatentes):
-    with open('Beta/data/nomes.json') as f:
-        nomes=json.load(f)
-
-    with open('Beta/data/npcs.json') as g:
-        npcs=json.load(g)
+    with open('Beta/data/combatentes.json') as fa:
+        combatentes=json.load(fa)
 
     with open('Beta/data/inventario/armas.json') as h:
         armas=json.load(h)
@@ -13,8 +10,8 @@ def melee(natk,q,combatentes):
     with open('Beta/data/inventario/armadura.json') as i:
         armadura=json.load(i)
 
-    with open('Beta/data/inventario/escudos.json') as q:
-        escudos=json.load(q)
+    with open('Beta/data/inventario/escudos.json') as es:
+        escudos=json.load(es)
 
     print("Vez de",natk,"atacar",q,"vez(es)")
     quanti=0
@@ -28,15 +25,14 @@ def melee(natk,q,combatentes):
         dd=(d1-d2)
 
 
-        if natk in nomes: non=nomes.get(natk)
-        else: non=npcs.get(natk)
+        non=combatentes.get(natk)
         f=int(non.get('forca'))
         res=non.get('resistencia')
         ar=non.get('inventario').get('arma')
         arm=non.get('inventario').get('armadura')
         if ar in armas: boar=int(armas.get(ar).get('dme'))
         else: boar=0
-        if arm in armadura: boarm=armas.get(arm).get('rme')
+        if arm in armadura: boarm=armadura.get(arm).get('rme')
         else: boarm=0
 
 
@@ -45,13 +41,10 @@ def melee(natk,q,combatentes):
         quo_vel_atk=dd+int(non.get('velocidade'))
 
 
-        if nomedef in nomes: non=nomes.get(nomedef)
-        else: non=npcs.get(nomedef)
+        non=combatentes.get(nomedef)
         f_def=int(non.get('forca'))
         ar_def=non.get('inventario').get('arma')
-        if ar_def in armas: 
-            print('entrou aqui')
-            boar_def=int(armas.get(ar).get('dme'))
+        if ar_def in armas: boar_def=int(armas.get(ar).get('dme'))
         else: boar_def=0
         armad_def=non.get('inventario').get('armadura')
         if armad_def in armadura: armadura_def=int(armadura.get(armad_def).get('rme'))
@@ -99,14 +92,10 @@ def melee(natk,q,combatentes):
             if pp:
                 d12=int(input('Dado do defensor(que agora está atacando)'))
                 d22=int(input('Dado do atacante'))
-                danof=dano2+(d12-d22)
+                danof2=dano2+(d12-d22)
+                combatentes[natk]['hp']=combatentes.get(natk).get('hp')-danof2
             else: danof=danop
-        if nomedef in nomes:
-            nomes[nomedef]['hp']=nomes.get(nomedef).get('hp')-danof
-            with open('Beta/data/nomes.json','w') as g:
-                json.dump(nomes,g)
-        if nomedef in npcs:
-            npcs[nomedef]['hp']=npcs.get(nomedef).get('hp')-danof
-            with open('Beta/data/npcs.json','w') as g:
-                json.dump(npcs,g)
+        combatentes[nomedef]['hp']=combatentes.get(nomedef).get('hp')-danof
+        with open('Beta/data/combatentes.json','w') as fa:
+            json.dump(combatentes,fa)
     return nomedef

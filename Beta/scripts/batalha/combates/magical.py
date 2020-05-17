@@ -2,11 +2,8 @@ import json
 from .melee import melee
 
 def magical(natk,q,combatentes):
-    with open('Beta/data/nomes.json') as f:
-        nomes=json.load(f)
-
-    with open('Beta/data/npcs.json') as g:
-        npcs=json.load(g)
+    with open('Beta/data/combatentes.json') as f:
+        combatentes=json.load(f)
 
     with open('Beta/data/magias.json') as h:
         magias=json.load(h)
@@ -17,8 +14,8 @@ def magical(natk,q,combatentes):
     with open('Beta/data/inventario/armadura.json') as i:
         armadura=json.load(i)
 
-    with open('Beta/data/inventario/escudos.json') as q:
-        escudos=json.load(q)
+    with open('Beta/data/inventario/escudos.json') as qq:
+        escudos=json.load(qq)
 
     #print('Combate magico n ta funfando 100%')
     print("Vez de",natk,"atacar",q,"vez(es)")
@@ -30,8 +27,7 @@ def magical(natk,q,combatentes):
             else: print('burro esse nome n existe')
 
         
-        if natk in nomes: non=nomes.get(natk)
-        else: non=npcs.get(natk)
+        non=combatentes.get(natk)
         while True:
             for m in magias:
                 for cla in magias.get(m).get('classes'):
@@ -57,10 +53,7 @@ def magical(natk,q,combatentes):
         dmin=spell.get('dificuldade')-non.get('inteligencia')
         print('Dado minimo necessário para completar o spell:',dmin)
         d1=int(input("dado atk:"))
-        if (d1+non.get('inteligencia'))<spell.get('dificuldade') or not d1==0:
-            print('Spell falhou')
-            danof=0
-        else:
+        if (d1+non.get('inteligencia'))>=spell.get('dificuldade') or d1==0:
             d2=int(input("dado def:"))
             dd=(d1-d2)
             non['mana']-=spell.get('mana')
@@ -70,7 +63,7 @@ def magical(natk,q,combatentes):
             if boar in armas: boar_atk=armas.get(boar).get('dma')
             else: boar_atk=0
             boarm=non.get('inventario').get('armadura')
-            if boarm in armadura: boarm_atk=armas.get(boarm).get('rma')
+            if boarm in armadura: boarm_atk=armadura.get(boarm).get('rma')
             else: boarm_atk=0
             
             quo_atk=i+boar_atk+dd+spell.get('dano')
@@ -78,8 +71,7 @@ def magical(natk,q,combatentes):
             quo_vel_atk=dd+int(spell.get('velocidade'))
 
 
-            if nomedef in nomes: non=nomes.get(nomedef)
-            else: non=npcs.get(nomedef)
+            non=combatentes.get(nomedef)
             i_def=int(non.get('inteligencia'))
             boar2=non.get('inventario').get('arma')
             if boar2 in armas: boar_def=armas.get(boar2).get('dma')
@@ -129,15 +121,14 @@ def magical(natk,q,combatentes):
                 if rp:
                     d12=int(input('Dado do defensor(que agora está atacando)'))
                     d22=int(input('Dado do atacante'))
-                    danof=dano2+(d12-d22)
+                    danof2=dano2+(d12-d22)
+                    combatentes[natk]['hp']=combatentes.get(natk).get('hp')-danof2
                 else: danof=danop
             if od.lower()=='0': danof=0
-        if nomedef in nomes:
-            nomes[nomedef]['hp']=nomes.get(nomedef).get('hp')-danof
-            with open('Beta/data/nomes.json','w') as g:
-                json.dump(nomes,g)
-        if nomedef in npcs:
-            npcs[nomedef]['hp']=npcs.get(nomedef).get('hp')-danof
-            with open('Beta/data/npcs.json','w') as g:
-                json.dump(npcs,g)
+        else:
+            print('Spell falhou')
+            danof=0
+        combatentes[nomedef]['hp']=combatentes.get(nomedef).get('hp')-danof
+        with open('Beta/data/combatentes.json','w') as f:
+            json.dump(combatentes,f)
     return nomedef

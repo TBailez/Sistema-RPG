@@ -54,7 +54,7 @@ def editar(N,y):
                                         aux2=input('Remover qual item?\n')
                                         itens_de_au=non.get('inventario').get('itens')
                                         itens_de_au.remove(aux2)
-                                elif o.lower()=='sair' or o.lower()=='exit' or 0=='s': break
+                                elif o.lower()=='sair' or o.lower()=='exit' or o.lower()=='s': break
                                 else: print('Não existe essa opção')
                     else:
                         print('Deseja mudar',inv,'?(',inv,'atual:',non.get('inventario').get(inv),')')
