@@ -24,7 +24,7 @@ def printar(l,y):
 
     with open('Beta/data/inventario/escudos.json') as e:
         escudos=json.load(e)
-
+    
     if y==1: ldq=l
     else: ldq=input('Lista de que?(personagens,jogadores,npcs,classes,raças,magias)')
     if ldq.lower()=='personagens' or ldq.lower()=='jogadores' or ldq.lower()=='all' or ldq.lower()=='p' or ldq.lower()=='j' or ldq.lower()=='a': 

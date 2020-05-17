@@ -83,7 +83,6 @@ def magical(natk,q,combatentes):
             if escu_def in escudos: esc_def=int(escudos.get(escu_def).get('rme'))
             else: esc_def=0
             
-
             quo_atk2=spell.get('dano')+boar_def+i_def
             quo_def=int(non.get('intransigencia'))+armadura_def
             dano=quo_atk-quo_def
@@ -91,10 +90,12 @@ def magical(natk,q,combatentes):
             desvio=quo_vel_atk-int(non.get('velocidade'))
             parry=quo_atk-(i_def+boar_def)
             if d1==20: dano=dano*2
-            if d2==20: int(dano=dano/2)
+            if d2==20: dano=int(dano/2)
             rp=False
-
-            print("Se tentar bloquear:\n Dano =",dano,'\nSe tentar desviar:')
+            if dano-esc_def<1: danob=1
+            else: danob=dano-esc_def
+            if dano<1: dano=1
+            print("Se tentar bloquear:\n Dano =",danob,'\nSe tentar desviar:')
             if desvio<=0:
                 danod=0
                 print(" Desvio")
@@ -113,9 +114,7 @@ def magical(natk,q,combatentes):
                 print(' Dano=',danop)
             quanti=quanti+1
             od=input('Qual a opção do defensor?')
-            if od.lower()=='bloquar' or od.lower()=='b':
-                if dano-esc_def<1: danof=1
-                else: danof=dano-esc_def
+            if od.lower()=='bloquar' or od.lower()=='b': danof=danob
             if od.lower()=='desviar' or od.lower()=='d': danof=danod
             if od.lower()=='redirecionar' or od.lower()=='r':
                 if rp:

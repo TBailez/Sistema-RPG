@@ -1,7 +1,7 @@
 import json
 import random
 
-def combatentes():
+def createcombatentes():
     with open('Beta/data/nomes.json') as f:
         nomes=json.load(f)
 

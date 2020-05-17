@@ -1,6 +1,5 @@
 import json
 from .batalha.iniciativa import batalha
-from .batalha.combatentes import combatentes
 from .jogadores.criacao_personagem import personagem
 from .jogadores.checar import checar
 from .jogadores.editor import editar
@@ -44,12 +43,15 @@ def menu(command):
             else: print('Digitou errado')
         elif len(cs)==3: restaurar(cs[1],cs[2],1)
         else: print('Escreva :r,quem vc deseja restaurar,oq vc deseja restaurar')
-    elif command == "a":
-        add()
+    elif command == "ait" or cs[0]=='a' or cs[0]=='add':
+        if len(cs)==1: additem(0,0,0)
+        elif len(cs)==2: print('Digitou errado')
+        elif len(cs)==3: additem(cs[1],cs[2],1)
+        else: print('Escreva :a,qual item vc deseja adicionar,quem vai ter o item adicionado')
     elif command=="lu":
         lvlup(0,0,0)
-    elif command == "ait":
-        additem()
+    elif command == "a":
+        add()
     elif command == "uit" or cs[0]=='use':
         if len(cs)==1: useitem(0,0,0)
         elif len(cs)==2: print('Digitou errado')

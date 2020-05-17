@@ -61,7 +61,10 @@ def melee(natk,q,combatentes):
         parry=quo_atk-(f_def+boar_def)
         if d1==20: dano=dano*2
         if d2==20: int(dano=dano/2)
-        print("Se tentar bloquear:\n Dano =",dano,'\nSe tentar desviar:')
+        if dano<1: dano=1
+        if dano-esc_def<1: danob=1
+        else: danob=dano-esc_def
+        print("Se tentar bloquear:\n Dano =",danob,'\nSe tentar desviar:')
         if desvio<=0:
             danon=0
             print(" Desvio")
@@ -77,17 +80,12 @@ def melee(natk,q,combatentes):
             else: print(' Parry inperfeito')
             danop=0
         else:
-            danopa=non.get('inventario').get('armadura')
-            danop=int(armadura[danopa]['rme'])+dano
+            danop=armadura_def+dano
             print(' Dano=',danop)
         quanti=quanti+1
         od=input('Qual a opção do defensor?')
-        if od.lower()=='bloquar' or od.lower()=='b':
-            if dano-esc_def<1: danof=1
-            else: danof=dano-esc_def
-        if od.lower()=='desviar' or od.lower()=='d':
-            if danon<1: danof=1
-            else: danof=danon
+        if od.lower()=='bloquar' or od.lower()=='b': danof=danob  
+        if od.lower()=='desviar' or od.lower()=='d': danof=danon
         if od.lower()=='parear' or od.lower()=='p':
             if pp:
                 d12=int(input('Dado do defensor(que agora está atacando)'))
