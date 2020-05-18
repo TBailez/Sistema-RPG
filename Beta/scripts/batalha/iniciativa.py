@@ -18,6 +18,9 @@ def batalha():
     with open('Beta/data/inventario/escudos.json') as q:
         escudos=json.load(q)
 
+    with open('Beta/data/nomes.json') as g:
+        jogadores=json.load(g)
+
     n=[]
     v=[]
     i=[]
@@ -95,7 +98,11 @@ def batalha():
                                     break
                             else: print('Não existe essa opção')
                     if nomes.get(nomedef).get('hp')<=0:
-                        print(nomes.get(nomedef),'morreu')
+                        print(nomedef,'morreu')
+                        gainxp=nomes.get(nomedef).get('dropxp')
+                        cxp=(nomes[z]['xp'])
+                        nomes[z]['xp']=cxp + gainxp
+                        print((nomes[z]['xp']))
                         combatentesleft-=1
                         inde=n.index(nomedef)
                         i[inde]=0
@@ -123,4 +130,8 @@ def batalha():
 
     with open('Beta/data/combatentes.json','w') as f:
         json.dump(nomes,f)
+    if nomes in jogadores:
+        with open('Beta/data/nomes.json','w') as g:
+         json.dump(nomes,g)
     return(n)
+    
