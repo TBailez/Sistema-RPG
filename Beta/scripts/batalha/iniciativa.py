@@ -2,6 +2,7 @@ import json
 from .combates.melee import melee
 from .combates.magical import magical
 from .combatentes import createcombatentes
+from ..funcoes.useit import useitem
 
 def batalha():
     createcombatentes()
@@ -81,35 +82,12 @@ def batalha():
                                 truebreak=True
                                 break
                             elif TdC=='use':
-                                if sair: break
-                                while True:
-                                    it=nomes.get(n[u]).get('inventario').get('itens')
-                                    print('Seus itens:',it)
-                                    item=input('Qual o nome do item que você deseja usar?')
-                                    if item in it:
-                                        items=item.split(sep=' ')
-                                        if items[0]=='sp': add=20
-                                        if items[0]=='mp': add=50
-                                        if items[0]=='lp': add=100
-                                        name=n[u]
-                                        if items[1]=='hp':
-                                            if nomes.get(name).get('hp')+add>(nomes.get(name).get('chp')*15): nomes[name]['hp']=nomes.get(name).get('chp')*15
-                                            else: nomes[name]['hp']=nomes.get(name).get('hp')+add
-                                        if items[1]=='mana':
-                                            if nomes.get(name).get('mana')+add>(nomes.get(name).get('cmana')*15): nomes[name]['mana']=nomes.get(name).get('cmana')*15
-                                            else: nomes[name]['mana']=nomes.get(name).get('mana')+add
-                                        it.remove(item)
-                                        with open('Beta/data/combatentes.json','w') as f:
-                                            json.dump(nomes,f)
-                                        truebreak=True
-                                        break
-                                    elif item=='exit':
-                                        sair=True
-                                        break
-                                    else: print('Esse jogador não possui esse item')
-                                if sair: truebreak=False
-                                else: truebreak=True
-                                break
+                                sair=useitem(0,n[u],2)
+                                with open('Beta/data/combatentes.json') as f:
+                                    nomes=json.load(f)
+                                if not sair:
+                                    truebreak=True
+                                    break
                             else: print('Não existe essa opção')
                 else: u+=1
             u=0
