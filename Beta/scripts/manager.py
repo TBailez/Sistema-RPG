@@ -14,6 +14,8 @@ from .funcoes.creators.racecreator import rcreator
 from .funcoes.creators.magiccreator import mcreator
 from .funcoes.creators.shieldcreator import screator
 from .funcoes.creators.weaponcreator import wcreator
+from .funcoes.creators.armorcreator import acreator
+
 
 
 def menu(command):
@@ -69,6 +71,8 @@ def menu(command):
         screator()
     elif command == "cw":
         wcreator()
+    elif command == "ca":
+        acreator()
     elif command == "uit" or cs[0]=='use':
         if len(cs)==1: useitem(0,0,0)
         elif len(cs)==2: print('Digitou errado')
