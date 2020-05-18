@@ -126,12 +126,11 @@ def batalha():
         aux+=1
         u=0
         x=input('Deseja continuar o combate?')
+
+
     nomes={}
 
     with open('Beta/data/combatentes.json','w') as f:
         json.dump(nomes,f)
-    if nomes in jogadores:
-        with open('Beta/data/nomes.json','w') as g:
-         json.dump(nomes,g)
     return(n)
     
