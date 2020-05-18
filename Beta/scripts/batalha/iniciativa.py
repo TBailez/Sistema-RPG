@@ -78,14 +78,16 @@ def batalha():
                             print('vez de',n[u])
                             TdC=input('Qual a sua ação?\n')
                             if TdC=='me':
-                                nomedef=melee(n[u],q[u],n)
+                                #nomedef=melee(n[u],q[u],n)
+                                nomedef=melee(n[u],1,n)
                                 with open('Beta/data/combatentes.json') as j:
                                     nomesm=json.load(j)
                                 nomes[nomedef]['hp']=nomesm.get(nomedef).get('hp')
                                 truebreak=True
                                 break
                             elif TdC=='ma':
-                                nomedef=magical(n[u],q[u],n)
+                                #nomedef=magical(n[u],q[u],n)
+                                nomedef=magical(n[u],1,n)
                                 with open('Beta/data/combatentes.json') as j:
                                     nomesm=json.load(j)
                                 nomes[nomedef]['hp']=nomesm.get(nomedef).get('hp')

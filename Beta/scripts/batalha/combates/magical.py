@@ -25,8 +25,6 @@ def magical(natk,q,combatentes):
             nomedef=input('Qual o nome do defensor?\n')
             if nomedef in combatentes: break
             else: print('burro esse nome n existe')
-
-        
         non=combatentes.get(natk)
         while True:
             for m in magias:
@@ -136,4 +134,5 @@ def magical(natk,q,combatentes):
         combatentes[nomedef]['hp']=combatentes.get(nomedef).get('hp')-danof
         with open('Beta/data/combatentes.json','w') as f:
             json.dump(combatentes,f)
+    quanti-=1
     return nomedef
