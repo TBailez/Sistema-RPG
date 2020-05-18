@@ -17,10 +17,6 @@ def batalha():
     
     with open('Beta/data/inventario/escudos.json') as q:
         escudos=json.load(q)
-
-    with open('Beta/data/nomes.json') as g:
-        jogadores=json.load(g)
-
     n=[]
     v=[]
     i=[]
@@ -96,6 +92,10 @@ def batalha():
                                 if not sair:
                                     truebreak=True
                                     break
+                            elif TdC=='jump': 
+                             print("Pulou o turno\n")
+                             truebreak=True
+                             break
                             else: print('Não existe essa opção')
                     if nomes.get(nomedef).get('hp')<=0:
                         print(nomedef,'morreu')
@@ -133,4 +133,5 @@ def batalha():
     with open('Beta/data/combatentes.json','w') as f:
         json.dump(nomes,f)
     return(n)
+
     
