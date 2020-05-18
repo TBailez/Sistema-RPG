@@ -49,7 +49,11 @@ def createcombatentes():
                             break
                     else: print('Digitou coisas demais')
                     if balance=='b' or balance=='s' or balance=='ou': break
-                    else: print('Não existe essa opção de balanceador')
+                    else:
+                        print('Não existe essa opção de balanceador')
+                        if len(comx)==3:
+                            sair=True
+                            break
                 if sair: break
                 if balance.lower()=='b':
                     div=0
