@@ -9,6 +9,10 @@ from .funcoes.adicionar import add
 from .funcoes.lvlup import lvlup
 from .funcoes.addinv import additem
 from .funcoes.useit import useitem
+from .funcoes.creators.classcreator import ccreator
+from .funcoes.creators.racecreator import rcreator
+from .funcoes.creators.magiccreator import mcreator
+
 def menu(command):
     with open('Beta/data/nomes.json') as f:
         nomes=json.load(f)
@@ -52,6 +56,12 @@ def menu(command):
         lvlup(0,0,0)
     elif command == "a":
         add()
+    elif command == "cm":
+        mcreator()
+    elif command == "cc":
+        ccreator()
+    elif command == "cr":
+        rcreator()
     elif command == "uit" or cs[0]=='use':
         if len(cs)==1: useitem(0,0,0)
         elif len(cs)==2: print('Digitou errado')
