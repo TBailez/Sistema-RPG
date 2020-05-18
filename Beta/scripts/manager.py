@@ -12,6 +12,9 @@ from .funcoes.useit import useitem
 from .funcoes.creators.classcreator import ccreator
 from .funcoes.creators.racecreator import rcreator
 from .funcoes.creators.magiccreator import mcreator
+from .funcoes.creators.shieldcreator import screator
+from .funcoes.creators.weaponcreator import wcreator
+
 
 def menu(command):
     with open('Beta/data/nomes.json') as f:
@@ -62,6 +65,10 @@ def menu(command):
         ccreator()
     elif command == "cr":
         rcreator()
+    elif command == "cs":
+        screator()
+    elif command == "cw":
+        wcreator()
     elif command == "uit" or cs[0]=='use':
         if len(cs)==1: useitem(0,0,0)
         elif len(cs)==2: print('Digitou errado')
