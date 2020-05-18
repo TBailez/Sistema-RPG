@@ -113,17 +113,23 @@ def magical(natk,q,combatentes):
                 danop=dano+armadura_def
                 print(' Dano=',danop)
             quanti=quanti+1
-            od=input('Qual a opção do defensor?')
-            if od.lower()=='bloquar' or od.lower()=='b': danof=danob
-            if od.lower()=='desviar' or od.lower()=='d': danof=danod
-            if od.lower()=='redirecionar' or od.lower()=='r':
-                if rp:
-                    d12=int(input('Dado do defensor(que agora está atacando)'))
-                    d22=int(input('Dado do atacante'))
-                    danof2=dano2+(d12-d22)
-                    combatentes[natk]['hp']=combatentes.get(natk).get('hp')-danof2
-                else: danof=danop
-            if od.lower()=='0': danof=0
+            while True:
+                od=input('Qual a opção do defensor?')
+                if od.lower()=='bloquar' or od.lower()=='b':
+                    danof=danob
+                    break
+                elif od.lower()=='desviar' or od.lower()=='d':
+                    danof=danod
+                    break
+                elif od.lower()=='redirecionar' or od.lower()=='r':
+                    if rp:
+                        d12=int(input('Dado do defensor(que agora está atacando)'))
+                        d22=int(input('Dado do atacante'))
+                        danof2=dano2+(d12-d22)
+                        combatentes[natk]['hp']=combatentes.get(natk).get('hp')-danof2
+                    else: danof=danop
+                    break
+                else: print('Não existe essa opção')
         else:
             print('Spell falhou')
             danof=0

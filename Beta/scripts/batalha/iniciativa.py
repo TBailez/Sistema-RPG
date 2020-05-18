@@ -52,19 +52,29 @@ def batalha():
     v.sort(reverse=True)
     x='s'
     aux=2
+    nomedef=z
     print('Combatentes:',n)
     na='0'
+    combatentesleft=len(n)
     while x=='s':
         while u2<(len(n)):
             while u<(len(n)):
+                print('len(n):',len(n),'u:',u,'u2:',u2)
+                print('teste 1')
+                if combatentesleft==1:
+                    truebreak=True
+                    break
                 if v[u2]==v2[u] and not n[u]==na:
+                    print('teste 2')
                     truebreak=False
                     while True:
+                        print('teste 3')
                         if truebreak:
                             na=n[u]
                             break
                         sair=False
                         while True:
+                            print('teste 4')
                             print('vez de',n[u])
                             TdC=input('Qual a sua ação?\n')
                             if TdC=='me':
@@ -89,6 +99,11 @@ def batalha():
                                     truebreak=True
                                     break
                             else: print('Não existe essa opção')
+                    if nomes.get(nomedef).get('hp')<=0:
+                        combatentesleft-=1
+                        inde=n.index(nomedef)
+                        i[inde]=0
+                        v2[inde]=-100
                 else: u+=1
             u=0
             u2+=1
