@@ -59,35 +59,28 @@ def batalha():
     while x=='s':
         while u2<(len(n)):
             while u<(len(n)):
-                print('len(n):',len(n),'u:',u,'u2:',u2)
-                print('teste 1')
                 if combatentesleft==1:
                     truebreak=True
                     break
                 if v[u2]==v2[u] and not n[u]==na:
-                    print('teste 2')
                     truebreak=False
                     while True:
-                        print('teste 3')
                         if truebreak:
                             na=n[u]
                             break
                         sair=False
                         while True:
-                            print('teste 4')
                             print('vez de',n[u])
                             TdC=input('Qual a sua ação?\n')
                             if TdC=='me':
-                                #nomedef=melee(n[u],q[u],n)
-                                nomedef=melee(n[u],1,n)
+                                nomedef=melee(n[u],q[u],n)
                                 with open('Beta/data/combatentes.json') as j:
                                     nomesm=json.load(j)
                                 nomes[nomedef]['hp']=nomesm.get(nomedef).get('hp')
                                 truebreak=True
                                 break
                             elif TdC=='ma':
-                                #nomedef=magical(n[u],q[u],n)
-                                nomedef=magical(n[u],1,n)
+                                nomedef=magical(n[u],q[u],n)
                                 with open('Beta/data/combatentes.json') as j:
                                     nomesm=json.load(j)
                                 nomes[nomedef]['hp']=nomesm.get(nomedef).get('hp')
@@ -114,7 +107,8 @@ def batalha():
             a[u]=i[u]*aux
             q[u]=int(a[u])-int(a2[u])
             a2[u]=a[u]
-            auxq[u]=q[u]
+            if q[u]>=1: auxq[u]=q[u] 
+            else: auxq[u]=1
             u+=1
         u=0
         auxq.sort()
