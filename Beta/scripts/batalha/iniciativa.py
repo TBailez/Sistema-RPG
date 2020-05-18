@@ -95,6 +95,7 @@ def batalha():
                                     break
                             else: print('Não existe essa opção')
                     if nomes.get(nomedef).get('hp')<=0:
+                        print(nomes.get(nomedef),'morreu')
                         combatentesleft-=1
                         inde=n.index(nomedef)
                         i[inde]=0
@@ -119,6 +120,7 @@ def batalha():
         u=0
         x=input('Deseja continuar o combate?')
     nomes={}
+
     with open('Beta/data/combatentes.json','w') as f:
         json.dump(nomes,f)
     return(n)

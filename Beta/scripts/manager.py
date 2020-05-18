@@ -16,8 +16,6 @@ from .funcoes.creators.shieldcreator import screator
 from .funcoes.creators.weaponcreator import wcreator
 from .funcoes.creators.armorcreator import acreator
 
-
-
 def menu(command):
     with open('Beta/data/nomes.json') as f:
         nomes=json.load(f)

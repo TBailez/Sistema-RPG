@@ -23,8 +23,8 @@ def createcombatentes():
             if comx[0] in npcs:
                 while True:
                     if len(comx)==1:
-                        balance=input('Qual balanceador será usado?(Digite o nivel de cada npc(digite sim), ser balanceado[digite b(mesmo nivel dos jogadores +ou- 1)], custom(digite ou)')
-                        times=int(input('Quantos desse npc estarão no combate?'))
+                        balance=input('Qual balanceador será usado?(Digite o nivel de cada npc(digite sim), ser balanceado[digite b(mesmo nivel dos jogadores +ou- 1)], custom(digite ou)\n')
+                        times=int(input('Quantos desse npc estarão no combate?\n'))
                     elif len(comx)==2:
                         Npc=comx[0]
                         try: times=int(float(comx[1]))
@@ -35,7 +35,7 @@ def createcombatentes():
                             print('Numero de npcs dado não é um numero')
                             sair=True
                             break
-                        balance=input('Qual balanceador será usado?(Digite o nivel de cada npc(digite s), ser balanceado[digite b(mesmo nivel dos jogadores +ou- 1)], custom(digite ou)')
+                        balance=input('Qual balanceador será usado?(Digite o nivel de cada npc(digite s), ser balanceado[digite b(mesmo nivel dos jogadores +ou- 1)], custom(digite ou)\n')
                     elif len(comx)==3:
                         Npc=comx[0]
                         balance=comx[1]
@@ -49,11 +49,7 @@ def createcombatentes():
                             break
                     else: print('Digitou coisas demais')
                     if balance=='b' or balance=='s' or balance=='ou': break
-                    else:
-                        print('Não existe essa opção de balanceador')
-                        if len(comx)==3:
-                            sair=True
-                            break
+                    else: print('Não existe essa opção de balanceador')
                 if sair: break
                 if balance.lower()=='b':
                     div=0
@@ -64,10 +60,7 @@ def createcombatentes():
                     lvl=int(lvl/div)
                     var=1
                 elif balance.lower()=='ou':
-                    while True:
-                        lvlns=input('Digite qual nivel você deseja que esses npcs tenham, espaço, + ou - x niveis(exp:3 1 --> nivel 3 +- 1 nivel)')
-                        if len(lvlns)==2: break
-                        else: print('Digitou errado')
+                    lvlns=input('Digite qual nivel você deseja que esses npcs tenham, espaço, + ou - x niveis(exp:3 1 --> nivel 3 +- 1 nivel)')
                     lvls=lvlns.split(sep=' ')
                     lvl=int(lvls[0])
                     var=int(lvls[1])
@@ -87,7 +80,7 @@ def createcombatentes():
                     inventariom=(npcs.get(Npc).get('inventario'))
                     gold=random.randint(0,int((npcs.get(Npc).get('inventario').get('gold'))*lvl))
                     inventariom['gold']=gold
-                    if lvl>1: multiplicador=0.5
+                    if lvl>1: multiplicador=0.8
                     else: multiplicador=1
                     multi=0.3*lvl
                     if multi<1: multi=1
