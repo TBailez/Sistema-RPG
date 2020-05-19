@@ -21,6 +21,7 @@ def createcombatentes():
             Npc=input('Quais npcs estaram no combate?[nome do npc,balanceador(manual/balanceador/custom),quantidade desse npc](para não adicionar mais npcs digite exit)\n')
             comx=Npc.split(sep=',')
             if comx[0] in npcs:
+                sair=False
                 while True:
                     if len(comx)==1:
                         balance=input('Qual balanceador será usado?(Digite o nivel de cada npc(digite sim), ser balanceado[digite b(mesmo nivel dos jogadores +ou- 1)], custom(digite ou)\n')
@@ -49,7 +50,11 @@ def createcombatentes():
                             break
                     else: print('Digitou coisas demais')
                     if balance=='b' or balance=='s' or balance=='ou': break
-                    else: print('Não existe essa opção de balanceador')
+                    else:
+                        print('Não existe essa opção de balanceador')
+                        if len(comx)==3:
+                            sair=True
+                            break
                 if sair: break
                 if balance.lower()=='b':
                     div=0
@@ -60,10 +65,14 @@ def createcombatentes():
                     lvl=int(lvl/div)
                     var=1
                 elif balance.lower()=='ou':
-                    lvlns=input('Digite qual nivel você deseja que esses npcs tenham, espaço, + ou - x niveis(exp:3 1 --> nivel 3 +- 1 nivel)')
-                    lvls=lvlns.split(sep=' ')
-                    lvl=int(lvls[0])
-                    var=int(lvls[1])
+                    while True:
+                        lvls=input('Digite qual nivel você deseja que esses npcs tenham, espaço, + ou - x niveis(exp:3 1 --> nivel 3 +- 1 nivel)')
+                        lvlns=lvls.split(sep=' ')
+                        if len(lvlns)==2 and isinstance(lvlns[0], int) and isinstance(lvlns[1], int):
+                            break
+                        else: print('Digitou errado')
+                    lvl=int(lvlns[0])
+                    var=int(lvlns[1])
                 else:
                     lvl=1
                     var=0
@@ -80,7 +89,7 @@ def createcombatentes():
                     inventariom=(npcs.get(Npc).get('inventario'))
                     gold=random.randint(0,int((npcs.get(Npc).get('inventario').get('gold'))*lvl))
                     inventariom['gold']=gold
-                    if lvl>1: multiplicador=0.8
+                    if lvl>1: multiplicador=0.5
                     else: multiplicador=1
                     multi=0.3*lvl
                     if multi<1: multi=1

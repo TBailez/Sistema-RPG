@@ -20,15 +20,29 @@ def lvlup(x,n,y):
             non=npcs.copy()
             break
         else: print('Esse nome não existe')
-    if y==1: name=n
-    if y==2: tlvlup='t'
+    if y==1:
+        name=n
+        if name in nomes: non=nomes.copy()
+        elif name in npcs: non=npcs.copy()
+        else:
+            print('Esse nome não existe')
+            return 0
+    if y==2:
+        name=n
+        if name in nomes: non=nomes.copy()
+        elif name in npcs: non=npcs.copy()
+        else:
+            print('Esse nome não existe')
+            return 0
+        tlvlup='t'
     else: tlvlup=input('Deseja só modificar o nivel/xp(digite m) ou dar true lvl up(digite t)?')
     while True:
         if y==0: opcao=input('Deseja adicionar nivel ou xp?')
         else: opcao='x'
         if opcao.lower()=='n' or opcao.lower()=='nivel':
             while True:
-                print('Nivel atual:',non.get(name).get('lvl'))
+                oldlvl=non.get(name).get('lvl')
+                print('Nivel atual:',oldlvl)
                 op=input('Deseja adicionar ou retirar niveis?')
                 if op.lower()=='adicionar' or op.lower()=='a':
                     while True:
@@ -65,8 +79,7 @@ def lvlup(x,n,y):
             if nlvl==3: xp=300
             if nlvl==2: xp=50
             if nlvl==1: xp=0
-            non[name]['lvl']=nlvl
-            non[name]['xp']=xp
+            lvl=nlvl
             break
         elif opcao.lower()=='x' or opcao.lower()=='xp':
             while True:
@@ -76,7 +89,7 @@ def lvlup(x,n,y):
                 else: op='a'
                 if op.lower()=='adicionar' or op.lower()=='a':
                     if y==0: xpi=int(input('Dejesa adicionar quanto de xp?'))
-                    else: xpi=x
+                    else: xpi=int(x)
                     oldxp=non.get(name).get('xp')
                     oldlvl=non.get(name).get('lvl')
                     xp=oldxp+xpi
@@ -109,113 +122,116 @@ def lvlup(x,n,y):
             else: lvl=1
             break
         else: print('Não existe essa opção')
-        if lvl>oldlvl and tlvlup=='t':
-            times=lvl-oldlvl
-            contador=0
-            e1=False
-            e2=False
-            ra=0
-            cla=0
-            nor=0
-            while contador<times:
-                qual_lvlup=oldlvl+contador+1
-                if qual_lvlup==5:
-                    ra+=1
-                    cla+=1
-                if qual_lvlup==7: ra+=1
-                if qual_lvlup==8: cla+=1
-                if qual_lvlup==10:
-                    ra+=1
-                    cla+=1
-                    e1=True
-                if qual_lvlup==12: cla+=1
-                if qual_lvlup==13: ra+=1
-                if qual_lvlup==15:
-                    ra+=1
-                    cla+=1
-                if qual_lvlup==17: cla+=1
-                if qual_lvlup==18: ra+=1
-                if qual_lvlup==20:
-                    ra+=1
-                    cla+=1
-                    e2=True
-                nor+=1
+    if lvl>oldlvl and tlvlup=='t':
+        times=lvl-oldlvl
+        contador=0
+        e1=False
+        e2=False
+        ra=0
+        cla=0
+        nor=0
+        while contador<times:
+            qual_lvlup=oldlvl+contador+1
+            if qual_lvlup==5:
+                ra+=1
+                cla+=1
+            if qual_lvlup==7: ra+=1
+            if qual_lvlup==8: cla+=1
+            if qual_lvlup==10:
+                ra+=1
+                cla+=1
+                e1=True
+            if qual_lvlup==12: cla+=1
+            if qual_lvlup==13: ra+=1
+            if qual_lvlup==15:
+                ra+=1
+                cla+=1
+            if qual_lvlup==17: cla+=1
+            if qual_lvlup==18: ra+=1
+            if qual_lvlup==20:
+                ra+=1
+                cla+=1
+                e2=True
+            nor+=1
+            contador+=1
+        contador=0
+        c2=ra
+        tipo='ra'
+        t2=non.get(name).get('raca')
+        troca=False
+        while contador<c2:
+            if troca:
+                tipo='cla'
+                t2=non.get(name).get('classe')
+            if not t2=='humano':
+                for b in bonus[tipo][t2]:
+                    if b=='int_FOR': non[name]['forca']+=b 
+                    if b=='int_INT': non[name]['inteligencia']+=b
+                    if b=='int_RES': non[name]['resistencia']+=b 
+                    if b=='int_ING': non[name]['intransigencia']+=b 
+                    if b=='int_VEL': non[name]['velocidade']+=b 
+                    if b=='int_CHP':
+                        non[name]['chp']+=b
+                        non[name]['hp']=non.get(name).get('chp')*15
+                    if b=='int_CMN':
+                        non[name]['cmana']+=b
+                        non[name]['mana']=non.get(name).get('cmana')*15
                 contador+=1
-            contador=0
-            c2=ra
-            tipo='ra'
-            t2=non.get(name).get('raca')
-            troca=False
-            while contador<c2:
-                if troca:
-                    tipo='cla'
-                    t2=non.get(name).get('classe')
-                if not t2=='humano':
-                    for b in bonus[tipo][t2]:
-                        if b=='int_FOR': non[name]['forca']+=b 
-                        if b=='int_INT': non[name]['inteligencia']+=b
-                        if b=='int_RES': non[name]['resistencia']+=b 
-                        if b=='int_ING': non[name]['intransigencia']+=b 
-                        if b=='int_VEL': non[name]['velocidade']+=b 
-                        if b=='int_CHP':
-                            non[name]['chp']+=b
-                            non[name]['hp']=non.get(name).get('chp')*15
-                        if b=='int_CMN':
-                            non[name]['cmana']+=b
-                            non[name]['mana']=non.get(name).get('cmana')*15
-                    contador+=1
-                    if contador==ra:
-                        c2=cla
-                        contador=0
-                        troca=True
-            contador=0
-            ppd=nor*3
-            if e1: ppd+=1
-            elif e2: ppd+=2
-            print('Parabens, você passou para o nivel',lvl,', distribua',ppd,'pontos')
-            print('\n',non.get(name))
-            while True:
-                print('Força:',non.get(name).get('forca'),('atual) + '))
-                add_for=input()
-                total=ppd-add_for
-                print('Pontos restantes para adicionar:',total)
-                print('Inteligência:',non.get(name).get('inteligencia'),('atual) + '))
-                add_int=input()
-                total-=add_int
-                print('Pontos restantes para adicionar:',total)
-                print('Resistência:',non.get(name).get('resistencia'),('atual) + '))
-                add_res=input()
-                total-=add_res
-                print('Pontos restantes para adicionar:',total)
-                print('Intransigência:',non.get(name).get('intransigencia'),('atual) + '))
-                add_ing=input()
-                total-=add_ing
-                print('Pontos restantes para adicionar:',total)
-                print('Velocidade:',non.get(name).get('velocidade'),('atual) + '))
-                add_vel=input()
-                total-=add_vel
-                print('Pontos restantes para adicionar:',total)
-                print('Coeficiente de hp:',non.get(name).get('chp'),('atual/',non.get(name).get('hp'),'de vida) + '))
-                add_chp=input()
-                total-=add_chp
-                print('Pontos restantes para adicionar:',total)
-                print('Coeficiente de mana:',non.get(name).get('cmana'),('atual/',non.get(name).get('mana'),'de mana) + '))
-                add_cmn=input()
-                total-=add_cmn
-                if total==0: break
-                elif total>0: print('Você não distribuiu todos os pontos')
-                else: print('Você distribuiu pontos demais')
-            non[name]['forca']+=add_for
-            non[name]['inteligencia']+=add_int
-            non[name]['resistencia']+=add_res
-            non[name]['intransigencia']+=add_ing
-            non[name]['velocidade']+=add_vel
-            non[name]['chp']+=add_chp
-            non[name]['hp']=non.get(name).get('chp')*15
-            non[name]['cmana']+=add_cmn
-            non[name]['mana']=non.get(name).get('cmana')*15
-        non[name]['lvl']=lvl
-        non[name]['xp']=xp
+                if contador==ra:
+                    c2=cla
+                    contador=0
+                    troca=True
+        contador=0
+        ppd=nor*3
+        if e1: ppd+=1
+        elif e2: ppd+=2
+        print('Parabens',name,', você passou para o nivel',lvl,', distribua',ppd,'pontos')
+        print(' Dados:')
+        for dado in non.get(name):
+            if isinstance(non.get(name).get(dado),int) and not dado=='lvl' and not dado=='xp':
+                print('  ',dado,':',non.get(name).get(dado))
+        while True:
+            print('Força:',non.get(name).get('forca'),('atual + '))
+            add_for=int(input())
+            total=ppd-add_for
+            print('Pontos restantes para adicionar:',total)
+            print('Inteligência:',non.get(name).get('inteligencia'),('atual + '))
+            add_int=int(input())
+            total-=add_int
+            print('Pontos restantes para adicionar:',total)
+            print('Resistência:',non.get(name).get('resistencia'),('atual + '))
+            add_res=int(input())
+            total-=add_res
+            print('Pontos restantes para adicionar:',total)
+            print('Intransigência:',non.get(name).get('intransigencia'),('atual + '))
+            add_ing=int(input())
+            total-=add_ing
+            print('Pontos restantes para adicionar:',total)
+            print('Velocidade:',non.get(name).get('velocidade'),('atual + '))
+            add_vel=int(input())
+            total-=add_vel
+            print('Pontos restantes para adicionar:',total)
+            print('Coeficiente de hp:',non.get(name).get('chp'),('atual (',non.get(name).get('hp'),'de vida) + '))
+            add_chp=int(input())
+            total-=add_chp
+            print('Pontos restantes para adicionar:',total)
+            print('Coeficiente de mana:',non.get(name).get('cmana'),('atual (',non.get(name).get('mana'),'de mana) + '))
+            add_cmn=int(input())
+            total-=add_cmn
+            if total==0: break
+            elif total>0: print('Você não distribuiu todos os pontos')
+            else: print('Você distribuiu pontos demais')
+        non[name]['forca']+=add_for
+        non[name]['inteligencia']+=add_int
+        non[name]['resistencia']+=add_res
+        non[name]['intransigencia']+=add_ing
+        non[name]['velocidade']+=add_vel
+        non[name]['chp']+=add_chp
+        non[name]['hp']=non.get(name).get('chp')*15
+        non[name]['cmana']+=add_cmn
+        non[name]['mana']=non.get(name).get('cmana')*15
+    non[name]['lvl']=lvl
+    non[name]['xp']=xp
     if name in npcs:
         npcs.update({name:non.get(name)})
         with open('Beta/data/npcs.json','w') as g:

@@ -39,8 +39,10 @@ def magical(natk,q,combatentes):
             spel=input('Qual spell será usado?')
             if spel in magias:
                 spell=magias.get(spel)
-                if non.get('mana')<spell.get('mana'):
-                    print('O atacante n tem mana sufuciente pra esse spell (mana do personagem:',non.get('mana'),'/mana do spell:',spell.get('mana'),')')
+                if non.get('classe')=='blood mage': m_or_h='hp'
+                else: m_or_h='mana'
+                if non.get(m_or_h)<spell.get('mana'):
+                    print('O atacante n tem mana sufuciente pra esse spell (mana do personagem:',non.get(m_or_h),'/mana do spell:',spell.get('mana'),')')
                 elif non.get('inteligencia')<spell.get('requisito'):
                     print('O atacante n tem inteligencia sufuciente pra esse spell (inteligencia do personagem:',non.get('inteligencia'),'/requisito do spell:',spell.get('requisito'),')')
                 else: break
@@ -54,7 +56,7 @@ def magical(natk,q,combatentes):
         if (d1+non.get('inteligencia'))>=spell.get('dificuldade') or d1==0:
             d2=int(input("dado def:"))
             dd=(d1-d2)
-            non['mana']-=spell.get('mana')
+            non[m_or_h]-=spell.get('mana')
             i=int(non.get('inteligencia'))
             ing=non.get('intransigencia')
             boar=non.get('inventario').get('arma')

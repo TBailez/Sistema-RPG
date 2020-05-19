@@ -3,11 +3,15 @@ from .combates.melee import melee
 from .combates.magical import magical
 from .combatentes import createcombatentes
 from ..funcoes.useit import useitem
+from ..funcoes.lvlup import lvlup
 
 def batalha():
     createcombatentes()
     with open('Beta/data/combatentes.json') as f:
         nomes=json.load(f)
+
+    with open('Beta/data/nomes.json') as jo:
+        jogadores=json.load(jo)
 
     with open('Beta/data/inventario/armas.json') as h:
         armas=json.load(h)
@@ -55,10 +59,11 @@ def batalha():
     print('Combatentes:',n)
     na='0'
     combatentesleft=len(n)
+    end=False
     while x=='s':
         while u2<(len(n)):
             while u<(len(n)):
-                if combatentesleft==1:
+                if combatentesleft==1 or end:
                     truebreak=True
                     break
                 if v[u2]==v2[u] and not n[u]==na:
@@ -69,7 +74,10 @@ def batalha():
                             break
                         sair=False
                         while True:
-                            print('vez de',n[u])
+                            for nm in n:
+                                if nomes.get(nm).get('hp')>0:# and nm not n[u]:
+                                    print(nm,'/',nomes.get(nm).get('hp'),'de vida')
+                            print('  Vez de',n[u])
                             TdC=input('Qual a sua ação?\n')
                             if TdC=='me':
                                 nomedef=melee(n[u],q[u],n)
@@ -92,10 +100,14 @@ def batalha():
                                 if not sair:
                                     truebreak=True
                                     break
-                            elif TdC=='jump': 
-                             print("Pulou o turno")
-                             truebreak=True
-                             break
+                            elif TdC=='jump':
+                                print("Pulou o turno")
+                                truebreak=True
+                                break
+                            elif TdC=='end':
+                                end=True
+                                truebreak=True
+                                break
                             else: print('Não existe essa opção')
                     if nomes.get(nomedef).get('hp')<=0:
                         print(nomedef,'morreu')
@@ -121,7 +133,15 @@ def batalha():
             u+=1
         aux+=1
         u=0
-        x=input('Deseja continuar o combate?')
+        if end: x='n'
+        else: x=input('Deseja continuar o combate?')
+    xptotal=0
+    for monstro in n:
+        if not monstro in jogadores and nomes.get(monstro).get('hp')<1:
+            xptotal+=nomes.get(monstro).get('dropxp')
+    for per in n:
+        if per in jogadores:
+            lvlup(xptotal,per,2)
 
     nomes={}
 

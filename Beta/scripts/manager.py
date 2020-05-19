@@ -55,8 +55,9 @@ def menu(command):
         elif len(cs)==2: print('Digitou errado')
         elif len(cs)==3: additem(cs[1],cs[2],1)
         else: print('Escreva :a,qual item vc deseja adicionar,quem vai ter o item adicionado')
-    elif command=="lu":
-        lvlup(0,0,0)
+    elif command=="lu" or cs[0]=='tl':
+        if len(cs)==3: lvlup(cs[1],cs[2],2)
+        else: lvlup(0,0,0)
     elif command == "a":
         add()
     elif command == "cm":

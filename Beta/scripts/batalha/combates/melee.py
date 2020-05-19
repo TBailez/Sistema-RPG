@@ -83,16 +83,23 @@ def melee(natk,q,combatentes):
             danop=armadura_def+dano
             print(' Dano=',danop)
         quanti=quanti+1
-        od=input('Qual a opção do defensor?')
-        if od.lower()=='bloquar' or od.lower()=='b': danof=danob  
-        if od.lower()=='desviar' or od.lower()=='d': danof=danon
-        if od.lower()=='parear' or od.lower()=='p':
-            if pp:
-                d12=int(input('Dado do defensor(que agora está atacando)'))
-                d22=int(input('Dado do atacante'))
-                danof2=dano2+(d12-d22)
-                combatentes[natk]['hp']=combatentes.get(natk).get('hp')-danof2
-            else: danof=danop
+        while True:
+            od=input('Qual a opção do defensor?')
+            if od.lower()=='bloquar' or od.lower()=='b':
+                danof=danob  
+                break
+            elif od.lower()=='desviar' or od.lower()=='d':
+                danof=danon
+                break
+            elif od.lower()=='parear' or od.lower()=='p':
+                if pp:
+                    d12=int(input('Dado do defensor(que agora está atacando)'))
+                    d22=int(input('Dado do atacante'))
+                    danof2=dano2+(d12-d22)
+                    combatentes[natk]['hp']=combatentes.get(natk).get('hp')-danof2
+                else: danof=danop
+                break
+            else: print('Não existe essa opção')
         combatentes[nomedef]['hp']=combatentes.get(nomedef).get('hp')-danof
         with open('Beta/data/combatentes.json','w') as fa:
             json.dump(combatentes,fa)
