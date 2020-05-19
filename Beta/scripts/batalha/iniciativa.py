@@ -26,6 +26,7 @@ def batalha():
     i=[]
     a=[]
     q=[]
+    vivo=[]
     auxq=[]
     v2=[]
     a2=[]
@@ -50,6 +51,7 @@ def batalha():
         q.append(int(u2))
         a2.append(int(u2))
         auxq.append(int(u2))   
+        vivo.append('vivo')
     u=0
     u2=0
     v.sort(reverse=True)
@@ -63,61 +65,51 @@ def batalha():
     while x=='s':
         while u2<(len(n)):
             while u<(len(n)):
-                if combatentesleft==1 or end:
-                    truebreak=True
-                    break
-                if v[u2]==v2[u] and not n[u]==na:
-                    truebreak=False
-                    while True:
-                        if truebreak:
-                            na=n[u]
+                if end: break
+                if v[u2]==v2[u] and not n[u]==na and vivo[u]=='vivo':
+                    na=n[u]
+                    for nm in n:
+                        if nomes.get(nm).get('hp')>0:# and nm not n[u]:
+                            print(nm,'/',nomes.get(nm).get('hp'),'de vida')
+                    print('  Vez de',n[u],'(',q[u],'ações)')
+                    action=0
+                    while action<q[u]:
+                        print('Qual a sua ação',action+1,'?')
+                        TdC=input()
+                        if TdC=='me':
+                            nomedef=melee(n[u],n)
+                            with open('Beta/data/combatentes.json') as j:
+                                nomesm=json.load(j)
+                            nomes[nomedef]['hp']=nomesm.get(nomedef).get('hp')
+                            action+=1
+                        elif TdC=='ma':
+                            nomedef=magical(n[u],n)
+                            with open('Beta/data/combatentes.json') as j:
+                                nomesm=json.load(j)
+                            nomes[nomedef]['hp']=nomesm.get(nomedef).get('hp')
+                            action+=1
+                        elif TdC=='use':
+                            sair=useitem(0,n[u],2)
+                            with open('Beta/data/combatentes.json') as f:
+                                nomes=json.load(f)
+                            if not sair: action+=1
+                        elif TdC=='jump':
+                            print("Pulou o turno")
+                            action+=1
+                        elif TdC=='end':
+                            end=True
                             break
-                        sair=False
-                        while True:
-                            for nm in n:
-                                if nomes.get(nm).get('hp')>0:# and nm not n[u]:
-                                    print(nm,'/',nomes.get(nm).get('hp'),'de vida')
-                            print('  Vez de',n[u])
-                            TdC=input('Qual a sua ação?\n')
-                            if TdC=='me':
-                                nomedef=melee(n[u],q[u],n)
-                                with open('Beta/data/combatentes.json') as j:
-                                    nomesm=json.load(j)
-                                nomes[nomedef]['hp']=nomesm.get(nomedef).get('hp')
-                                truebreak=True
-                                break
-                            elif TdC=='ma':
-                                nomedef=magical(n[u],q[u],n)
-                                with open('Beta/data/combatentes.json') as j:
-                                    nomesm=json.load(j)
-                                nomes[nomedef]['hp']=nomesm.get(nomedef).get('hp')
-                                truebreak=True
-                                break
-                            elif TdC=='use':
-                                sair=useitem(0,n[u],2)
-                                with open('Beta/data/combatentes.json') as f:
-                                    nomes=json.load(f)
-                                if not sair:
-                                    truebreak=True
-                                    break
-                            elif TdC=='jump':
-                                print("Pulou o turno")
-                                truebreak=True
-                                break
-                            elif TdC=='end':
-                                end=True
-                                truebreak=True
-                                break
-                            else: print('Não existe essa opção')
+                        else: print('Não existe essa opção')
                     if nomes.get(nomedef).get('hp')<=0:
                         print(nomedef,'morreu')
                         combatentesleft-=1
                         inde=n.index(nomedef)
-                        i[inde]=0
-                        v2[inde]=-100
+                        vivo[inde]='morto'
+                    break
                 else: u+=1
             u=0
             u2+=1
+            if end: break
         u2=0
         while u<(len(n)):
             a[u]=i[u]*aux
@@ -135,6 +127,12 @@ def batalha():
         u=0
         if end: x='n'
         else: x=input('Deseja continuar o combate?')
+        for per in n:
+            cmana=nomes.get(per).get('cmana')
+            mana=nomes.get(per).get('mana')
+            if nomes.get(per).get('cmana')>0:
+                if cmana+mana>cmana*15: nomes[per]['mana']=cmana*15
+                else: nomes[per]['mana']+=cmana
     xptotal=0
     for monstro in n:
         if not monstro in jogadores and nomes.get(monstro).get('hp')<1:
@@ -142,9 +140,7 @@ def batalha():
     for per in n:
         if per in jogadores:
             lvlup(xptotal,per,2)
-
     nomes={}
-
     with open('Beta/data/combatentes.json','w') as f:
         json.dump(nomes,f)
     return(n)  

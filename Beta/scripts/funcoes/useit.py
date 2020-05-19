@@ -32,7 +32,7 @@ def useitem(i,N,y):
             else: print('Item não é uma poção')
         elif item=='exit': return True
         else:
-            print('Esse personagem não tem esse item  /  lista de itens desse personagem:\n   ',it)
+            print('Esse personagem não tem esse item  /  lista de itens desse personagem:')
             if y==1: return 0
     if items[0]=='sp': add=20
     if items[0]=='mp': add=50
