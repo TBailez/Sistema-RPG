@@ -41,7 +41,11 @@ def printar(l,y):
         for r in Racas: print('  ',r)
     if ldq.lower()=='magias' or ldq.lower()=='all' or ldq.lower()=='m' or ldq.lower()=='a':
         print('Lista de magias:')
-        for m in magias: print('  ',m)
+        for cl in classes:
+            print(' ',cl,':')
+            for m in magias:
+                if cl in magias.get(m).get('classes'):
+                    print('    ',m)
     if ldq.lower()=='armas' or ldq.lower()=='all' or ldq.lower()=='ar' or ldq.lower()=='a':
         print('Lista de armas:')
         for ar in armas: print('  ',ar)
