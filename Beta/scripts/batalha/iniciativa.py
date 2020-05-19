@@ -45,7 +45,7 @@ def batalha():
         a.append(u2)
         q.append(int(u2))
         a2.append(int(u2))
-        auxq.append(int(u2))
+        auxq.append(int(u2))   
     u=0
     u2=0
     v.sort(reverse=True)
@@ -93,16 +93,12 @@ def batalha():
                                     truebreak=True
                                     break
                             elif TdC=='jump': 
-                             print("Pulou o turno\n")
+                             print("Pulou o turno")
                              truebreak=True
                              break
                             else: print('Não existe essa opção')
                     if nomes.get(nomedef).get('hp')<=0:
                         print(nomedef,'morreu')
-                        gainxp=nomes.get(nomedef).get('dropxp')
-                        cxp=(nomes[z]['xp'])
-                        nomes[z]['xp']=cxp + gainxp
-                        print((nomes[z]['xp']))
                         combatentesleft-=1
                         inde=n.index(nomedef)
                         i[inde]=0
@@ -127,11 +123,8 @@ def batalha():
         u=0
         x=input('Deseja continuar o combate?')
 
-
     nomes={}
 
     with open('Beta/data/combatentes.json','w') as f:
         json.dump(nomes,f)
-    return(n)
-
-    
+    return(n)  
