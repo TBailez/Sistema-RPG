@@ -17,8 +17,24 @@ def melee(natk,combatentes):
         nomedef=input('Qual o nome do defensor?\n')
         if nomedef in combatentes: break
         else: print('burro esse nome n existe')
-    d1=int(input("dado atk:"))
-    d2=int(input("dado def:"))
+    while True:
+        d=input("dado atk:")
+        try: d1=int(float(d))
+        except ValueError: true=False
+        else: true=True
+        if true:
+            d1=int(float(d))
+            break
+        else: print('D1 digitado não é um numero initeiro')
+    while True:
+        d=input("dado def:")
+        try: d2=int(float(d))
+        except ValueError: true=False
+        else: true=True
+        if true:
+            d2=int(float(d))
+            break
+        else: print('D2 digitado não é um numero initeiro')
     dd=(d1-d2)
     non=combatentes.get(natk)
     f=int(non.get('forca'))

@@ -48,9 +48,25 @@ def magical(natk,combatentes):
         else: print('Burro esse spell não existe')
     dmin=spell.get('dificuldade')-non.get('inteligencia')
     print('Dado minimo necessário para completar o spell:',dmin)
-    d1=int(input("dado atk:"))
+    while True:
+        d=input("dado atk:")
+        try: d1=int(float(d))
+        except ValueError: true=False
+        else: true=True
+        if true:
+            d1=int(float(d))
+            break
+        else: print('D1 digitado não é um numero initeiro')
     if (d1+non.get('inteligencia'))>=spell.get('dificuldade') or d1==0:
-        d2=int(input("dado def:"))
+        while True:
+            d=input("dado def:")
+            try: d2=int(float(d))
+            except ValueError: true=False
+            else: true=True
+            if true:
+                d2=int(float(d))
+                break
+            else: print('D2 digitado não é um numero initeiro')
         dd=(d1-d2)
         non[m_or_h]-=spell.get('mana')
         i=int(non.get('inteligencia'))

@@ -85,7 +85,8 @@ def createcombatentes():
                     else: varn=random.randint(-var,var)
                     tlvl=lvl+varn
                     if tlvl<1: tlvl=1
-                    name=Npc+' '+str(times)
+                    if times==1: name=Npc 
+                    else: name=Npc+' '+str(times)
                     inventariom=(npcs.get(Npc).get('inventario'))
                     gold=random.randint(0,int((npcs.get(Npc).get('inventario').get('gold'))*lvl))
                     inventariom['gold']=gold
