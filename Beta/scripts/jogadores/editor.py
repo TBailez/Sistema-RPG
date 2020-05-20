@@ -6,9 +6,9 @@ def editar(N,y):
 
     with open('Beta/data/npcs.json') as g:
         npcs=json.load(g)
-    if y==1: au=N
-    else: au=input('Qual nome do personagem que você deseja editar?\n')
     while True:
+        if y==1: au=N
+        else: au=input('Qual nome do personagem que você deseja editar?\n')
         if au in nomes or au in npcs: break
         else:
             print('Burro esse nome não existe')

@@ -68,11 +68,17 @@ def createcombatentes():
                     while True:
                         lvls=input('Digite qual nivel você deseja que esses npcs tenham, espaço, + ou - x niveis(exp:3 1 --> nivel 3 +- 1 nivel)')
                         lvlns=lvls.split(sep=' ')
-                        if len(lvlns)==2 and isinstance(lvlns[0], int) and isinstance(lvlns[1], int):
-                            break
+                        if len(lvlns)==2:
+                            try: lvl=int(float(lvlns[0]))
+                            except ValueError: print('Nivel dado não é um numero')
+                            else:
+                                lvl=int(comx[0])
+                                try: var=int(float(lvlns[0]))
+                                except ValueError: print('Variancia dada não é um numero')
+                                else:
+                                    var=int(comx[0])
+                                    break
                         else: print('Digitou errado')
-                    lvl=int(lvlns[0])
-                    var=int(lvlns[1])
                 else:
                     lvl=1
                     var=0
