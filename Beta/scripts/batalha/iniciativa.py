@@ -1,5 +1,5 @@
 import json
-from .combates.melee import melee
+from .combates.melee import melee 
 from .combates.magical import magical
 from .combatentes import createcombatentes
 from ..funcoes.useit import useitem
