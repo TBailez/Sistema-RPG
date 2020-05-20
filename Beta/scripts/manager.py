@@ -2,7 +2,6 @@ import json
 from .batalha.iniciativa import batalha
 from .jogadores.criacao_personagem import personagem
 from .jogadores.checar import checar
-from .jogadores.editor import editar
 from .jogadores.print import printar
 from .funcoes.restore import restaurar
 from .funcoes.adicionar import add
@@ -15,6 +14,7 @@ from .funcoes.creators.magiccreator import mcreator
 from .funcoes.creators.shieldcreator import screator
 from .funcoes.creators.weaponcreator import wcreator
 from .funcoes.creators.armorcreator import acreator
+from .funcoes.editores import editor
 
 def menu(command):
     with open('Beta/data/nomes.json') as f:
@@ -34,9 +34,9 @@ def menu(command):
         elif len(cs)==2: checar(cs[1],1)
         else: print('Escreva :c,oq vc deseja checar')
     elif command == "e" or cs[0]=='e':
-        if len(cs)==1: editar(0,0)
-        elif len(cs)==2: editar(cs[1],1)
-        else: print('Escreva :c,quem vc deseja editar')
+        if len(cs)==1: editor(0,0)
+        elif len(cs)==2: editor(cs[1],1)
+        else: print('Escreva :e,tipo de coisa q vc deseja editar')
     elif command == "p" or cs[0]=='p':
         if len(cs)==1: printar(0,0)
         elif len(cs)==2: printar(cs[1],1)

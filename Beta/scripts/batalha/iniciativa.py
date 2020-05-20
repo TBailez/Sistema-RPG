@@ -47,7 +47,8 @@ def batalha():
         v2.append(u)
         i.append(u2)
         a.append(u2)
-        q.append(int(u2))
+        if int(u2)<1: q.append(1)
+        else: q.append(int(u2))
         a2.append(int(u2))
         auxq.append(int(u2))   
     u=0
@@ -64,6 +65,13 @@ def batalha():
     while x=='s':
         while u2<lenn:
             while u<lenn:
+                print('v:',v)
+                print('v2:',v2)
+                print('a:',a)
+                print('q:',q)
+                print('a2:',a2)
+                print('i:',i)
+                print('auxq:',auxq)
                 if end: break
                 if v[u2]==v2[u] and not n[u]==na:
                     na=n[u]
