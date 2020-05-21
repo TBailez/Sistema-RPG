@@ -59,8 +59,8 @@ def magical(natk,combatentes):
         else: print('D1 digitado não é um numero initeiro')
     if (d1+non.get('inteligencia'))>=spell.get('dificuldade') or d1==0:
         if spell.get('Type')=='heal':
-            if combatentes.get(nomedef).get('hp')+spell.get('dano')>combatentes.get(nomedef).get('chp')*15: combatentes[nomedef]['hp']=combatentes.get(nomedef).get('chp')*15
-            else: combatentes[nomedef]['hp']+=spell.get('dano')
+            if combatentes.get(nomedef).get('hp')+spell.get('dano')+non.get('inteligencia')+d1-spell.get('dificuldade')>combatentes.get(nomedef).get('chp')*15: combatentes[nomedef]['hp']=combatentes.get(nomedef).get('chp')*15
+            else: combatentes[nomedef]['hp']+=spell.get('dano')+non.get('inteligencia')+d1-spell.get('dificuldade')
             with open('Beta/data/combatentes.json','w') as f:
                 json.dump(combatentes,f)
             return nomedef
