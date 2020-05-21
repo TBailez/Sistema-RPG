@@ -59,13 +59,11 @@ def magical(natk,combatentes):
         else: print('D1 digitado não é um numero initeiro')
     if (d1+non.get('inteligencia'))>=spell.get('dificuldade') or d1==0:
         if spell.get('Type')=='heal':
-            while True:
-                qual=input('Qual nome do personagem que você deseja healar?')
-                if qual in combatentes: break
-                else: print('Esse personagem não está no combate')
-            if combatentes.get(qual).get('hp')+spell.get('dano')>combatentes.get(qual).get('chp')*15: combatentes[qual]['hp']=combatentes.get(qual).get('chp')*15
-            else: combatentes[qual]['hp']+=spell.get('dano')
-            return 0
+            if combatentes.get(nomedef).get('hp')+spell.get('dano')>combatentes.get(nomedef).get('chp')*15: combatentes[nomedef]['hp']=combatentes.get(nomedef).get('chp')*15
+            else: combatentes[nomedef]['hp']+=spell.get('dano')
+            with open('Beta/data/combatentes.json','w') as f:
+                json.dump(combatentes,f)
+            return nomedef
         while spell.get('Type')=='dano':
             d=input("dado def:")
             try: d2=int(float(d))

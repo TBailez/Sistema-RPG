@@ -47,9 +47,10 @@ def batalha():
         v2.append(u)
         i.append(u2)
         a.append(u2)
-        q.append(int(u2))
+        if int(u2)<1: q.append(1)
+        else: q.append(int(u2))
         a2.append(int(u2))
-        auxq.append(int(u2))   
+        auxq.append(int(u2))
     u=0
     u2=0
     v.sort(reverse=True)
@@ -79,21 +80,24 @@ def batalha():
                         TdC=input()
                         if TdC=='me':
                             nomedef=melee(n[u],n)
-                            with open('Beta/data/combatentes.json') as j:
-                                nomesm=json.load(j)
-                            nomes[nomedef]['hp']=nomesm.get(nomedef).get('hp')
+                            with open('Beta/data/combatentes.json') as jp:
+                                nomesm=json.load(jp)
+                            nomes=nomesm.copy()
+                            nomes[nomedef]['hp']=nomes.get(nomedef).get('hp')
                             action+=1
                         elif TdC=='ma':
                             nomedef=magical(n[u],n)
-                            with open('Beta/data/combatentes.json') as j:
-                                nomesm=json.load(j)
-                            nomes[nomedef]['hp']=nomesm.get(nomedef).get('hp')
+                            with open('Beta/data/combatentes.json') as pj:
+                                nomesm=json.load(pj)
+                            nomes=nomesm.copy()
+                            nomes[nomedef]['hp']=nomes.get(nomedef).get('hp')
                             action+=1
                         elif TdC=='use':
                             nomedef=n[u]
                             sair=useitem(0,n[u],2)
-                            with open('Beta/data/combatentes.json') as f:
-                                nomes=json.load(f)
+                            with open('Beta/data/combatentes.json') as fu:
+                                nomesm=json.load(fu)
+                            nomes=nomesm.copy()
                             if not sair: action+=1
                         elif TdC=='jump' or TdC=='j':
                             nomedef=n[u]
@@ -104,30 +108,30 @@ def batalha():
                             end=True
                             break
                         else: print('Não existe essa opção')
-                    if nomes.get(nomedef).get('hp')<=0:
-                        print(nomedef,'morreu')
-                        combatentesleft-=1
-                        inde=n.index(nomedef)
-                        if inde<u2: u2-=1
-                        n.pop(inde)
-                        for vi in v: 
-                            if vi==v2[inde]:
-                                v.remove(vi)
-                                break
-                        for vi in q:
-                            if vi==q[inde]:
-                                qsort=q.copy()
-                                qsort.sort(reverse=True)
-                                if qsort[0]==auxq[0]: pass
-                                else: vi+=(auxq[0]-qsort[0])
-                                auxq.remove(vi)
-                                break
-                        v2.pop(inde)
-                        i.pop(inde)
-                        a.pop(inde)
-                        a2.pop(inde)
-                        q.pop(inde)
-                        lenn=len(n)
+                        if nomes.get(nomedef).get('hp')<=0:
+                            print(nomedef,'morreu')
+                            combatentesleft-=1
+                            inde=n.index(nomedef)
+                            if inde<u2: u2-=1
+                            n.pop(inde)
+                            for vi in v: 
+                                if vi==v2[inde]:
+                                    v.remove(vi)
+                                    break
+                            for vi in q:
+                                if vi==q[inde]:
+                                    qsort=q.copy()
+                                    qsort.sort(reverse=True)
+                                    if qsort[0]==auxq[0]: pass
+                                    else: vi+=(auxq[0]-qsort[0])
+                                    auxq.remove(vi)
+                                    break
+                            v2.pop(inde)
+                            i.pop(inde)
+                            a.pop(inde)
+                            a2.pop(inde)
+                            q.pop(inde)
+                            lenn=len(n)
                     break
                 else: u+=1
             u=0
