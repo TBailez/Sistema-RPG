@@ -95,7 +95,18 @@ def createcombatentes():
                     else: name=Npc+' '+str(times)
                     inventariom=(npcs.get(Npc).get('inventario'))
                     gold=random.randint(0,int((npcs.get(Npc).get('inventario').get('gold'))*lvl))
+                    items=[]
+                    print('Itens de maluco ai',npcs.get(Npc).get('inventario').get('itens'))
+                    for i in npcs.get(Npc).get('inventario').get('itens'):
+                        print('i:',i)
+                        x=random.randint(0,2)
+                        print('x:',x)
+                        while x>0:
+                            items.append(i)
+                            x-=1
                     inventariom['gold']=gold
+                    inventariom['itens']=items
+                    print('Inventario completo:',inventariom)
                     if lvl>1: multiplicador=0.5
                     else: multiplicador=1
                     multi=0.3*lvl
