@@ -83,6 +83,7 @@ def createcombatentes():
                     lvl=1
                     var=0
                 tlvl=lvl
+                it=npcs.get(Npc).get('inventario').get('itens')
                 while times>0:
                     if balance.lower()=='sim' or balance.lower()=='s':
                         print('Qual o nivel de',Npc,times,)
@@ -96,17 +97,13 @@ def createcombatentes():
                     inventariom=(npcs.get(Npc).get('inventario'))
                     gold=random.randint(0,int((npcs.get(Npc).get('inventario').get('gold'))*lvl))
                     items=[]
-                    print('Itens de maluco ai',npcs.get(Npc).get('inventario').get('itens'))
-                    for i in npcs.get(Npc).get('inventario').get('itens'):
-                        print('i:',i)
-                        x=random.randint(0,2)
-                        print('x:',x)
+                    for i in it:
+                        x=random.randint(0,5)
                         while x>0:
                             items.append(i)
                             x-=1
                     inventariom['gold']=gold
                     inventariom['itens']=items
-                    print('Inventario completo:',inventariom)
                     if lvl>1: multiplicador=0.5
                     else: multiplicador=1
                     multi=0.3*lvl
@@ -127,7 +124,8 @@ def createcombatentes():
                         'lvl': tlvl,
                         'dropxp': int((npcs.get(Npc).get('dropxp'))*multi)
                     }
-                    combatentes1.update({name:dados})
+                    combatentes1[name]=dados
+                    combatentes1[name]['inventario']=inventariom
                     times-=1
             elif comx[0].lower()=='exit':
                 truebreak=True
