@@ -77,7 +77,8 @@ def magical(natk,combatentes):
         non[m_or_h]-=spell.get('mana')
         i=int(non.get('inteligencia'))
         ing=non.get('intransigencia')
-        boar=non.get('inventario').get('arma')
+        lboar=non.get('inventario').get('arma')
+        boar=lboar[0]
         if boar in armas: boar_atk=armas.get(boar).get('dma')
         else: boar_atk=0
         boarm=non.get('inventario').get('armadura')
@@ -88,7 +89,8 @@ def magical(natk,combatentes):
         quo_vel_atk=dd+int(spell.get('velocidade'))
         non=combatentes.get(nomedef)
         i_def=int(non.get('inteligencia'))
-        boar2=non.get('inventario').get('arma')
+        lboar2=non.get('inventario').get('arma')
+        boar2=lboar2[0]
         if boar2 in armas: boar_def=armas.get(boar2).get('dma')
         else: boar_def=0
         boarm2=non.get('inventario').get('armadura')

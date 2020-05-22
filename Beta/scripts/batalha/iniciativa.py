@@ -30,7 +30,8 @@ def batalha():
     v2=[]
     a2=[]
     for z in nomes:
-        dva=nomes.get(z).get('inventario').get('arma')
+        ldva=nomes.get(z).get('inventario').get('arma')
+        dva=ldva[0]
         dvam=nomes.get(z).get('inventario').get('armadura')
         dve=nomes.get(z).get('inventario').get('escudo')
         if dva in armas: dvat=armas.get(dva).get('int_VEL')
@@ -122,6 +123,9 @@ def batalha():
                              itens=nomes.get(nk).get('inventario').get('itens')
                              itens.append(nomes.get(nomedef).get('inventario').get('itens'))
                              print('Seus intens atuais',itens)
+                             armas=nomes.get(nk).get('inventario').get('arma')
+                             armas.append(nomes.get(nomedef).get('inventario').get('arma'))
+                             print('Suas armas atuais',armas)
                             else:print('Tranquilo')
                             combatentesleft-=1
                             inde=n.index(nomedef)
