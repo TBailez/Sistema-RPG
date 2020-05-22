@@ -113,12 +113,15 @@ def batalha():
                             print(nomes.get(nomedef).get('inventario'))
                             loot=input('Deseja lootar?\n')
                             if loot=='sim' or loot=='s':
-                             ngold=n[u]
+                             nk=n[u]
                              gold=int(nomes.get(nomedef).get('inventario').get('gold'))
                              ggold=int(nomes.get(n[u]).get('inventario').get('gold'))
                              tgold=gold+ggold
-                             nomes[ngold]['inventario']['gold']=tgold
-                             print(nomes.get(n[u]).get('inventario').get('gold'))
+                             nomes[nk]['inventario']['gold']=tgold
+                             print('Seu gold atual',nomes.get(n[u]).get('inventario').get('gold'))
+                             itens=nomes.get(nk).get('inventario').get('itens')
+                             itens.append(nomes.get(nomedef).get('inventario').get('itens'))
+                             print('Seus intens atuais',itens)
                             else:print('Tranquilo')
                             combatentesleft-=1
                             inde=n.index(nomedef)
