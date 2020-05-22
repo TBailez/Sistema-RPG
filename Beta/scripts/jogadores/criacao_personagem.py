@@ -139,12 +139,19 @@ def personagem(t,y):
             if BoAr in armaduras: break
             else: print('Essa armadura não existe')
     else: BoAr=0
+
     itens = list()
+    lBoArm = list()
+    lBoArm.append(BoArm)
+    lBoAr = list()
+    lBoAr.append(BoAr)
+    lesc = list()
+    lesc.append(esc)
     inventario={
         'gold':gold,
-        'armadura':BoAr,
-        'arma':BoArm,
-        'escudo':esc,
+        'armadura':lBoAr,
+        'arma':lBoArm,
+        'escudo':lesc,
         'itens': itens
     }
     dados={
