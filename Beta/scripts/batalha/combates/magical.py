@@ -81,7 +81,8 @@ def magical(natk,combatentes):
         boar=lboar[0]
         if boar in armas: boar_atk=armas.get(boar).get('dma')
         else: boar_atk=0
-        boarm=non.get('inventario').get('armadura')
+        lboarm=non.get('inventario').get('armadura')
+        boarm=lboarm[0]
         if boarm in armadura: boarm_atk=armadura.get(boarm).get('rma')
         else: boarm_atk=0
         quo_atk=i+boar_atk+dd+spell.get('dano')
@@ -93,10 +94,12 @@ def magical(natk,combatentes):
         boar2=lboar2[0]
         if boar2 in armas: boar_def=armas.get(boar2).get('dma')
         else: boar_def=0
-        boarm2=non.get('inventario').get('armadura')
+        lboarm2=non.get('inventario').get('armadura')
+        boarm2=lboarm2[0]
         if boarm2 in armadura: armadura_def=int(armadura.get(boarm2).get('rma'))
         else: armadura_def=0
-        escu_def=non.get('inventario').get('escudo')
+        lescu_def=non.get('inventario').get('escudo')
+        escu_def=lescu_def[0]
         if escu_def in escudos: esc_def=int(escudos.get(escu_def).get('rme'))
         else: esc_def=0
         quo_atk2=spell.get('dano')+boar_def+i_def
