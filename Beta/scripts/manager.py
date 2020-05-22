@@ -15,7 +15,7 @@ from .funcoes.creators.shieldcreator import screator
 from .funcoes.creators.weaponcreator import wcreator
 from .funcoes.creators.armorcreator import acreator
 from .funcoes.editores import editor
-
+from .funcoes.equip import equipar
 def menu(command):
     with open('Beta/data/nomes.json') as f:
         nomes=json.load(f)
@@ -72,6 +72,8 @@ def menu(command):
         wcreator()
     elif command == "ca":
         acreator()
+    elif command == "eq":
+        equipar()
     elif command == "uit" or cs[0]=='use':
         if len(cs)==1: useitem(0,0,0)
         elif len(cs)==2: print('Digitou errado')

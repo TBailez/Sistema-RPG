@@ -119,7 +119,6 @@ def batalha():
                             print(nomes.get(nomedef).get('inventario'))
                             loot=input('Deseja lootar?\n')
                             if loot=='sim' or loot=='s':
-<<<<<<< HEAD
                              nk=n[u]
                              gold=int(nomes.get(nomedef).get('inventario').get('gold'))
                              ggold=int(nomes.get(n[u]).get('inventario').get('gold'))
@@ -138,26 +137,6 @@ def batalha():
                              escudos=nomes.get(nk).get('inventario').get('escudo')
                              escudos.extend(nomes.get(nomedef).get('inventario').get('escudo'))
                              print('Suas escudos atuais',escudos)
-=======
-                                nk=n[u]
-                                gold=int(nomes.get(nomedef).get('inventario').get('gold'))
-                                ggold=int(nomes.get(n[u]).get('inventario').get('gold'))
-                                tgold=gold+ggold
-                                nomes[nk]['inventario']['gold']=tgold
-                                print('Seu gold atual',nomes.get(n[u]).get('inventario').get('gold'))
-                                itens=nomes.get(nk).get('inventario').get('itens')
-                                itens.append(nomes.get(nomedef).get('inventario').get('itens'))
-                                print('Seus intens atuais',itens)
-                                armas=nomes.get(nk).get('inventario').get('arma')
-                                armas.append(nomes.get(nomedef).get('inventario').get('arma'))
-                                print('Suas armas atuais',armas)
-                                armaduras=nomes.get(nk).get('inventario').get('armadura')
-                                armaduras.append(nomes.get(nomedef).get('inventario').get('armadura'))
-                                print('Suas armaduras atuais',armaduras)
-                                escudos=nomes.get(nk).get('inventario').get('escudo')
-                                escudos.append(nomes.get(nomedef).get('inventario').get('escudo'))
-                                print('Suas escudos atuais',escudos)
->>>>>>> e08ebc388a6bb7228adbef2bea72c071aefc1b26
                             else:print('Tranquilo')
                             combatentesleft-=1
                             inde=n.index(nomedef)
