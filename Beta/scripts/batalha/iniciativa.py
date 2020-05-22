@@ -110,6 +110,16 @@ def batalha():
                         else: print('Não existe essa opção')
                         if nomes.get(nomedef).get('hp')<=0:
                             print(nomedef,'morreu')
+                            print(nomes.get(nomedef).get('inventario'))
+                            loot=input('Deseja lootar?\n')
+                            if loot=='sim' or loot=='s':
+                             ngold=n[u]
+                             gold=int(nomes.get(nomedef).get('inventario').get('gold'))
+                             ggold=int(nomes.get(n[u]).get('inventario').get('gold'))
+                             tgold=gold+ggold
+                             nomes[ngold]['inventario']['gold']=tgold
+                             print(nomes.get(n[u]).get('inventario').get('gold'))
+                            else:print('Tranquilo')
                             combatentesleft-=1
                             inde=n.index(nomedef)
                             if inde<u2: u2-=1
