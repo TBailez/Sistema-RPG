@@ -24,6 +24,7 @@ def batalha():
     for pessoa in nomes:
         print('Nome: ',pessoa,'seus itens:')
         print(nomes.get(pessoa).get('inventario').get('itens'))
+        print(nomes.get(pessoa).get('inventario').get('gold'))
     n=[]
     v=[]
     i=[]

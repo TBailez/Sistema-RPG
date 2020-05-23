@@ -85,6 +85,8 @@ def createcombatentes():
                 tlvl=lvl
                 it=npcs.get(Npc).get('inventario').get('itens')
                 while times>0:
+                    with open('Beta/data/npcs.json') as g:
+                        npcs=json.load(g)
                     if balance.lower()=='sim' or balance.lower()=='s':
                         print('Qual o nivel de',Npc,times,)
                         lvl=int(input())
@@ -98,7 +100,8 @@ def createcombatentes():
                     gold=random.randint(0,int((npcs.get(Npc).get('inventario').get('gold'))*lvl))
                     items=[]
                     for i in it:
-                        x=random.randint(0,5)
+                        x=random.randint(0,30)
+                        x=int(x/10)
                         while x>0:
                             items.append(i)
                             x-=1
@@ -125,7 +128,6 @@ def createcombatentes():
                         'dropxp': int((npcs.get(Npc).get('dropxp'))*multi)
                     }
                     combatentes1[name]=dados
-                    combatentes1[name]['inventario']=inventariom
                     times-=1
             elif comx[0].lower()=='exit':
                 truebreak=True
