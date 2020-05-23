@@ -19,7 +19,9 @@ def magical(natk,combatentes):
 
     while True:
         nomedef=input('Qual o nome do defensor?\n')
-        if nomedef in combatentes: break
+        if nomedef in combatentes:
+            if combatentes.get(nomedef).get('hp')<0: print('Esse combatente está morto')
+            else: break
         else: print('burro esse nome n existe')
     non=combatentes.get(natk)
     while True:

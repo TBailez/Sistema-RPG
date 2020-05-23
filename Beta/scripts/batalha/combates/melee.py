@@ -15,7 +15,9 @@ def melee(natk,combatentes):
 
     while True:
         nomedef=input('Qual o nome do defensor?\n')
-        if nomedef in combatentes: break
+        if nomedef in combatentes:
+            if combatentes.get(nomedef).get('hp')<0: print('Esse combatente está morto')
+            else: break
         else: print('burro esse nome n existe')
     while True:
         d=input("dado atk:")

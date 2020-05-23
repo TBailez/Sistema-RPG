@@ -21,10 +21,10 @@ def batalha():
     
     with open('Beta/data/inventario/escudos.json') as q:
         escudos=json.load(q)
-    for pessoa in nomes:
-        print('Nome: ',pessoa,'seus itens:')
-        print(nomes.get(pessoa).get('inventario').get('itens'))
-        print(nomes.get(pessoa).get('inventario').get('gold'))
+    #for pessoa in nomes:
+    #    print('Nome: ',pessoa,'seus itens:')
+    #    print(nomes.get(pessoa).get('inventario').get('itens'))
+    #    print(nomes.get(pessoa).get('inventario').get('gold'))
     n=[]
     v=[]
     i=[]
@@ -124,7 +124,9 @@ def batalha():
                             nomedef=n[u]
                             end=True
                             break
-                        else: print('Não existe essa opção')
+                        else:
+                            print('Não existe essa opção')
+                            nomedef=n[u]
                         if nomes.get(nomedef).get('hp')<=0:
                             u-=1
                             print(nomedef,'morreu')
@@ -183,17 +185,17 @@ def batalha():
             else: print('Essa opção não existe')
     xptotal=0
     if x=='loot' or x=='lootar' or x=='l':
-        print('Jogadores: ',jogadores)
+        print('Jogadores: ',jogadores.keys())
         while True:
             print('Quem vai lootar?')
             lutador=input()
             if lutador in jogadores:
                 lut={
                     'gold':0,
-                    'arma': None,
-                    'armadura': None,
-                    'escudo': None,
-                    'itens': None,
+                    'arma': [],
+                    'armadura': [],
+                    'escudo': [],
+                    'itens': [],
                 }
                 new_inventario={}
                 for monstro in nomes:
@@ -211,7 +213,8 @@ def batalha():
                             nomes=json.load(f)
                         print('Deseja lootar qual monstro?')
                         mon=input()
-                        if not mon in jogadores and nomes.get(mon).get('hp')<1:
+                        if mon=='exit': break
+                        elif not mon in jogadores and nomes.get(mon).get('hp')<1:
                             while True:
                                 while True:
                                     print('Inventario de',mon,':',nomes.get(mon).get('inventario'))
@@ -254,8 +257,10 @@ def batalha():
                                                     variavel='itens'
                                                     break
                                                 else: print('Esse monstro não tem esse item')
-                                            lut[variavel].extend(nomes.get(mon).get('inventario').get(variavel).get(qual2))
-                                            new_inventario[variavel].pop(qual2,None)
+                                            lucy=nomes.get(mon).get('inventario').get(variavel)
+                                            indexdalista=lucy.index(qual2)
+                                            lut[variavel].append(lucy[indexdalista])
+                                            new_inventario[variavel].remove(qual2)
                                             nomes[mon]['inventario']=new_inventario
                                             with open('Beta/data/combatentes.json','w') as f:
                                                 json.dump(nomes,f)
@@ -270,7 +275,6 @@ def batalha():
                                 if ask=='s': pass
                                 else: break
                             for coisa in nomes.get(lutador).get('inventario'):
-                                print('lut:',lut)
                                 if lut.get(coisa)==None: pass
                                 else:
                                     if isinstance((nomes.get(lutador).get('inventario').get(coisa)),list): nomes[lutador]['inventario'][coisa].extend(lut.get(coisa))
@@ -278,7 +282,6 @@ def batalha():
                             nomes[mon]['inventario']=new_inventario
                             with open('Beta/data/combatentes.json','w') as f:
                                 json.dump(nomes,f)
-                        elif mon=='exit': break
                         else: print('Não existe esse monstro')
                 if qual=='all' or qual=='a':
                     for mon in nomes:
