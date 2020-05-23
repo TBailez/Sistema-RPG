@@ -33,7 +33,7 @@ def magical(natk,combatentes):
                     break
         print(' ',natk,'tem',non.get('mana'),'de mana e',non.get('inteligencia'),'de inteligencia')
         spel=input('Qual spell será usado?')
-        if spel in magias:
+        if spel in magias and combatentes.get(natk).get('classe') in magias.get(spel).get('classes'):
             spell=magias.get(spel)
             if non.get('classe')=='blood mage': m_or_h='hp'
             else: m_or_h='mana'

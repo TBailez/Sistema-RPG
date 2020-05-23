@@ -71,7 +71,7 @@ def melee(natk,combatentes):
     desvio=quo_vel_atk-int(non.get('velocidade'))
     parry=quo_atk-(f_def+boar_def)
     if d1==20: dano=dano*2
-    if d2==20: int(dano=dano/2)
+    if d2==20: dano=int(dano/2)
     if dano<1: dano=1
     if dano-esc_def<1: danob=1
     else: danob=dano-esc_def
@@ -107,6 +107,7 @@ def melee(natk,combatentes):
                 d22=int(input('Dado do atacante'))
                 danof2=dano2+(d12-d22)
                 combatentes[natk]['hp']=combatentes.get(natk).get('hp')-danof2
+                danof=0
             else: danof=danop
             break
         else: print('Não existe essa opção')

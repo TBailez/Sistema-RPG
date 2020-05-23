@@ -69,12 +69,13 @@ def batalha():
     combatentesleft=len(n)
     end=False
     lenn=len(n)
-    while x=='s':
+    while x=='s' or x=='sim':
+        na=[]
         while u2<lenn:
             while u<lenn:
                 if end: break
-                if v[u2]==v2[u] and not n[u]==na:
-                    na=n[u]
+                if v[u2]==v2[u] and not n[u] in na:
+                    na.append(n[u])
                     #print('\n')
                     for nm in n:
                         if nomes.get(nm).get('hp')>0:# and nm not n[u]:
@@ -82,6 +83,15 @@ def batalha():
                     #print('\n')
                     print('Vez de',n[u],'(',q[u],'ações )')
                     action=0
+                    #print('\nu:',u)
+                    #print('\nu2:',u2)
+                    #print('\ni:',i)
+                    #print('\nq:',q)
+                    #print('\na:',a)
+                    #print('\na2:',a2)
+                    #print('\nv:',v)
+                    #print('\nv2:',v2)
+                    #print('\nauxq:',auxq)
                     while action<q[u]:
                         print('Qual a sua ação',action+1,'?')
                         TdC=input()
@@ -116,29 +126,8 @@ def batalha():
                             break
                         else: print('Não existe essa opção')
                         if nomes.get(nomedef).get('hp')<=0:
+                            u-=1
                             print(nomedef,'morreu')
-                            print(nomes.get(nomedef).get('inventario'))
-                            loot=input('Deseja lootar?\n')
-                            if loot=='sim' or loot=='s':
-                             nk=n[u]
-                             gold=int(nomes.get(nomedef).get('inventario').get('gold'))
-                             ggold=int(nomes.get(n[u]).get('inventario').get('gold'))
-                             tgold=gold+ggold
-                             nomes[nk]['inventario']['gold']=tgold
-                             print('Seu gold atual',nomes.get(n[u]).get('inventario').get('gold'))
-                             itens=nomes.get(nk).get('inventario').get('itens')
-                             itens.extend(nomes.get(nomedef).get('inventario').get('itens'))
-                             print('Seus intens atuais',itens)
-                             armas=nomes.get(nk).get('inventario').get('arma')
-                             armas.extend(nomes.get(nomedef).get('inventario').get('arma'))
-                             print('Suas armas atuais',armas)
-                             armaduras=nomes.get(nk).get('inventario').get('armadura')
-                             armaduras.extend(nomes.get(nomedef).get('inventario').get('armadura'))
-                             print('Suas armaduras atuais',armaduras)
-                             escudos=nomes.get(nk).get('inventario').get('escudo')
-                             escudos.extend(nomes.get(nomedef).get('inventario').get('escudo'))
-                             print('Suas escudos atuais',escudos)
-                            else:print('Tranquilo')
                             combatentesleft-=1
                             inde=n.index(nomedef)
                             if inde<u2: u2-=1
@@ -181,15 +170,135 @@ def batalha():
             u+=1
         aux+=1
         u=0
-        if end: x='n'
-        else: x=input('Deseja continuar o combate?')
         for per in n:
             cmana=nomes.get(per).get('cmana')
             mana=nomes.get(per).get('mana')
             if nomes.get(per).get('cmana')>0:
                 if cmana+mana>cmana*15: nomes[per]['mana']=cmana*15
                 else: nomes[per]['mana']+=cmana
+        while True:
+            if end: x='n'
+            else: x=input('Deseja continuar o combate?')
+            if x=='loot' or x=='lootar' or x=='l' or x=='s' or x=='sim' or x=='n' or x=='nao': break
+            else: print('Essa opção não existe')
     xptotal=0
+    if x=='loot' or x=='lootar' or x=='l':
+        print('Jogadores: ',jogadores)
+        while True:
+            print('Quem vai lootar?')
+            lutador=input()
+            if lutador in jogadores:
+                lut={
+                    'gold':0,
+                    'arma': None,
+                    'armadura': None,
+                    'escudo': None,
+                    'itens': None,
+                }
+                new_inventario={}
+                for monstro in nomes:
+                    if not monstro in jogadores and nomes.get(monstro).get('hp')<1:
+                        print('Monstro:',monstro,' / Seu inventario:',nomes.get(monstro).get('inventario'))
+                while True:
+                    print('Deseja lootar todos os monstros(all) ou 1 especifico(u)?')
+                    qual=input()
+                    if qual=='all' or qual=='u': break
+                    elif qual=='exit': break
+                    else: print('Não existe essa opção')
+                if qual=='u':
+                    while True:
+                        with open('Beta/data/combatentes.json') as f:
+                            nomes=json.load(f)
+                        print('Deseja lootar qual monstro?')
+                        mon=input()
+                        if not mon in jogadores and nomes.get(mon).get('hp')<1:
+                            while True:
+                                while True:
+                                    print('Inventario de',mon,':',nomes.get(mon).get('inventario'))
+                                    print('Deseja lootar tudo(all or a), só o gold(gold or g), todos os itens(i) ou digitar quais itens(d)?')
+                                    x=input()
+                                    if x=='all' or x=='a':
+                                        lut['gold']+=nomes.get(mon).get('inventario').get('gold')
+                                        lut['itens'].extend(nomes.get(mon).get('inventario').get('itens'))
+                                        lut['arma'].extend(nomes.get(mon).get('inventario').get('arma'))
+                                        lut['armadura'].extend(nomes.get(mon).get('inventario').get('armadura'))
+                                        lut['escudo'].extend(nomes.get(mon).get('inventario').get('escudo'))
+                                        new_inventario={}
+                                        break
+                                    elif x=='i':
+                                        lut['itens'].extend(nomes.get(mon).get('inventario').get('itens'))
+                                        new_inventario=nomes.get(mon).get('inventario')
+                                        new_inventario.pop('itens',None)
+                                        break
+                                    elif x=='gold' or x=='g':
+                                        lut['gold']+=nomes.get(mon).get('inventario').get('gold')
+                                        new_inventario=nomes.get(mon).get('inventario')
+                                        new_inventario.pop('gold',None)
+                                        break
+                                    elif x=='d':
+                                        while True:
+                                            while True:
+                                                print('Qual item deseja lootar?')
+                                                qual2=input()
+                                                new_inventario=nomes.get(mon).get('inventario')
+                                                if qual2 in nomes.get(mon).get('inventario').get('arma'):
+                                                    variavel='arma'
+                                                    break
+                                                elif qual2 in nomes.get(mon).get('inventario').get('armadura'):
+                                                    variavel='armadura'
+                                                    break
+                                                elif qual2 in nomes.get(mon).get('inventario').get('escudo'):
+                                                    variavel='escudo'
+                                                    break
+                                                elif qual2 in nomes.get(mon).get('inventario').get('itens'):
+                                                    variavel='itens'
+                                                    break
+                                                else: print('Esse monstro não tem esse item')
+                                            lut[variavel].extend(nomes.get(mon).get('inventario').get(variavel).get(qual2))
+                                            new_inventario[variavel].pop(qual2,None)
+                                            nomes[mon]['inventario']=new_inventario
+                                            with open('Beta/data/combatentes.json','w') as f:
+                                                json.dump(nomes,f)
+                                            print('Deseja lootar outro item desse monstro?')
+                                            con=input()
+                                            if con=='s': pass 
+                                            else: break
+                                        break
+                                    else: print('Não existe essa opção')
+                                print('Deseja lootar esse monstro novamente?')
+                                ask=input()
+                                if ask=='s': pass
+                                else: break
+                            for coisa in nomes.get(lutador).get('inventario'):
+                                print('lut:',lut)
+                                if lut.get(coisa)==None: pass
+                                else:
+                                    if isinstance((nomes.get(lutador).get('inventario').get(coisa)),list): nomes[lutador]['inventario'][coisa].extend(lut.get(coisa))
+                                    else: nomes[lutador]['inventario'][coisa]+=(lut.get(coisa))
+                            nomes[mon]['inventario']=new_inventario
+                            with open('Beta/data/combatentes.json','w') as f:
+                                json.dump(nomes,f)
+                        elif mon=='exit': break
+                        else: print('Não existe esse monstro')
+                if qual=='all' or qual=='a':
+                    for mon in nomes:
+                        if not mon in jogadores and nomes.get(mon).get('hp')<1:
+                            lut['gold']+=nomes.get(mon).get('inventario').get('gold')
+                            lut['itens']+=nomes.get(mon).get('inventario').get('itens')
+                            lut['arma']+=nomes.get(mon).get('inventario').get('arma')
+                            lut['armadura']+=nomes.get(mon).get('inventario').get('armadura')
+                            lut['escudo']+=nomes.get(mon).get('inventario').get('escudo')
+                            new_inventario={}
+                            for coisa in nomes.get(lutador).get('inventario'):
+                                if isinstance(nomes.get(lutador).get('inventario').get(coisa),list): nomes[lutador]['inventario'][coisa].extend(lut.get(coisa))
+                                else: nomes[lutador]['inventario'][coisa]+=lut.get(coisa)
+                            nomes[mon]['inventario']=new_inventario
+                            with open('Beta/data/combatentes.json','w') as f:
+                                json.dump(nomes,f)
+                        elif mon=='exit': break
+                        else: print('Não existe esse monstro')
+            elif lutador=='exit': break
+            else: print('Esse nome não existe')
     for monstro in n:
         if not monstro in jogadores and nomes.get(monstro).get('hp')<1:
             xptotal+=nomes.get(monstro).get('dropxp')
