@@ -11,29 +11,29 @@ def equipar():
    if perso in nomes or perso in npcs:
       eq=input('Arma, armadura ou escudo?\n')
    if eq=='arma' or eq=="a":
-       arma=nomes.get(perso).get('inventario').get('arma')
-       print(arma)
-       no=input('Qual arma você quer equipar?\n')
-       if no in arma:
-        arma.remove(no)
-        arma.insert(0,no)
-        print('Você equipou',arma[0])
+         arma=nomes.get(perso).get('inventario').get('arma')
+         print(arma)
+         no=input('Qual arma você quer equipar?\n')
+         if no in arma:
+            arma.remove(no)
+            arma.insert(0,no)
+            print('Você equipou',arma[0])
    elif eq=='armadura' or eq=="arm":
-       armadura=nomes.get(perso).get('inventario').get('armadura')
-       print(armadura)
-       no=input('Qual armadrua você quer equipar?\n')
-       if no in armadura:
-        armadura.remove(no)
-        armadura.insert(0,no)
-        print('Você equipou',armadura[0])
+         armadura=nomes.get(perso).get('inventario').get('armadura')
+         print(armadura)
+         no=input('Qual armadrua você quer equipar?\n')
+         if no in armadura:
+            armadura.remove(no)
+            armadura.insert(0,no)
+            print('Você equipou',armadura[0])
    elif eq=='escudo' or eq=="e":
-       escudo=nomes.get(perso).get('inventario').get('escudo')
-       print(escudo)
-       no=input('Qual escudo você quer equipar?\n')
-       if no in escudo:
-        escudo.remove(no)
-        escudo.insert(0,no)
-        print('Você equipou',escudo[0])
+         escudo=nomes.get(perso).get('inventario').get('escudo')
+         print(escudo)
+         no=input('Qual escudo você quer equipar?\n')
+         if no in escudo:
+            escudo.remove(no)
+            escudo.insert(0,no)
+            print('Você equipou',escudo[0])
    else: print('Esse nome não existe')
    if perso in nomes:
       with open('Beta/data/nomes.json','w') as f:
