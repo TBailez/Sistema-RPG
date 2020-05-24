@@ -191,33 +191,30 @@ def lvlup(x,n,y):
             if isinstance(non.get(name).get(dado),int) and not dado=='lvl' and not dado=='xp':
                 print('  ',dado,':',non.get(name).get(dado))
         while True:
-            print('Força:',non.get(name).get('forca'),('atual + '))
-            add_for=int(input())
-            total=ppd-add_for
-            print('Pontos restantes para adicionar:',total)
-            print('Inteligência:',non.get(name).get('inteligencia'),('atual + '))
-            add_int=int(input())
-            total-=add_int
-            print('Pontos restantes para adicionar:',total)
-            print('Resistência:',non.get(name).get('resistencia'),('atual + '))
-            add_res=int(input())
-            total-=add_res
-            print('Pontos restantes para adicionar:',total)
-            print('Intransigência:',non.get(name).get('intransigencia'),('atual + '))
-            add_ing=int(input())
-            total-=add_ing
-            print('Pontos restantes para adicionar:',total)
-            print('Velocidade:',non.get(name).get('velocidade'),('atual + '))
-            add_vel=int(input())
-            total-=add_vel
-            print('Pontos restantes para adicionar:',total)
-            print('Coeficiente de hp:',non.get(name).get('chp'),('atual (',non.get(name).get('hp'),'de vida) + '))
-            add_chp=int(input())
-            total-=add_chp
-            print('Pontos restantes para adicionar:',total)
-            print('Coeficiente de mana:',non.get(name).get('cmana'),('atual (',non.get(name).get('mana'),'de mana) + '))
-            add_cmn=int(input())
-            total-=add_cmn
+            total=ppd
+            add_for=0
+            add_int=0
+            add_res=0
+            add_ing=0
+            add_vel=0
+            add_chp=0
+            add_cmn=0
+            for hab in non.get(name):
+                if isinstance(non.get(name).get(hab),int) and not hab=='xp' and not hab=='lvl' and not hab=='hp' and not hab=='mana':
+                    print(hab,non.get(name).get(hab),('atual + '))
+                    testeint=input()
+                    try: add=int(float(testeint))
+                    except ValueError: add=0
+                    else: add=int(float(testeint))
+                    if hab=='forca': add_for=add
+                    if hab=='inteligencia': add_int=add
+                    if hab=='resistencia': add_res=add
+                    if hab=='intransigencia': add_ing=add
+                    if hab=='velocidade': add_vel=add
+                    if hab=='chp': add_chp=add
+                    if hab=='cmana': add_cmn=add
+                    total-=add
+                    print('Pontos restantes para adicionar:',total)
             if total==0: break
             elif total>0: print('Você não distribuiu todos os pontos')
             else: print('Você distribuiu pontos demais')
