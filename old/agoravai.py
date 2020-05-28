@@ -1,17 +1,5 @@
 import matplotlib.pyplot as plt
-from random import randint
-import numpy as np
-
 plt.ion()
-
-'''
-#Let's generate some random X, Y data X = [ [frst group],[second group] ...]
-X = [ [randint(0,50) for i in range(0,5)] for i in range(0,24)]
-Y = [ [randint(0,50) for i in range(0,5)] for i in range(0,24)]
-print('x:',X)
-print('y:',Y)
-labels = range(1,len(X)+1)
-'''
 fig = plt.figure()
 ax = fig.add_subplot(111)
 X=[[1],[2],[3]]
@@ -37,18 +25,40 @@ while True:
     while True:
         m=input('Digite qual personagem deve mudar de lugar:')
         if m in labels: break
-        elif m=='b':
+        elif m=='exit':
             sair=True
             break
         else: print('Esse nome não existe')
     if sair: break
-    xy=input('Digite x y:')
-    xys=xy.split(sep=' ')
+    while True:
+        while True:
+            xy=input('Digite x y:')
+            xys=xy.split(sep=' ')
+            if len(xys)==2:
+                try: newx=float(xys[0])
+                except ValueError:
+                    print('X digitado não é um numero')
+                    sair=False
+                else:
+                    try: newy=float(xys[1])
+                    except ValueError:
+                        print('Y digitado não é um numero')
+                        sair=False
+                    else: sair=True
+            else: print('Digite: x-espaço-y')
+            if sair: break
+        aux=0
+        while aux<len(X):
+            if X[aux][0]==float(xys[0]) and Y[aux][0]==float(xys[1]):
+                print('Erro, já existe um personagem nesse lugar')
+                sair=False
+                break
+            sair=True
+            aux+=1
+        if sair: break
     inn=labels.index(m)
     X[inn][0]=float(xys[0])
     Y[inn][0]=float(xys[1])
-    print('X:',X)
-    print('Y:',Y)
     ax.clear()
     for x,y,lab in zip(X,Y,labels):
         ax.scatter(x,y,label=lab)
@@ -57,3 +67,7 @@ while True:
     ax.set_ylim(yl[-1]-2,yl[-1]+2+dm)
     fig.canvas.draw()
     fig.canvas.flush_events()
+    sair=False
+
+print('Teste')
+input()
