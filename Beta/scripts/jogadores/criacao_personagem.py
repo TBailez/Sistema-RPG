@@ -107,13 +107,13 @@ def personagem(t,y):
     else:
         RAÇA=input('Qual a sua raça?\n')
         CLASSE=input('Qual a sua classe\n') 
-        int_FOR=int(input('Quanto de força você tem?'))
-        int_INT=int(input('Quanto de inteligência você tem?'))
-        int_RES=int(input('Quanto de resistência você tem?'))
-        int_ING=int(input('Quanto de intransigência você tem?'))
-        int_VEL=int(input('Quanto de velocidade você tem?'))
-        int_CHP=int(input('Quanto é seu coeficiente de HP?'))
-        int_CMN=int(input('Quanto é seu coeficiente de MANA?'))
+        int_FOR=int(input('Quanto de força você tem?\n'))
+        int_INT=int(input('Quanto de inteligência você tem?\n'))
+        int_RES=int(input('Quanto de resistência você tem?\n'))
+        int_ING=int(input('Quanto de intransigência você tem?\n'))
+        int_VEL=int(input('Quanto de velocidade você tem?\n'))
+        int_CHP=int(input('Quanto é seu coeficiente de HP?\n'))
+        int_CMN=int(input('Quanto é seu coeficiente de MANA?\n'))
         HP = int_CHP*15
         MN = int_CMN*15
         lvl=1 
