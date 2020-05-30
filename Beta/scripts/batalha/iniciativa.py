@@ -126,6 +126,12 @@ def batalha():
                             nomedef=n[u]
                             end=True
                             break
+                        elif TdC=='kill' or TdC=='k':
+                            while True:
+                                killwho=input('Deseja matar qual combatente?')
+                                if killwho in nomes: break
+                                else: print('Esse combatente não existe')
+                            nomes[killwho]['hp']=0
                         else:
                             print('Não existe essa opção')
                             nomedef=n[u]
