@@ -132,6 +132,9 @@ def batalha():
                                 if killwho in nomes: break
                                 else: print('Esse combatente não existe')
                             nomes[killwho]['hp']=0
+                            with open('Beta/data/combatentes.json','w') as f:
+                                json.dump(nomes,f)
+                            nomedef=killwho
                         else:
                             print('Não existe essa opção')
                             nomedef=n[u]

@@ -108,12 +108,25 @@ def lootar():
             if qual=='all' or qual=='a':
                 for mon in nomes:
                     if not mon in jogadores and nomes.get(mon).get('hp')<1:
+                        lut={
+                            'gold':0,
+                            'arma': [],
+                            'armadura': [],
+                            'escudo': [],
+                            'itens': []
+                        }
                         lut['gold']+=nomes.get(mon).get('inventario').get('gold')
                         lut['itens']+=nomes.get(mon).get('inventario').get('itens')
                         lut['arma']+=nomes.get(mon).get('inventario').get('arma')
                         lut['armadura']+=nomes.get(mon).get('inventario').get('armadura')
                         lut['escudo']+=nomes.get(mon).get('inventario').get('escudo')
-                        new_inventario={}
+                        new_inventario={
+                            'gold':0,
+                            'arma': [],
+                            'armadura': [],
+                            'escudo': [],
+                            'itens': []
+                        }
                         for coisa in nomes.get(lutador).get('inventario'):
                             if isinstance(nomes.get(lutador).get('inventario').get(coisa),list): nomes[lutador]['inventario'][coisa].extend(lut.get(coisa))
                             else: nomes[lutador]['inventario'][coisa]+=lut.get(coisa)
