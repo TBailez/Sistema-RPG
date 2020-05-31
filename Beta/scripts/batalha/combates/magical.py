@@ -144,7 +144,19 @@ def magical(natk,combatentes):
             elif od.lower()=='redirecionar' or od.lower()=='r':
                 if rp:
                     d12=int(input('Dado do defensor(que agora está atacando)'))
+                    while True:
+                     dx=input('Dado do defensor(que agora está atacando)')
+                     try: d12=int(float(dx))
+                     except ValueError:print('Digite um número seu animal!')
+                     else: d12=int(float(dx))
+                     break
                     d22=int(input('Dado do atacante'))
+                    while True:
+                     dx=input('Dado do defensor(que agora está atacando)')
+                     try: d22=int(float(dx))
+                     except ValueError:print('Digite um número seu animal!')
+                     else: d22=int(float(dx))
+                     break
                     danof2=dano2+(d12-d22)
                     combatentes[natk]['hp']=combatentes.get(natk).get('hp')-danof2
                 else: danof=danop

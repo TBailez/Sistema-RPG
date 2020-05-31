@@ -105,8 +105,20 @@ def melee(natk,combatentes):
             break
         elif od.lower()=='parear' or od.lower()=='p':
             if pp:
-                d12=int(input('Dado do defensor(que agora está atacando)'))
-                d22=int(input('Dado do atacante'))
+                while True:
+                    dx=input('Dado do defensor(que agora está atacando)')
+                    try: d12=int(float(dx))
+                    except ValueError:print('Digite um número seu animal!')
+                    else:
+                        d12=int(float(dx))  
+                        break
+                while True:
+                    dy=input('Dado do atacante')
+                    try: d22=int(float(dy))
+                    except ValueError:print('Digite um número seu animal!')
+                    else:
+                        d22=int(float(dy))
+                        break
                 danof2=dano2+(d12-d22)
                 combatentes[natk]['hp']=combatentes.get(natk).get('hp')-danof2
                 danof=0
