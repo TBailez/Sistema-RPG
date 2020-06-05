@@ -143,7 +143,7 @@ def batalha():
                             print(nomedef,'morreu')
                             combatentesleft-=1
                             inde=n.index(nomedef)
-                            if inde<u2: u2-=1
+                            if inde<=u2: u2-=1
                             n.pop(inde)
                             for vi in v: 
                                 if vi==v2[inde]:
@@ -153,8 +153,10 @@ def batalha():
                                 if vi==q[inde]:
                                     qsort=q.copy()
                                     qsort.sort(reverse=True)
-                                    if qsort[0]==auxq[0]: pass
-                                    else: vi+=(auxq[0]-qsort[0])
+                                    qasort=auxq.copy()
+                                    qasort.sort(reverse=True)
+                                    if qsort[0]==qasort[0]: pass
+                                    else: vi+=(qasort[0]-qsort[0])
                                     auxq.remove(vi)
                                     break
                             v2.pop(inde)
@@ -163,12 +165,24 @@ def batalha():
                             a2.pop(inde)
                             q.pop(inde)
                             lenn=len(n)
+                            if u<0: u=0
                     break
                 else: u+=1
             u=0
             u2+=1
             if end: break
         u2=0
+        '''
+        print('\nu:',u)
+        print('\nu2:',u2)
+        print('\ni:',i)
+        print('\nq:',q)
+        print('\na:',a)
+        print('\na2:',a2)
+        print('\nv:',v)
+        print('\nv2:',v2)
+        print('\nauxq:',auxq)
+        '''
         while u<lenn:
             a[u]=i[u]*aux
             q[u]=int(a[u])-int(a2[u])
