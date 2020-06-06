@@ -56,7 +56,7 @@ def melee(natk,combatentes):
     f_def=int(non.get('forca'))
     lar_def=non.get('inventario').get('arma')
     ar_def=lar_def[0]
-    if ar_def in armas: boar_def=int(armas.get(ar).get('dme'))
+    if ar_def in armas: boar_def=int(armas.get(ar_def).get('dme'))
     else: boar_def=0
     larmd_def=non.get('inventario').get('armadura')
     armad_def=larmd_def[0]
