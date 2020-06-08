@@ -36,7 +36,7 @@ def createcombatentes():
                             print('Numero de npcs dado não é um numero')
                             sair=True
                             break
-                        balance=input('Qual balanceador será usado?(Digite o nivel de cada npc(digite s), ser balanceado[digite b(mesmo nivel dos jogadores +ou- 1)], custom(digite ou)\n')
+                        balance=input('Qual balanceador será usado?(Digite o nivel de cada npc(digite s), ser o nivél do jonson(digite n/digite nv para ter variancia), ser balanceado[digite b(mesmo nivel dos jogadores +ou- 1)], custom(digite ou)\n')
                     elif len(comx)==3:
                         Npc=comx[0]
                         balance=comx[1]
@@ -49,7 +49,7 @@ def createcombatentes():
                             sair=True
                             break
                     else: print('Digitou coisas demais')
-                    if balance=='b' or balance=='s' or balance=='ou': break
+                    if balance=='b' or balance=='s' or balance=='ou' or balance=='n' or balance=='nv': break
                     else:
                         print('Não existe essa opção de balanceador')
                         if len(comx)==3:
@@ -64,6 +64,18 @@ def createcombatentes():
                         lvl+=nomes.get(no).get('lvl')
                     lvl=int(lvl/div)
                     var=1
+                elif balance=='n' or balance=='nv':
+                    lvl=npcs.get(Npc).get('lvl')
+                    if balance=='nv':
+                        while True:
+                            print('Qual variancia?')
+                            var_try=input()
+                            try: var=int(float(var_try))
+                            except ValueError: print('Variancia digitada não é um numero')
+                            else:
+                                var=int(float(var_try))
+                                break
+                    else: var=0
                 elif balance.lower()=='ou':
                     while True:
                         lvls=input('Digite qual nivel você deseja que esses npcs tenham, espaço, + ou - x niveis(exp:3 1 --> nivel 3 +- 1 nivel)')
