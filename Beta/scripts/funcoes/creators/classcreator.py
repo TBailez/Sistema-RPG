@@ -17,6 +17,7 @@ def ccreator():
             v=int(input('velocidade?\n'))
             soma=int(chp)+int(cmn)+int(f)+int(r)+int(it)+int(ig)+int(v)
             if soma>3 or soma<3: print('Você não distribuiu certo os pontos') 
+            break
         else: print('Essa classe já existe')
     dados={
         'int_CHP': chp,
@@ -28,7 +29,7 @@ def ccreator():
         'int_VEL': v,
     }
     classes.update({name:dados})
-    c=input('dejeja criar outra classe?')
+    c=input('Deseja criar outra classe?')
     with open('Beta/data/classes.json','w') as f:
         json.dump(classes,f)
     if c=='s': pass

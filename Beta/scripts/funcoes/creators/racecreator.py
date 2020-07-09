@@ -17,6 +17,7 @@ def rcreator():
             v=int(input('velocidade?\n'))
             soma=int(chp)+int(cmn)+int(f)+int(r)+int(it)+int(ig)+int(v)
             if soma>3 or soma<3: print('Você não distribuiu certo os pontos') 
+            break
         else: print('Essa raça já existe')
     dados={
         'int_CHP': chp,
@@ -28,7 +29,7 @@ def rcreator():
         'int_VEL': v,
     }
     Racas.update({name:dados})
-    c=input('dejeja criar outra raça?')
+    c=input('Deseja criar outra raça?')
     with open('Beta/data/Racas.json','w') as f:
         json.dump(Racas,f)
     if c=='s': pass
