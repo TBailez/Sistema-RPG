@@ -3,9 +3,9 @@ from data.classes import personagem
 from data.classes import arma
 
 def combate():
-    with open('data/p.pickle','rb') as f:
+    with open('class/data/p.pickle','rb') as f:
         p=pickle.load(f)
-    with open('data/a.pickle','rb') as f:
+    with open('class/data/a.pickle','rb') as f:
         a=pickle.load(f)
     vf=0
     hs=[]
