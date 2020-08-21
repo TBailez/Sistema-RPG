@@ -44,6 +44,7 @@ def xys(d,an):
     if numt==2: return [-x3,-y3]
     if numt==3: return [y3,-x3]
     if numt==0: return [x3,y3]
+
 def RoundProx(xs,ys,co):
     newx=[]
     newy=[]
@@ -62,14 +63,12 @@ def RoundProx(xs,ys,co):
     return [newx,newy]
 
 def demo():
-    print('Aperta enter pra gerar outros boulders')
     plt.ion()
     fig=plt.figure()
     ax1=fig.add_subplot(221)
     ax2=fig.add_subplot(222)
     ax3=fig.add_subplot(223)
     ax4=fig.add_subplot(224)
-
     while True:
         nump=random.randint(16,28)
         ds=np.linspace(2,8)
