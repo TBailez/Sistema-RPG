@@ -1,5 +1,6 @@
 import pygame
 from data.classes import Personagem
+#from scripts.map import mapa
 import pickle
 
 with open('GameRPG/data/players.pickle','rb') as f:
@@ -7,7 +8,15 @@ with open('GameRPG/data/players.pickle','rb') as f:
 number=len(l)
 window_size=(600,600)
 D=pygame.display.set_mode(window_size)
+#pedras=mapa(list(window_size),'floresta 1')
+#D.blit((pygame.image.load('data/pngs/grass.png')),(0,0))
 D.fill((200,255,200))
+'''
+for p in pedras:
+    lista=[]
+    for x,y in zip(p[0],p[1]): lista.append([x,y])
+    pygame.draw.polygon(D,(100,100,100),lista)
+'''
 
 # position players
 wx=int(list(window_size)[0]/2)
@@ -27,10 +36,12 @@ else:
         # load image
         p.sp=pygame.image.load(p.sp)
 
-for p in l: p.draw(D,False,'i')
+for p in l: p.draw(D,False)
 pygame.display.update()
 vez=0
 while True:
+    pygame.event.pump()
+    event = pygame.event.wait()
     for p in l:
         print(p.n,'vai mover?') 
         o=input()

@@ -9,17 +9,21 @@ for name in os.listdir('GameRPG/data/pngs'):
     i[name]={'image':I,'path':('GameRPG/data/pngs/'+name)}
 
 while True:
-    print('Digite o nome do personagem(para sair digite n/para ver os outros personagens digite read):')
+    print('Digite o nome do personagem(para sair digite n/para ver os outros personagens digite read/para deletar os personagens digite delete):')
     n=input()
     if n=='n': break
-    if n=='read':
+    if n=='delete':
+        P=[]
+        with open('GameRPG/data/players.pickle','wb') as f:
+            pickle.dump(P,f)
+    elif n=='read':
         with open('GameRPG/data/players.pickle','rb') as f:
             Pi=pickle.load(f)
             for x in Pi:
                 print(x)
     else:
         while True:
-            print('Digite o nome da sprite para o personagem(se quiser ver as fotos digite show):')
+            print('Digite o nome da sprite para o personagem(se quiser ver as fotos digite show - só funciona se vc tiever a biblioteca pillow):')
             p=input()
             Deucerto=False
             if p=='show':
@@ -35,7 +39,7 @@ while True:
                         break
                 if Deucerto: break
                 else: print('Não existe essa opção')
-        print('Digite o tamanho do personagem(por enquanto só funfa com 50):')
+        print('Digite o tamanho do personagem(so funciona com 50):')
         t=int(input())
         print('Digite a velocidade do personagem:')
         v=int(input())
