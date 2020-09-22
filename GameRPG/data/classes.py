@@ -1,6 +1,7 @@
 import numpy as np
 import cmath
 import pygame
+from scripts.text import texto
 
 class Personagem:
     def __init__(self,sprite,x,y,nome,velocidade,tamanho,color=(0,0,255)):
@@ -122,7 +123,8 @@ class Personagem:
                             return p.n
         if not teste: return ('n')
 
-    def move(self,m,l):
+    def move(self,m,l,ws):
+        # ws = window_size
         # m = map(display window)
         # l = lista de personagens
 
@@ -142,7 +144,7 @@ class Personagem:
 
         while run:
             pygame.time.delay(15)
-            m.fill((200,255,200))
+            pygame.draw.rect(m,(200,255,200),(0,0,ws[0],ws[1]))
             #m.blit((pygame.image.load(backgroud)),(0,0))
 
             # draw todo mundo menos quem vc ta controlando
