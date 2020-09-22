@@ -25,7 +25,6 @@ def cria():
         lista=func.split(sep='_')
         if len(lista)==2 and lista[0]=='i':
             getattr(teste,func)(teste)
-            '''
     with open('class2/data/a.pickle','rb') as f:
         dic=pickle.load(f)
     print('dic: ',dic)
@@ -35,7 +34,6 @@ def cria():
     with open('class2/data/a.pickle','rb') as f:
         dic=pickle.load(f)
     print('dic2: ',dic)
-    '''
 
 #def printt():
     o=teste

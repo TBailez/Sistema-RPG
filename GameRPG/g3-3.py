@@ -3,6 +3,8 @@ from data.classes import Personagem
 #from scripts.map import mapa
 import pickle
 
+pygame.init()
+
 with open('GameRPG/data/players.pickle','rb') as f:
     l=pickle.load(f) 
 number=len(l)
@@ -11,6 +13,23 @@ D=pygame.display.set_mode(window_size)
 #pedras=mapa(list(window_size),'floresta 1')
 #D.blit((pygame.image.load('data/pngs/grass.png')),(0,0))
 D.fill((200,255,200))
+#criar fonte para texto
+font = pygame.font.Font('freesansbold.ttf', 32)
+#criar variaveis para cores o que facilita mt coisa
+green = (0,255,0)
+blue= (0,0,128)
+#criando o texto
+text = font.render('Sexy Time', True, green, blue)
+#criando retangulo do texto
+textRect = text.get_rect()
+#variaveis de posição do texto
+X=300
+Y=500
+#posição do texto
+textRect.center = (X,Y) 
+#display do texto
+D.blit(text,textRect)
+
 '''
 for p in pedras:
     lista=[]
