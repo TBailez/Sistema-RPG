@@ -7,6 +7,7 @@ class personagem:
         self.vel=int(velocidade)
         self.forca=int(forca)
         self.arma=arma
+        
     def curse(self,NoDoCo):
         qual=random.randint(0,2)
         if qual==0: print('vai se fuder',NoDoCo,'!')

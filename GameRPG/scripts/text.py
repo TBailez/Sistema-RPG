@@ -1,4 +1,5 @@
-import pygame
+import pygame 
+from scripts.inputbox import main
 
 # printa os textos na tela
 def texto(txt,textos,D,window_size,font,tat):

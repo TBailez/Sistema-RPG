@@ -3,6 +3,7 @@ from data.classes import Personagem
 #from scripts.map import mapa
 import pickle
 from scripts.text import texto
+from scripts.text import main
 
 '''
 pedras=mapa(list(window_size),'floresta 1')
@@ -30,8 +31,10 @@ with open('GameRPG/data/players.pickle','rb') as f:
 number=len(l)
 
 # create window
-window_size=[800,800]
+window_size=[500,500]
 D=pygame.display.set_mode((window_size[0]+tat,window_size[1]))
+
+
 
 # fill window com verde ou grama
 if Grass: D.blit((pygame.image.load('data/pngs/grass.png')),(0,0))
@@ -69,8 +72,10 @@ while True:
     for p in l:
         texto((str(p.n)+' vai mover?'),textos,D,window_size,font,tat)
         print((str(p.n)+' vai mover?'))
+        #main(D)
         o=input()
         if o=='s': p.move(D,l,window_size)
     print('outro turno')
+     
 
 D.quit()

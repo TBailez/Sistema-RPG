@@ -1,72 +1,57 @@
+import pygame as pg
 
-# import pygame module in this program 
-import pygame 
-  
-# activate the pygame library 
-# initiate pygame and give permission 
-# to use pygame's functionality. 
-pygame.init() 
-  
-# define the RGB value for white, 
-#  green, blue colour . 
-white = (255, 255, 255) 
-green = (0, 255, 0) 
-blue = (0, 0, 128) 
-  
-# assigning values to X and Y variable 
-X = 400
-Y = 400
-  
-# create the display surface object 
-# of specific dimension..e(X, Y). 
-display_surface = pygame.display.set_mode((X, Y )) 
-  
-# set the pygame window name 
-pygame.display.set_caption('Show Text') 
-  
-# create a font object. 
-# 1st parameter is the font file 
-# which is present in pygame. 
-# 2nd parameter is size of the font 
-font = pygame.font.Font('freesansbold.ttf', 32) 
-  
-# create a text suface object, 
-# on which text is drawn on it. 
-text = font.render('haha vc é gay menor', True, green, blue) 
-  
-# create a rectangular object for the 
-# text surface object 
-textRect = text.get_rect()  
-  
-# set the center of the rectangular object. 
-textRect.center = (X // 2, Y // 2) 
-  
-# infinite loop 
-while True : 
-  
-    # completely fill the surface object 
-    # with white color 
-    display_surface.fill(white) 
-  
-    # copying the text surface object 
-    # to the display surface object  
-    # at the center coordinate. 
-    display_surface.blit(text, textRect) 
-  
-    # iterate over the list of Event objects 
-    # that was returned by pygame.event.get() method. 
-    for event in pygame.event.get() : 
-  
-        # if event object type is QUIT 
-        # then quitting the pygame 
-        # and program both. 
-        if event.type == pygame.QUIT : 
-  
-            # deactivates the pygame library 
-            pygame.quit() 
-  
-            # quit the program. 
-            quit() 
-  
-        # Draws the surface object to the screen.   
-        pygame.display.update()  
+
+def main():
+    screen = pg.display.set_mode((500, 500))
+    font = pg.font.Font(None, 32)
+    clock = pg.time.Clock()
+    input_box = pg.Rect(200, 460, 140, 32)
+    color_inactive = pg.Color('lightskyblue3')
+    color_active = pg.Color('dodgerblue2')
+    color = color_inactive
+    active = False
+    text = ''
+    done = False
+
+    while not done:
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                done = True
+            if event.type == pg.MOUSEBUTTONDOWN:
+                # If the user clicked on the input_box rect.
+                if input_box.collidepoint(event.pos):
+                    # Toggle the active variable.
+                    active = not active
+                else:
+                    active = False
+                # Change the current color of the input box.
+                color = color_active if active else color_inactive
+            if event.type == pg.KEYDOWN:
+                if active:
+                    if event.key == pg.K_RETURN:
+                        print(text)
+                        text = ''
+                    elif event.key == pg.K_BACKSPACE:
+                        text = text[:-1]
+                    else:
+                        text += event.unicode
+
+        screen.fill((30, 30, 30))
+        # Render the current text.
+        txt_surface = font.render(text, True, color)
+        # Resize the box if the text is too long.
+        width = max(200, txt_surface.get_width()+10)
+        input_box.w = width
+        # Blit the text.
+        screen.blit(txt_surface, (input_box.x+5, input_box.y+5))
+        # Blit the input_box rect.
+        pg.draw.rect(screen, color, input_box, 2)
+
+        pg.display.flip()
+        clock.tick(30)
+
+
+if __name__ == '__main__':
+    pg.init()
+    main()
+    pg.quit()
