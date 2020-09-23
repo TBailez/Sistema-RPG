@@ -9,11 +9,9 @@ def texto(txt,textos,D,window_size,font,tat):
     # draw area de texto
     pygame.draw.rect(D,(0,0,0),(window_size[0],0,tat,window_size[1]))
 
+    n=0
     # print all texts
     for t in textos:
-        # ve qual é a posição do texto dentro da lista
-        n=textos.index(t)
-
         #criando o texto
         text = font.render(t, True, (255,255,255))
 
@@ -25,3 +23,4 @@ def texto(txt,textos,D,window_size,font,tat):
         #display do texto
         D.blit(text,rect)
         pygame.display.update()
+        n+=1

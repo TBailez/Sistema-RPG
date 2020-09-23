@@ -3,6 +3,45 @@ import cmath
 import pygame
 from scripts.text import texto
 
+class Pedra:
+    def __init__(self,centro,lista,maior):
+        self.c=centro
+        self.l=lista
+        self.m=maior
+
+    def update(self,x,y):
+        newl=[]
+        for p in self.l: newl.append([p[0]+x,p[1]+y])
+        self.l=newl
+        self.c=[self.c[0]+x,self.c[1]+y]
+    
+    def draw(self,m,x,y):
+        self.update(x,y)
+        pygame.draw.polygon(m,(100,100,100),self.l)
+        '''
+        if hit:
+            if thit: pygame.draw.polygon(m,(0,0,0),self.l,2)
+            else: pygame.draw.circle(m,(0,0,0),tuple(self.c),int(self.m),2)
+        '''
+
+    def check(self,x,y,t):
+        d=(((self.c[0]-x)**2)+((self.c[1]+y)**2))**(1/2)
+        if d>((self.m*2)+(t/2)): return True
+        else: return False
+
+class Arvore:
+    def __init__(self,centro,tamanho):
+        self.c=centro
+        self.t=int(tamanho)
+
+    def update(self,x,y):
+        self.c=[self.c[0]+x,self.c[1]+y]
+
+    def draw(self,m,x,y):
+        self.update(x,y)
+        pygame.draw.circle(m,(139,69,19),tuple(self.c),self.t)
+        #if hit: pygame.draw.circle(m,(0,0,0),tuple(self.c),self.t,2)
+
 class Personagem:
     def __init__(self,sprite,x,y,nome,velocidade,tamanho,color=(0,0,255)):
         # true x,y
@@ -123,10 +162,11 @@ class Personagem:
                             return p.n
         if not teste: return ('n')
 
-    def move(self,m,l,ws):
+    def move(self,m,l,ws,Back):
         # ws = window_size
         # m = map(display window)
         # l = lista de personagens
+        # Back = all background objects
 
         # update hitbox color
         self.hc=(0,255,0)
@@ -188,6 +228,11 @@ class Personagem:
             for x in l:
                 if x.n!=self.n:
                     x.updateline(allx,ally)
+
+            # draw all rocks and things
+            for Tipo in Back:
+                for Object in Back[Tipo]:
+                    Object.draw(m,allx,ally)
             
             # move player
             if k[pygame.K_LEFT]: self.x-=5

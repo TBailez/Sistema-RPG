@@ -8,8 +8,8 @@ def main(D1,window_size):
     input_box = pygame.Rect(ws[0]+5, ws[1]-35, 140, 32)
     color_inactive = pygame.Color('lightskyblue3')
     color_active = pygame.Color('dodgerblue2')
-    color = color_inactive
-    active = False
+    color = color_active
+    active = True
     tx = ''
     done = False
 
@@ -32,8 +32,7 @@ def main(D1,window_size):
                 if active:
                     # eu descobri q pygame.K_ESCAPE é igual a 13
                     if event.key == 13:
-                        print(tx)
-                        tx = ''
+                        return tx
                     elif event.key == pygame.K_BACKSPACE:
                         tx = tx[:-1]
                     else:
