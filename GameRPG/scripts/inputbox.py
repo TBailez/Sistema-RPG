@@ -1,11 +1,11 @@
 import pygame 
 
 
-def main(D1):
+def main(D1,window_size):
     screen = D1
+    ws=window_size
     font = pygame.font.Font(None, 32)
-    clock = pygame.time.Clock()
-    input_box = pygame.Rect(505, 465, 140, 32)
+    input_box = pygame.Rect(ws[0]+5, ws[1]-35, 140, 32)
     color_inactive = pygame.Color('lightskyblue3')
     color_active = pygame.Color('dodgerblue2')
     color = color_inactive
@@ -14,6 +14,7 @@ def main(D1):
     done = False
 
     while not done:
+        pygame.time.delay(5)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
@@ -29,23 +30,24 @@ def main(D1):
                 # Escreve o txo
             if event.type == pygame.KEYDOWN:
                 if active:
-                    if event.key == pygame.K_RETURN:
+                    # eu descobri q pygame.K_ESCAPE é igual a 13
+                    if event.key == 13:
                         print(tx)
                         tx = ''
                     elif event.key == pygame.K_BACKSPACE:
                         tx = tx[:-1]
                     else:
                         tx += event.unicode
-
-        # Renderiza o txo
-        txt_surface = font.render(tx, True, color)
-        # Altera o tamanho da caixa caso necessario
-        width = max(200, txt_surface.get_width()+10)
-        input_box.w = width
-        # Montar o txo
-        screen.blit(txt_surface, (input_box.x+5, input_box.y+5))
-        # Montar a caixa
-        pygame.draw.rect(screen, color, input_box, 2)
-
-        pygame.display.flip()
-        clock.tick(30)
+            # Renderiza o txo
+            txt_surface = font.render(tx, True, color)
+            # Altera o tamanho da caixa caso necessario
+            width = max(200, txt_surface.get_width()+10)
+            input_box.w = width+80
+            # apaga as letras antigas
+            pygame.draw.rect(screen, (0,0,0), input_box)
+            input_box.w -=80
+            # Montar a caixa
+            pygame.draw.rect(screen, color, input_box, 2)
+            # Montar o txo
+            screen.blit(txt_surface, (input_box.x+5, input_box.y+5))
+            pygame.display.flip()

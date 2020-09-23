@@ -72,7 +72,7 @@ while True:
     for p in l:
         texto((str(p.n)+' vai mover?'),textos,D,window_size,font,tat)
         print((str(p.n)+' vai mover?'))
-        #main(D)
+        main(D,window_size)
         o=input()
         if o=='s': p.move(D,l,window_size)
     print('outro turno')
