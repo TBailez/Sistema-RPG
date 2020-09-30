@@ -185,7 +185,6 @@ class Personagem:
         while run:
             pygame.time.delay(15)
             pygame.draw.rect(m,(200,255,200),(0,0,ws[0],ws[1]))
-            #m.blit((pygame.image.load(backgroud)),(0,0))
 
             # draw todo mundo menos quem vc ta controlando
             for player in l:

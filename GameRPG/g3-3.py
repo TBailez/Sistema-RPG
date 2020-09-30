@@ -10,7 +10,7 @@ pygame.init()
 # define se vai usar a png de grama ou fundo verde
 Grass=False
 # define se vai ter arvores e pedras ou n
-Back=False
+Back=True
 
 # cria tamanho da area de texto
 tat=350
@@ -29,7 +29,7 @@ window_size=[500,500]
 D=pygame.display.set_mode((window_size[0]+tat,window_size[1]))
 
 # fill window com verde ou grama
-if Grass: D.blit((pygame.image.load('data/pngs/grass.png')),(0,0))
+if Grass: D.blit((pygame.image.load('GameRPG/data/pngs/grass.png')),(0,0))
 else: D.fill((200,255,200))
 
 # position players (vai ser mais facil eu te explicar no discord como isso funfa)
