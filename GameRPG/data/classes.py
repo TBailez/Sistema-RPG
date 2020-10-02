@@ -7,7 +7,7 @@ class Pedra:
     def __init__(self,centro,lista,maior):
         self.c=centro
         self.l=lista
-        self.m=maior
+        self.t=maior
 
     def update(self,x,y):
         newl=[]
@@ -18,16 +18,6 @@ class Pedra:
     def draw(self,m,x,y):
         self.update(x,y)
         pygame.draw.polygon(m,(100,100,100),self.l)
-        '''
-        if hit:
-            if thit: pygame.draw.polygon(m,(0,0,0),self.l,2)
-            else: pygame.draw.circle(m,(0,0,0),tuple(self.c),int(self.m),2)
-        '''
-
-    def check(self,x,y,t):
-        d=(((self.c[0]-x)**2)+((self.c[1]+y)**2))**(1/2)
-        if d>((self.m*2)+(t/2)): return True
-        else: return False
 
 class Arvore:
     def __init__(self,centro,tamanho):
@@ -40,7 +30,6 @@ class Arvore:
     def draw(self,m,x,y):
         self.update(x,y)
         pygame.draw.circle(m,(139,69,19),tuple(self.c),self.t)
-        #if hit: pygame.draw.circle(m,(0,0,0),tuple(self.c),self.t,2)
 
 class Personagem:
     def __init__(self,sprite,x,y,nome,velocidade,tamanho,color=(0,0,255)):
@@ -59,6 +48,9 @@ class Personagem:
         # x,y do centro
         self.x=int(x+(self.t/2))
         self.y=int(y+(self.t/2))
+
+        # centro do range
+        self.cr=[int(x+(self.t/2)),int(y+(self.t/2))]
 
         # linha de direção inicial
         self.d=[[0,0],[0,0]]
@@ -126,31 +118,7 @@ class Personagem:
         p2=[int(newx[1]+self.x),int(newy[1]+self.y)]
         self.d=[p1,p2]
 
-    def check(self,c,r):
-        # c = centro do outro personagem
-        # r = raio da hitbox do outro personagem
-        # ve se a distancia entre os centros de 2 personagens é maior q a hitbox dos 2 juntas
-
-        x=abs(self.x-c[0])
-        y=abs(self.y-c[1])
-        d=(((x**2)+(y**2))**(1/2))
-        if d>((int(self.t/2)*1.3)+r): return True
-        else: return False
-
-    def check2(self,cr):
-        # cr = centro do range
-        # ve se o personagem ta dentro do range
-
-        # centro do personagem
-        cp=[self.x,self.y]
-        
-        x=abs(cp[0]-cr[0])
-        y=abs(cp[1]-cr[1])
-        d=(((x**2)+(y**2))**(1/2))
-        if d<=(int((self.t*self.v)-((self.t/2)*1.3))): return True
-        else: return False
-
-    def check3(self,l,pos):
+    def check(self,l,pos):
         # ve se o mouse ta em cima de algum personagem
         teste=False
         for p in l:
@@ -161,12 +129,39 @@ class Personagem:
                             teste=True
                             return p.n
         if not teste: return ('n')
+    
+    def collisions(self,players,objects):
+        # check 1
+        for p in players:
+            if p.n!=self.n:
+                x=(self.x-p.x)
+                y=(self.y-p.y)
+                d=(((x**2)+(y**2))**(1/2))
+                if d<=((((self.t/2)*1.3)+((p.t/2)*1.3))): return True
 
-    def move(self,m,l,ws,Back):
+        # check 2 (naõ ta funfanfo, n sei pq. acho q tem alguma informação errada passada pro init de cada objeto or something)
+        '''
+        for Tipo in objects:
+            for Object in objects[Tipo]:
+                d=((((self.x-Object.c[0])**2)+((self.y+Object.c[1])**2))**(1/2))
+                if d<=((((self.t/2)*1.3)+((Object.t/2)))): return True
+        '''
+
+        # check 3
+        x=(self.x-self.cr[0])
+        y=(self.y-self.cr[1])
+        d=(((x**2)+(y**2))**(1/2))
+        if d>=(((self.t*self.v)-((self.t/2)*1.3))): return True
+
+        # se n sair ate aqui: return contanct=False, pq n encostou em nada
+        return False
+
+    def move(self,m,l,ws,Back,background=False):
         # ws = window_size
         # m = map(display window)
         # l = lista de personagens
         # Back = all background objects
+        # background = Fasle(n tem imagem) ou um png
 
         # update hitbox color
         self.hc=(0,255,0)
@@ -174,17 +169,24 @@ class Personagem:
             if p.n!=self.n:
                 p.hc=(255,0,0)
 
+        # update range
+        for p in l: p.cr=[p.x,p.y]
+
         run=True
-
-        # define contro do range e range distance
-        cr=[self.x,self.y]
-        dr=int(self.t*self.v)
-
         Clk=True
-
         while run:
-            pygame.time.delay(15)
-            pygame.draw.rect(m,(200,255,200),(0,0,ws[0],ws[1]))
+            # update old x,y
+            oldx=self.x
+            oldy=self.y
+
+            # draw background
+            if isinstance(background,bool):
+                pygame.time.delay(15)
+                pygame.draw.rect(m,(200,255,200),(0,0,ws[0],ws[1]))
+            else:
+                # aumentei o delay pq usar png na imagem deixa tudo mais lento
+                pygame.time.delay(15)
+                m.blit(background,(0,0))
 
             # draw todo mundo menos quem vc ta controlando
             for player in l:
@@ -204,7 +206,7 @@ class Personagem:
             if (list(click)[0]==1):
                 if Clk:
                     # printa o nome do personagem q vc clicou e muda a cor da hitbox dele pra amarelo
-                    n=self.check3(l,list(pygame.mouse.get_pos()))
+                    n=self.check(l,list(pygame.mouse.get_pos()))
                     if n!='n':
                         for p in l:
                             if p.n==n: p.hc=(255,255,0)
@@ -222,8 +224,10 @@ class Personagem:
             for p in l:
                 p.x+=allx
                 p.y+=ally
+            cr=self.cr
             cr[0]+=allx
             cr[1]+=ally
+            self.cr=cr
             for x in l:
                 if x.n!=self.n:
                     x.updateline(allx,ally)
@@ -238,23 +242,19 @@ class Personagem:
             if k[pygame.K_RIGHT]: self.x+=5
             if k[pygame.K_UP]: self.y-=5
             if k[pygame.K_DOWN]: self.y+=5
-            if k[pygame.K_SPACE]: run=False
+            if k[pygame.K_SPACE]:
+                run=False
+                # update centro do range
+                self.cr=[self.x,self.y]
 
             # update hitbox
             self.draw(m,False,False)
 
             # check colisions
-            go=self.check2(cr)
-            contact=False
-            for player in l:
-                if player.n!=self.n:
-                    C=self.check([player.x,player.y],((player.t/2)*1.3))
-                    if not C:
-                        contact=True
-                        break
+            contact=self.collisions(l,Back)
             
             # update x,y if not in contact
-            if go and (not contact):
+            if not contact:
                 oldx=self.x
                 oldy=self.y
             else:
@@ -272,6 +272,5 @@ class Personagem:
                     p.draw(m,False)
             
             # draw range
-            else:
-                pygame.draw.circle(m,(0,0,0),(tuple(cr)),dr,2)
-            pygame.display.update()
+            else: pygame.draw.circle(m,(0,0,0),(tuple(cr)),(int(self.t*self.v)),2)
+            pygame.display.update((0,0,ws[0],ws[1]))

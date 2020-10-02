@@ -4,6 +4,10 @@ from scripts.map.criamap import mapa
 import pickle
 from scripts.text import texto
 from scripts.text import main
+import os
+
+# peguei na internt, faz a window ficar no canto superior esquerdo da tela
+os.environ['SDL_VIDEO_WINDOW_POS'] = "0,0"
 
 pygame.init()
 
@@ -25,11 +29,15 @@ with open('GameRPG/data/players.pickle','rb') as f:
 number=len(l)
 
 # create window
-window_size=[500,500]
+window_size=[1000,1000]
 D=pygame.display.set_mode((window_size[0]+tat,window_size[1]))
 
+# ve se usa a grama maior ou n
+if ((window_size[0]>1000) or (window_size[1]>1000)): path='GameRPG/data/pngs/grass2.png'
+else: path='GameRPG/data/pngs/grass.png'
+
 # fill window com verde ou grama
-if Grass: D.blit((pygame.image.load('GameRPG/data/pngs/grass.png')),(0,0))
+if Grass: D.blit((pygame.image.load(path)),(0,0))
 else: D.fill((200,255,200))
 
 # position players (vai ser mais facil eu te explicar no discord como isso funfa)
@@ -88,7 +96,8 @@ while True:
         o=resposta
         textos.insert(0,'   '+o)
         if o=='s':
-            p.move(D,l,window_size,back)
+            if Grass: p.move(D,l,window_size,back,(pygame.image.load(path)))
+            else: p.move(D,l,window_size,back)
             vez+=1
         elif o=='n': vez+=1
         else: textos.insert(0,'Não existe essa opção')
