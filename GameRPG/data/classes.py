@@ -139,13 +139,11 @@ class Personagem:
                 d=(((x**2)+(y**2))**(1/2))
                 if d<=((((self.t/2)*1.3)+((p.t/2)*1.3))): return True
 
-        # check 2 (naõ ta funfanfo, n sei pq. acho q tem alguma informação errada passada pro init de cada objeto or something)
-        '''
+        # check 2
         for Tipo in objects:
             for Object in objects[Tipo]:
-                d=((((self.x-Object.c[0])**2)+((self.y+Object.c[1])**2))**(1/2))
-                if d<=((((self.t/2)*1.3)+((Object.t/2)))): return True
-        '''
+                d=((((self.x-Object.c[0])**2)+((self.y-Object.c[1])**2))**(1/2))
+                if d<=((((self.t/2)*1.3)+((Object.t*0.8)))): return True
 
         # check 3
         x=(self.x-self.cr[0])
